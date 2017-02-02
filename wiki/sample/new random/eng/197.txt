@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Kruskal's algorithm - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Kruskal's_algorithm","wgTitle":"Kruskal's algorithm","wgCurRevisionId":756468833,"wgRevisionId":756468833,"wgArticleId":53776,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["CS1 maint: Multiple names: authors list","Articles lacking in-text citations from June 2013","All articles lacking in-text citations","Articles with example pseudocode","Articles containing proofs","Pages using ISBN magic links","Graph algorithms","Spanning tree"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Kruskal's_algorithm","wgRelevantArticleId":53776,"wgRequestId":"WHsg2gpAEKgAADa-WaIAAAGT","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q797860","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.math.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","ext.math.scripts","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.7" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Kruskal%27s_algorithm" rel="alternate"/>
+<link href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit" rel="alternate" title="Edit this page" type="application/x-wiki"/>
+<link href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit" rel="edit" title="Edit this page"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="Wikipedia (en)" type="application/opensearchdescription+xml"/>
+<link href="//en.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Kruskal_s_algorithm rootpage-Kruskal_s_algorithm skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="en">Kruskal's algorithm</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><table class="plainlinks metadata ambox ambox-style ambox-No_footnotes" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><img alt="" data-file-height="48" data-file-width="48" height="40" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/40px-Text_document_with_red_question_mark.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/60px-Text_document_with_red_question_mark.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/80px-Text_document_with_red_question_mark.svg.png 2x" width="40"/></div>
+</td>
+<td class="mbox-text"><span class="mbox-text-span">This article includes a <a href="/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">list of references</a>, related reading or <a href="/wiki/Wikipedia:External_links" title="Wikipedia:External links">external links</a>, <b>but its sources remain unclear because it lacks <a href="/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">inline citations</a></b>. <span class="hide-when-compact">Please help to <a href="/wiki/Wikipedia:WikiProject_Fact_and_Reference_Check" title="Wikipedia:WikiProject Fact and Reference Check">improve</a> this article by <a href="/wiki/Wikipedia:When_to_cite" title="Wikipedia:When to cite">introducing</a> more precise citations.</span> <small><i>(June 2013)</i></small> <small class="hide-when-compact"><i>(<a href="/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this template message</a>)</i></small></span></td>
+</tr>
+</table>
+<table class="vertical-navbox nowraplinks hlist" style="float:right;clear:right;width:22.0em;margin:0 0 1.0em 1.0em;background:#f9f9f9;border:1px solid #aaa;padding:0.2em;border-spacing:0.4em 0;text-align:center;line-height:1.4em;font-size:88%">
+<tr>
+<th style="padding:0.2em 0.4em 0.2em;font-size:145%;line-height:1.2em"><a href="/wiki/Graph_traversal" title="Graph traversal">Graph</a> and <a href="/wiki/Tree_traversal" title="Tree traversal">tree<br/>
+search algorithms</a></th>
+</tr>
+<tr>
+<td style="padding:0 0.1em 0.4em">
+<ul>
+<li><a href="/wiki/Alpha%E2%80%93beta_pruning" title="Alpha–beta pruning">α–β</a></li>
+<li><a href="/wiki/A*_search_algorithm" title="A* search algorithm">A*</a></li>
+<li><a href="/wiki/B*" title="B*">B*</a></li>
+<li><a href="/wiki/Backtracking" title="Backtracking">Backtracking</a></li>
+<li><a href="/wiki/Beam_search" title="Beam search">Beam</a></li>
+<li><a href="/wiki/Bellman%E2%80%93Ford_algorithm" title="Bellman–Ford algorithm">Bellman–Ford</a></li>
+<li><a href="/wiki/Best-first_search" title="Best-first search">Best-first</a></li>
+<li><a href="/wiki/Bidirectional_search" title="Bidirectional search">Bidirectional</a></li>
+<li><a href="/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka</a></li>
+<li><a href="/wiki/Branch_and_bound" title="Branch and bound">Branch &amp; bound</a></li>
+<li><a href="/wiki/Breadth-first_search" title="Breadth-first search">BFS</a></li>
+<li><a href="/wiki/British_Museum_algorithm" title="British Museum algorithm">British Museum</a></li>
+<li><a href="/wiki/D*" title="D*">D*</a></li>
+<li><a href="/wiki/Depth-first_search" title="Depth-first search">DFS</a></li>
+<li><a href="/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra</a></li>
+<li><a href="/wiki/Edmonds%27_algorithm" title="Edmonds' algorithm">Edmonds</a></li>
+<li><a href="/wiki/Floyd%E2%80%93Warshall_algorithm" title="Floyd–Warshall algorithm">Floyd–Warshall</a></li>
+<li><a href="/wiki/Fringe_search" title="Fringe search">Fringe search</a></li>
+<li><a href="/wiki/Hill_climbing" title="Hill climbing">Hill climbing</a></li>
+<li><a href="/wiki/Iterative_deepening_A*" title="Iterative deepening A*">IDA*</a></li>
+<li><a href="/wiki/Iterative_deepening_depth-first_search" title="Iterative deepening depth-first search">Iterative deepening</a></li>
+<li><a href="/wiki/Johnson%27s_algorithm" title="Johnson's algorithm">Johnson</a></li>
+<li><a href="/wiki/Jump_point_search" title="Jump point search">Jump point</a></li>
+<li><strong class="selflink">Kruskal</strong></li>
+<li><a href="/wiki/Lexicographic_breadth-first_search" title="Lexicographic breadth-first search">Lexicographic BFS</a></li>
+<li><a href="/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim</a></li>
+<li><a href="/wiki/SMA*" title="SMA*">SMA*</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<th style="padding:0.1em">Listings</th>
+</tr>
+<tr>
+<td style="padding:0 0.1em 0.4em">
+<ul>
+<li><i><a href="/wiki/Category:Graph_algorithms" title="Category:Graph algorithms">Graph algorithms</a></i></li>
+<li><i><a href="/wiki/Category:Search_algorithms" title="Category:Search algorithms">Search algorithms</a></i></li>
+<li><i><a href="/wiki/List_of_algorithms#Graph_algorithms" title="List of algorithms">List of graph algorithms</a></i></li>
+</ul>
+</td>
+</tr>
+<tr>
+<th style="padding:0.1em">Related topics</th>
+</tr>
+<tr>
+<td style="padding:0 0.1em 0.4em">
+<ul>
+<li><a href="/wiki/Dynamic_programming" title="Dynamic programming">Dynamic programming</a></li>
+<li><a href="/wiki/Graph_traversal" title="Graph traversal">Graph traversal</a></li>
+<li><a href="/wiki/Tree_traversal" title="Tree traversal">Tree traversal</a></li>
+<li><a href="/wiki/Search_game" title="Search game">Search games</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-size:115%">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Graph_search_algorithm" title="Template:Graph search algorithm"><abbr title="View this template">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Graph_search_algorithm" title="Template talk:Graph search algorithm"><abbr title="Discuss this template">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Graph_search_algorithm&amp;action=edit"><abbr title="Edit this template">e</abbr></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+<div class="thumb tright">
+<div class="thumbinner" style="width:202px;"><a class="image" href="/wiki/File:MST_kruskal_en.gif"><img alt="" class="thumbimage" data-file-height="800" data-file-width="800" height="200" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MST_kruskal_en.gif/200px-MST_kruskal_en.gif" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MST_kruskal_en.gif/300px-MST_kruskal_en.gif 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MST_kruskal_en.gif/400px-MST_kruskal_en.gif 2x" width="200"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:MST_kruskal_en.gif" title="Enlarge"></a></div>
+Visualization of Kruskal's algorithm</div>
+</div>
+</div>
+<p><b>Kruskal's algorithm</b> is a <a href="/wiki/Minimum_spanning_tree#Algorithms" title="Minimum spanning tree">minimum-spanning-tree algorithm</a> which finds an edge of the least possible weight that connects any two trees in the forest.<sup class="reference" id="cite_ref-:0_1-0"><a href="#cite_note-:0-1">[1]</a></sup> It is a <a href="/wiki/Greedy_algorithm" title="Greedy algorithm">greedy algorithm</a> in <a href="/wiki/Graph_theory" title="Graph theory">graph theory</a> as it finds a <a href="/wiki/Minimum_spanning_tree" title="Minimum spanning tree">minimum spanning tree</a> for a <a href="/wiki/Connectivity_(graph_theory)" title="Connectivity (graph theory)">connected</a> <a class="mw-redirect" href="/wiki/Glossary_of_graph_theory#Weighted_graphs_and_networks" title="Glossary of graph theory">weighted graph</a> adding increasing cost arcs at each step.<sup class="reference" id="cite_ref-:0_1-1"><a href="#cite_note-:0-1">[1]</a></sup> This means it finds a subset of the <a class="mw-redirect" href="/wiki/Edge_(graph_theory)" title="Edge (graph theory)">edges</a> that forms a tree that includes every <a href="/wiki/Vertex_(graph_theory)" title="Vertex (graph theory)">vertex</a>, where the total weight of all the edges in the tree is minimized. If the graph is not connected, then it finds a <i>minimum spanning forest</i> (a minimum spanning tree for each <a href="/wiki/Connected_component_(graph_theory)" title="Connected component (graph theory)">connected component</a>).</p>
+<p>This algorithm first appeared in <i><a href="/wiki/Proceedings_of_the_American_Mathematical_Society" title="Proceedings of the American Mathematical Society">Proceedings of the American Mathematical Society</a></i>, pp. 48–50 in 1956, and was written by <a href="/wiki/Joseph_Kruskal" title="Joseph Kruskal">Joseph Kruskal</a>.<sup class="reference" id="cite_ref-2"><a href="#cite_note-2">[2]</a></sup></p>
+<p>Other algorithms for this problem include <a href="/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim's algorithm</a>, <a href="/wiki/Reverse-delete_algorithm" title="Reverse-delete algorithm">Reverse-delete algorithm</a>, and <a href="/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka's algorithm</a>.</p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Algorithm"><span class="tocnumber">1</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Pseudocode"><span class="tocnumber">2</span> <span class="toctext">Pseudocode</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Complexity"><span class="tocnumber">3</span> <span class="toctext">Complexity</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Example"><span class="tocnumber">4</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Proof_of_correctness"><span class="tocnumber">5</span> <span class="toctext">Proof of correctness</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Spanning_tree"><span class="tocnumber">5.1</span> <span class="toctext">Spanning tree</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Minimality"><span class="tocnumber">5.2</span> <span class="toctext">Minimality</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#See_also"><span class="tocnumber">6</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#References"><span class="tocnumber">7</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#External_links"><span class="tocnumber">8</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Algorithm">Algorithm</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=1" title="Edit section: Algorithm">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li>create a forest <i>F</i> (a set of trees), where each vertex in the graph is a separate <a href="/wiki/Tree_(graph_theory)" title="Tree (graph theory)">tree</a></li>
+<li>create a set <i>S</i> containing all the edges in the graph</li>
+<li>while <i>S</i> is <a class="mw-redirect" href="/wiki/Nonempty" title="Nonempty">nonempty</a> and <i>F</i> is not yet <a href="/wiki/Spanning_tree" title="Spanning tree">spanning</a>
+<ul>
+<li>remove an edge with minimum weight from <i>S</i></li>
+<li>if the removed edge connects two different trees then add it to the forest <i>F</i>, combining two trees into a single tree</li>
+</ul>
+</li>
+</ul>
+<p>At the termination of the algorithm, the forest forms a minimum spanning forest of the graph. If the graph is connected, the forest has a single component and forms a minimum spanning tree.</p>
+<h2><span class="mw-headline" id="Pseudocode">Pseudocode</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=2" title="Edit section: Pseudocode">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a class="image" href="/wiki/File:KruskalDemo.gif"><img alt="" class="thumbimage" data-file-height="323" data-file-width="314" height="226" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/bb/KruskalDemo.gif/220px-KruskalDemo.gif" srcset="//upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif 1.5x" width="220"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:KruskalDemo.gif" title="Enlarge"></a></div>
+A demo for Kruskal's algorithm based on Euclidean distance.</div>
+</div>
+</div>
+<p>The following code is implemented with <a href="/wiki/Disjoint-set_data_structure" title="Disjoint-set data structure">disjoint-set data structure</a>:</p>
+<pre>
+KRUSKAL(G):
+1 A = ∅
+2 <b>foreach</b> v ∈ G.V:
+3    MAKE-SET(v)
+4 <b>foreach</b> (u, v) in G.E ordered by weight(u, v), increasing:
+5    <b>if</b> FIND-SET(u) ≠ FIND-SET(v):
+6       A = A ∪ {(u, v)}
+7       UNION(u, v)
+8 <b>return</b> 
+</pre>
+<p>complexity:</p>
+<p>O(Elog(v))</p>
+<h2><span class="mw-headline" id="Complexity">Complexity</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=3" title="Edit section: Complexity">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Where <i>E</i> is the number of edges in the graph and <i>V</i> is the number of vertices, Kruskal's algorithm can be shown to run in <i><a class="mw-redirect" href="/wiki/Big-O_notation" title="Big-O notation">O</a></i>(<i>E</i> <a href="/wiki/Binary_logarithm" title="Binary logarithm">log</a> <i>E</i>) time, or equivalently, <i>O</i>(<i>E</i> log <i>V</i>) time, all with simple data structures. These running times are equivalent because:</p>
+<ul>
+<li><i>E</i> is at most <i>V</i><sup>2</sup> and <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>log</mi>
+<mo>⁡<!-- ⁡ --></mo>
+<msup>
+<mi>V</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msup>
+<mo>=</mo>
+<mn>2</mn>
+<mi>log</mi>
+<mo>⁡<!-- ⁡ --></mo>
+<mi>V</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle \log V^{2}=2\log V}</annotation>
+</semantics>
+</math></span><img alt="\log V^{2}=2\log V" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c9b050622101455e6a49474bd9e562f012a2909a" style="vertical-align: -0.838ex; width:16.236ex; height:3.176ex;"/></span> <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mspace width="thickmathspace"></mspace>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle \;}</annotation>
+</semantics>
+</math></span><img alt="\;" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bc6108a5a28c151e5a093a13142157cbbe08b1c6" style="vertical-align: -0.171ex; width:0.645ex; height:0.343ex;"/></span> is <i>O</i>(log <i>V</i>).</li>
+<li>Each isolated vertex is a separate component of the minimum spanning forest. If we ignore isolated vertices we obtain <i>V</i> ≤ 2<i>E</i>, so log <i>V</i> is <i>O</i>(log <i>E</i>).</li>
+</ul>
+<p>We can achieve this bound as follows: first sort the edges by weight using a <a href="/wiki/Comparison_sort" title="Comparison sort">comparison sort</a> in <i>O</i>(<i>E</i> log <i>E</i>) time; this allows the step "remove an edge with minimum weight from <i>S</i>" to operate in constant time. Next, we use a <a href="/wiki/Disjoint-set_data_structure" title="Disjoint-set data structure">disjoint-set data structure</a> (Union&amp;Find) to keep track of which vertices are in which components. We need to perform O(<i>V</i>) operations, as in each iteration we connect a vertex to the spanning tree, two 'find' operations and possibly one union for each edge. Even a simple disjoint-set data structure such as disjoint-set forests with union by rank can perform O(<i>V</i>) operations in <i>O</i>(<i>V</i> log <i>V</i>) time. Thus the total time is <i>O</i>(<i>E</i> log <i>E</i>) = <i>O</i>(<i>E</i> log <i>V</i>).</p>
+<p>Provided that the edges are either already sorted or can be sorted in linear time (for example with <a href="/wiki/Counting_sort" title="Counting sort">counting sort</a> or <a href="/wiki/Radix_sort" title="Radix sort">radix sort</a>), the algorithm can use a more sophisticated <a href="/wiki/Disjoint-set_data_structure" title="Disjoint-set data structure">disjoint-set data structure</a> to run in <i>O</i>(<i>E</i> α(<i>V</i>)) time, where α is the extremely slowly growing inverse of the single-valued <a href="/wiki/Ackermann_function" title="Ackermann function">Ackermann function</a>.</p>
+<h2><span class="mw-headline" id="Example">Example</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=4" title="Edit section: Example">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" cellpadding="5" cellspacing="2" class="wikitable">
+<tr>
+<th>Image</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_1.svg"><img alt="Kruskal Algorithm 1.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Kruskal_Algorithm_1.svg/200px-Kruskal_Algorithm_1.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Kruskal_Algorithm_1.svg/300px-Kruskal_Algorithm_1.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Kruskal_Algorithm_1.svg/400px-Kruskal_Algorithm_1.svg.png 2x" width="200"/></a></td>
+<td><b>AD</b> and <b>CE</b> are the shortest edges, with length 5, and <b>AD</b> has been <a class="mw-redirect" href="/wiki/Arbitrary" title="Arbitrary">arbitrarily</a> chosen, so it is highlighted.</td>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_2.svg"><img alt="Kruskal Algorithm 2.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Kruskal_Algorithm_2.svg/200px-Kruskal_Algorithm_2.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Kruskal_Algorithm_2.svg/300px-Kruskal_Algorithm_2.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Kruskal_Algorithm_2.svg/400px-Kruskal_Algorithm_2.svg.png 2x" width="200"/></a></td>
+<td><b>CE</b> is now the shortest edge that does not form a cycle, with length 5, so it is highlighted as the second edge.</td>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_3.svg"><img alt="Kruskal Algorithm 3.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/59/Kruskal_Algorithm_3.svg/200px-Kruskal_Algorithm_3.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/59/Kruskal_Algorithm_3.svg/300px-Kruskal_Algorithm_3.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/59/Kruskal_Algorithm_3.svg/400px-Kruskal_Algorithm_3.svg.png 2x" width="200"/></a></td>
+<td>The next edge, <b>DF</b> with length 6, is highlighted using much the same method.</td>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_4.svg"><img alt="Kruskal Algorithm 4.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Kruskal_Algorithm_4.svg/200px-Kruskal_Algorithm_4.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Kruskal_Algorithm_4.svg/300px-Kruskal_Algorithm_4.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Kruskal_Algorithm_4.svg/400px-Kruskal_Algorithm_4.svg.png 2x" width="200"/></a></td>
+<td>The next-shortest edges are <b>AB</b> and <b>BE</b>, both with length 7. <b>AB</b> is chosen arbitrarily, and is highlighted. The edge <b>BD</b> has been highlighted in red, because there already exists a path (in green) between <b>B</b> and <b>D</b>, so it would form a cycle (<b>ABD</b>) if it were chosen.</td>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_5.svg"><img alt="Kruskal Algorithm 5.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Kruskal_Algorithm_5.svg/200px-Kruskal_Algorithm_5.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Kruskal_Algorithm_5.svg/300px-Kruskal_Algorithm_5.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Kruskal_Algorithm_5.svg/400px-Kruskal_Algorithm_5.svg.png 2x" width="200"/></a></td>
+<td>The process continues to highlight the next-smallest edge, <b>BE</b> with length 7. Many more edges are highlighted in red at this stage: <b>BC</b> because it would form the loop <b>BCE</b>, <b>DE</b> because it would form the loop <b>DEBA</b>, and <b>FE</b> because it would form <b>FEBAD</b>.</td>
+</tr>
+<tr>
+<td><a class="image" href="/wiki/File:Kruskal_Algorithm_6.svg"><img alt="Kruskal Algorithm 6.svg" data-file-height="518" data-file-width="618" height="168" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kruskal_Algorithm_6.svg/200px-Kruskal_Algorithm_6.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kruskal_Algorithm_6.svg/300px-Kruskal_Algorithm_6.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kruskal_Algorithm_6.svg/400px-Kruskal_Algorithm_6.svg.png 2x" width="200"/></a></td>
+<td>Finally, the process finishes with the edge <b>EG</b> of length 9, and the minimum spanning tree is found.</td>
+</tr>
+</table>
+<h2><span class="mw-headline" id="Proof_of_correctness">Proof of correctness</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=5" title="Edit section: Proof of correctness">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The proof consists of two parts. First, it is proved that the algorithm produces a <a href="/wiki/Spanning_tree" title="Spanning tree">spanning tree</a>. Second, it is proved that the constructed spanning tree is of minimal weight.</p>
+<h3><span class="mw-headline" id="Spanning_tree">Spanning tree</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=6" title="Edit section: Spanning tree">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Let <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P}</annotation>
+</semantics>
+</math></span><img alt="P" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a" style="vertical-align: -0.338ex; width:1.756ex; height:2.176ex;"/></span> be a connected, weighted graph and let <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>Y</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle Y}</annotation>
+</semantics>
+</math></span><img alt="Y" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/961d67d6b454b4df2301ac571808a3538b3a6d3f" style="vertical-align: -0.338ex; width:1.784ex; height:2.176ex;"/></span> be the subgraph of <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P}</annotation>
+</semantics>
+</math></span><img alt="P" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a" style="vertical-align: -0.338ex; width:1.756ex; height:2.176ex;"/></span> produced by the algorithm. <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>Y</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle Y}</annotation>
+</semantics>
+</math></span><img alt="Y" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/961d67d6b454b4df2301ac571808a3538b3a6d3f" style="vertical-align: -0.338ex; width:1.784ex; height:2.176ex;"/></span> cannot have a cycle, being within one subtree and not between two different trees. <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>Y</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle Y}</annotation>
+</semantics>
+</math></span><img alt="Y" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/961d67d6b454b4df2301ac571808a3538b3a6d3f" style="vertical-align: -0.338ex; width:1.784ex; height:2.176ex;"/></span> cannot be disconnected, since the first encountered edge that joins two components of <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>Y</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle Y}</annotation>
+</semantics>
+</math></span><img alt="Y" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/961d67d6b454b4df2301ac571808a3538b3a6d3f" style="vertical-align: -0.338ex; width:1.784ex; height:2.176ex;"/></span> would have been added by the algorithm. Thus, <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>Y</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle Y}</annotation>
+</semantics>
+</math></span><img alt="Y" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/961d67d6b454b4df2301ac571808a3538b3a6d3f" style="vertical-align: -0.338ex; width:1.784ex; height:2.176ex;"/></span> is a spanning tree of <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P}</annotation>
+</semantics>
+</math></span><img alt="P" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a" style="vertical-align: -0.338ex; width:1.756ex; height:2.176ex;"/></span>.</p>
+<h3><span class="mw-headline" id="Minimality">Minimality</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=7" title="Edit section: Minimality">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>We show that the following proposition <i><b>P</b></i> is true by <a href="/wiki/Mathematical_induction" title="Mathematical induction">induction</a>: If <i>F</i> is the set of edges chosen at any stage of the algorithm, then there is some minimum spanning tree that contains <i>F</i>.</p>
+<ul>
+<li>Clearly <i><b>P</b></i> is true at the beginning, when <i>F</i> is empty: any minimum spanning tree will do, and there exists one because a weighted connected graph always has a minimum spanning tree.</li>
+<li>Now assume <i><b>P</b></i> is true for some non-final edge set <i>F</i> and let <i>T</i> be a minimum spanning tree that contains <i>F</i>. If the next chosen edge <i>e</i> is also in <i>T</i>, then <i><b>P</b></i> is true for <i>F</i> + <i>e</i>. Otherwise, <i>T</i> + <i>e</i> has a cycle <i>C</i> and there is another edge <i>f</i> that is in <i>C</i> but not <i>F</i>. (If there were no such edge <i>f</i>, then <i>e</i> could not have been added to <i>F</i>, since doing so would have created the cycle <i>C</i>.) Then <i>T</i> − <i>f</i> + <i>e</i> is a tree, and it has the same weight as <i>T</i>, since <i>T</i> has minimum weight and the weight of <i>f</i> cannot be less than the weight of <i>e</i>, otherwise the algorithm would have chosen <i>f</i> instead of <i>e</i>. So <i>T</i> − <i>f</i> + <i>e</i> is a minimum spanning tree containing <i>F</i> + <i>e</i> and again <i><b>P</b></i> holds.</li>
+<li>Therefore, by the principle of induction, <i><b>P</b></i> holds when <i>F</i> has become a spanning tree, which is only possible if <i>F</i> is a minimum spanning tree itself.</li>
+</ul>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=8" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra's algorithm</a></li>
+<li><a href="/wiki/Prim%27s_algorithm" title="Prim's algorithm">Prim's algorithm</a></li>
+<li><a href="/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka's algorithm</a></li>
+<li><a href="/wiki/Reverse-delete_algorithm" title="Reverse-delete algorithm">Reverse-delete algorithm</a></li>
+<li><a href="/wiki/Single-linkage_clustering" title="Single-linkage clustering">Single-linkage clustering</a></li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=9" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-:0-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-:0_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-:0_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation book">Cormen, Thomas; Charles E Leiserson, Ronald L Rivest, Clifford Stein (2009). <i>Introduction To Algorithms</i> (Third ed.). MIT Press. p. 631. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a> <a href="/wiki/Special:BookSources/0262258102" title="Special:BookSources/0262258102">0262258102</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AKruskal%27s+algorithm&amp;rft.au=Charles+E+Leiserson%2C+Ronald+L+Rivest%2C+Clifford+Stein&amp;rft.aufirst=Thomas&amp;rft.aulast=Cormen&amp;rft.btitle=Introduction+To+Algorithms&amp;rft.date=2009&amp;rft.edition=Third&amp;rft.genre=book&amp;rft.isbn=0262258102&amp;rft.pages=631&amp;rft.pub=MIT+Press&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="citation-comment" style="display:none; color:#33aa33">CS1 maint: Multiple names: authors list (<a href="/wiki/Category:CS1_maint:_Multiple_names:_authors_list" title="Category:CS1 maint: Multiple names: authors list">link</a>)</span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Joseph_Kruskal" title="Joseph Kruskal">Kruskal, J. B.</a> (1956). "On the shortest spanning subtree of a graph and the traveling salesman problem". <i><a href="/wiki/Proceedings_of_the_American_Mathematical_Society" title="Proceedings of the American Mathematical Society">Proceedings of the American Mathematical Society</a></i>. <b>7</b>: 48–50. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1090%2FS0002-9939-1956-0078686-7" rel="nofollow">10.1090/S0002-9939-1956-0078686-7</a>. <a href="/wiki/JSTOR" title="JSTOR">JSTOR</a> <a class="external text" href="//www.jstor.org/stable/2033241" rel="nofollow">2033241</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AKruskal%27s+algorithm&amp;rft.atitle=On+the+shortest+spanning+subtree+of+a+graph+and+the+traveling+salesman+problem&amp;rft.aufirst=J.+B.&amp;rft.aulast=Kruskal&amp;rft.date=1956&amp;rft.genre=article&amp;rft_id=%2F%2Fwww.jstor.org%2Fstable%2F2033241&amp;rft_id=info%3Adoi%2F10.1090%2FS0002-9939-1956-0078686-7&amp;rft.jtitle=Proceedings+of+the+American+Mathematical+Society&amp;rft.pages=48-50&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=7"><span style="display:none;"> </span></span></span></li>
+</ol>
+</div>
+<ul>
+<li><a href="/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a class="mw-redirect" href="/wiki/Ronald_L._Rivest" title="Ronald L. Rivest">Ronald L. Rivest</a>, and <a href="/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a>. <i><a href="/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i>, Second Edition. MIT Press and McGraw-Hill, 2001. <a class="internal mw-magiclink-isbn" href="/wiki/Special:BookSources/0262032937">ISBN 0-262-03293-7</a>. Section 23.2: The algorithms of Kruskal and Prim, pp. 567–574.</li>
+<li><a href="/wiki/Michael_T._Goodrich" title="Michael T. Goodrich">Michael T. Goodrich</a> and <a href="/wiki/Roberto_Tamassia" title="Roberto Tamassia">Roberto Tamassia</a>. <i>Data Structures and Algorithms in Java</i>, Fourth Edition. John Wiley &amp; Sons, Inc., 2006. <a class="internal mw-magiclink-isbn" href="/wiki/Special:BookSources/0471738840">ISBN 0-471-73884-0</a>. Section 13.7.1: Kruskal's Algorithm, pp. 632..</li>
+</ul>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit&amp;section=10" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a class="external text" href="http://thecodersportal.com/mst-krushkal/" rel="nofollow">Krushkal's Algorithm with example and program in c++</a></li>
+</ul>
+<!-- 
+NewPP limit report
+Parsed by mw1210
+Cached time: 20161230151504
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.108 seconds
+Real time usage: 0.207 seconds
+Preprocessor visited node count: 382/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 15220/2097152 bytes
+Template argument size: 101/2097152 bytes
+Highest expansion depth: 7/40
+Expensive parser function count: 1/500
+Lua time usage: 0.038/10.000 seconds
+Lua memory usage: 1.84 MB/50 MB
+-->
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  104.236      1 - -total
+ 44.64%   46.527      1 - Template:Reflist
+ 44.31%   46.186      1 - Template:Inline_citations
+ 33.40%   34.811      1 - Template:Cite_book
+ 25.45%   26.526      1 - Template:Ambox
+  7.90%    8.232      1 - Template:Graph_search_algorithm
+  6.26%    6.523      1 - Template:Sidebar
+  4.92%    5.129      1 - Template:Cite_journal
+  1.57%    1.639      1 - Template:Main_other
+-->
+<!-- Saved in parser cache with key enwiki:pcache:idhash:53776-0!*!0!!en!4!*!math=5 and timestamp 20161230151504 and revision id 756468833
+ -->
+<noscript><img alt="" height="1" src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Kruskal%27s_algorithm&amp;oldid=756468833">https://en.wikipedia.org/w/index.php?title=Kruskal%27s_algorithm&amp;oldid=756468833</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Graph_algorithms" title="Category:Graph algorithms">Graph algorithms</a></li><li><a href="/wiki/Category:Spanning_tree" title="Category:Spanning tree">Spanning tree</a></li></ul></div><div class="mw-hidden-catlinks mw-hidden-cats-hidden" id="mw-hidden-catlinks">Hidden categories: <ul><li><a href="/wiki/Category:CS1_maint:_Multiple_names:_authors_list" title="Category:CS1 maint: Multiple names: authors list">CS1 maint: Multiple names: authors list</a></li><li><a href="/wiki/Category:Articles_lacking_in-text_citations_from_June_2013" title="Category:Articles lacking in-text citations from June 2013">Articles lacking in-text citations from June 2013</a></li><li><a href="/wiki/Category:All_articles_lacking_in-text_citations" title="Category:All articles lacking in-text citations">All articles lacking in-text citations</a></li><li><a href="/wiki/Category:Articles_with_example_pseudocode" title="Category:Articles with example pseudocode">Articles with example pseudocode</a></li><li><a href="/wiki/Category:Articles_containing_proofs" title="Category:Articles containing proofs">Articles containing proofs</a></li><li><a href="/wiki/Category:Pages_using_ISBN_magic_links" title="Category:Pages using ISBN magic links">Pages using ISBN magic links</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>Navigation menu</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">Personal tools</h3>
+<ul>
+<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]">Talk</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Kruskal%27s+algorithm" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=Special:UserLogin&amp;returnto=Kruskal%27s+algorithm" title="You're encouraged to log in; however, it's not mandatory. [o]">Log in</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">Namespaces</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/Kruskal%27s_algorithm" title="View the content page [c]">Article</a></span></li>
+<li id="ca-talk"><span><a accesskey="t" href="/wiki/Talk:Kruskal%27s_algorithm" rel="discussion" title="Discussion about the content page [t]">Talk</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>Variants</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">Views</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/Kruskal%27s_algorithm">Read</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=edit" title="Edit this page [e]">Edit</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=history" title="Past revisions of this page [h]">View history</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">Search</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" type="search"/><input name="title" type="hidden" value="Special:Search"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="Search Wikipedia for this text" type="submit" value="Search"/><input class="searchButton" id="searchButton" name="go" title="Go to a page with this exact name if it exists" type="submit" value="Go"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page" title="Visit the main page"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">Navigation</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/Main_Page" title="Visit the main page [z]">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/Special:Random" title="Load a random article [x]">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-interaction-label" class="portal" id="p-interaction" role="navigation">
+<h3 id="p-interaction-label">Interaction</h3>
+<div class="body">
+<ul>
+<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">Tools</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/Special:WhatLinksHere/Kruskal%27s_algorithm" title="List of all English Wikipedia pages containing links to this page [j]">What links here</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/Special:RecentChangesLinked/Kruskal%27s_algorithm" rel="nofollow" title="Recent changes in pages linked from this page [k]">Related changes</a></li><li id="t-upload"><a accesskey="u" href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]">Upload file</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/Special:SpecialPages" title="A list of all special pages [q]">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;oldid=756468833" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Kruskal%27s_algorithm&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q797860" title="Link to connected data repository item [g]">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Kruskal%27s_algorithm&amp;id=756468833" title="Information on how to cite this page">Cite this page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">Print/export</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Kruskal%27s+algorithm">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Kruskal%27s+algorithm&amp;returnto=Kruskal%27s+algorithm&amp;oldid=756468833&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=Kruskal%27s_algorithm&amp;printable=yes" title="Printable version of this page [p]">Printable version</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-wikibase-otherprojects-label" class="portal" id="p-wikibase-otherprojects" role="navigation">
+<h3 id="p-wikibase-otherprojects-label">In other projects</h3>
+<div class="body">
+<ul>
+<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:Kruskal%27s_algorithm" hreflang="en">Wikimedia Commons</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">Languages</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-ar"><a class="interlanguage-link-target" href="https://ar.wikipedia.org/wiki/%D8%AE%D9%88%D8%A7%D8%B1%D8%B2%D9%85%D9%8A%D8%A9_%D9%83%D8%B1%D9%88%D8%B3%D9%83%D8%A7%D9%84" hreflang="ar" lang="ar" title="خوارزمية كروسكال – Arabic">العربية</a></li><li class="interlanguage-link interwiki-ca"><a class="interlanguage-link-target" href="https://ca.wikipedia.org/wiki/Algorisme_de_Kruskal" hreflang="ca" lang="ca" title="Algorisme de Kruskal – Catalan">Català</a></li><li class="interlanguage-link interwiki-cs"><a class="interlanguage-link-target" href="https://cs.wikipedia.org/wiki/Kruskal%C5%AFv_algoritmus" hreflang="cs" lang="cs" title="Kruskalův algoritmus – Czech">Čeština</a></li><li class="interlanguage-link interwiki-de"><a class="interlanguage-link-target" href="https://de.wikipedia.org/wiki/Algorithmus_von_Kruskal" hreflang="de" lang="de" title="Algorithmus von Kruskal – German">Deutsch</a></li><li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/wiki/Algoritmo_de_Kruskal" hreflang="es" lang="es" title="Algoritmo de Kruskal – Spanish">Español</a></li><li class="interlanguage-link interwiki-fa"><a class="interlanguage-link-target" href="https://fa.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%DA%A9%D8%B1%D8%A7%D8%B3%DA%A9%D8%A7%D9%84" hreflang="fa" lang="fa" title="الگوریتم کراسکال – Persian">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a class="interlanguage-link-target" href="https://fr.wikipedia.org/wiki/Algorithme_de_Kruskal" hreflang="fr" lang="fr" title="Algorithme de Kruskal – French">Français</a></li><li class="interlanguage-link interwiki-ko"><a class="interlanguage-link-target" href="https://ko.wikipedia.org/wiki/%ED%81%AC%EB%9F%AC%EC%8A%A4%EC%BB%AC_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98" hreflang="ko" lang="ko" title="크러스컬 알고리즘 – Korean">한국어</a></li><li class="interlanguage-link interwiki-hy"><a class="interlanguage-link-target" href="https://hy.wikipedia.org/wiki/%D4%BF%D6%80%D5%B8%D6%82%D5%BD%D5%AF%D5%A1%D5%AC%D5%AB_%D5%A1%D5%AC%D5%A3%D5%B8%D6%80%D5%AB%D5%A9%D5%B4" hreflang="hy" lang="hy" title="Կրուսկալի ալգորիթմ – Armenian">Հայերեն</a></li><li class="interlanguage-link interwiki-it"><a class="interlanguage-link-target" href="https://it.wikipedia.org/wiki/Algoritmo_di_Kruskal" hreflang="it" lang="it" title="Algoritmo di Kruskal – Italian">Italiano</a></li><li class="interlanguage-link interwiki-he"><a class="interlanguage-link-target" href="https://he.wikipedia.org/wiki/%D7%94%D7%90%D7%9C%D7%92%D7%95%D7%A8%D7%99%D7%AA%D7%9D_%D7%A9%D7%9C_%D7%A7%D7%A8%D7%95%D7%A1%D7%A7%D7%9C" hreflang="he" lang="he" title="האלגוריתם של קרוסקל – Hebrew">עברית</a></li><li class="interlanguage-link interwiki-hu"><a class="interlanguage-link-target" href="https://hu.wikipedia.org/wiki/Kruskal-algoritmus" hreflang="hu" lang="hu" title="Kruskal-algoritmus – Hungarian">Magyar</a></li><li class="interlanguage-link interwiki-mn"><a class="interlanguage-link-target" href="https://mn.wikipedia.org/wiki/%D0%9A%D1%80%D1%83%D1%81%D0%BA%D0%B0%D0%BB%D1%8B%D0%BD_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC" hreflang="mn" lang="mn" title="Крускалын алгоритм – Mongolian">Монгол</a></li><li class="interlanguage-link interwiki-nl"><a class="interlanguage-link-target" href="https://nl.wikipedia.org/wiki/Kruskals_algoritme" hreflang="nl" lang="nl" title="Kruskals algoritme – Dutch">Nederlands</a></li><li class="interlanguage-link interwiki-ja"><a class="interlanguage-link-target" href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%AB%E3%83%AB%E6%B3%95" hreflang="ja" lang="ja" title="クラスカル法 – Japanese">日本語</a></li><li class="interlanguage-link interwiki-pl"><a class="interlanguage-link-target" href="https://pl.wikipedia.org/wiki/Algorytm_Kruskala" hreflang="pl" lang="pl" title="Algorytm Kruskala – Polish">Polski</a></li><li class="interlanguage-link interwiki-pt"><a class="interlanguage-link-target" href="https://pt.wikipedia.org/wiki/Algoritmo_de_Kruskal" hreflang="pt" lang="pt" title="Algoritmo de Kruskal – Portuguese">Português</a></li><li class="interlanguage-link interwiki-ro"><a class="interlanguage-link-target" href="https://ro.wikipedia.org/wiki/Algoritmul_lui_Kruskal" hreflang="ro" lang="ro" title="Algoritmul lui Kruskal – Romanian">Română</a></li><li class="interlanguage-link interwiki-ru"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%9A%D1%80%D1%83%D1%81%D0%BA%D0%B0%D0%BB%D0%B0" hreflang="ru" lang="ru" title="Алгоритм Крускала – Russian">Русский</a></li><li class="interlanguage-link interwiki-simple"><a class="interlanguage-link-target" href="https://simple.wikipedia.org/wiki/Kruskal%27s_algorithm" hreflang="simple" lang="simple" title="Kruskal's algorithm – Simple English">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a class="interlanguage-link-target" href="https://sk.wikipedia.org/wiki/Kruskalov_algoritmus" hreflang="sk" lang="sk" title="Kruskalov algoritmus – Slovak">Slovenčina</a></li><li class="interlanguage-link interwiki-sr"><a class="interlanguage-link-target" href="https://sr.wikipedia.org/wiki/%D0%9A%D1%80%D1%83%D1%81%D0%BA%D0%B0%D0%BB%D0%BE%D0%B2_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%B0%D0%BC" hreflang="sr" lang="sr" title="Крускалов алгоритам – Serbian">Српски / srpski</a></li><li class="interlanguage-link interwiki-sv"><a class="interlanguage-link-target" href="https://sv.wikipedia.org/wiki/Kruskals_algoritm" hreflang="sv" lang="sv" title="Kruskals algoritm – Swedish">Svenska</a></li><li class="interlanguage-link interwiki-th"><a class="interlanguage-link-target" href="https://th.wikipedia.org/wiki/%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AA%E0%B8%81%E0%B8%B2%E0%B8%A5" hreflang="th" lang="th" title="ขั้นตอนวิธีของครูสกาล – Thai">ไทย</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%9A%D1%80%D1%83%D1%81%D0%BA%D0%B0%D0%BB%D0%B0" hreflang="uk" lang="uk" title="Алгоритм Крускала – Ukrainian">Українська</a></li><li class="interlanguage-link interwiki-vi"><a class="interlanguage-link-target" href="https://vi.wikipedia.org/wiki/Thu%E1%BA%ADt_to%C3%A1n_Kruskal" hreflang="vi" lang="vi" title="Thuật toán Kruskal – Vietnamese">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/%E5%85%8B%E9%B2%81%E6%96%AF%E5%85%8B%E5%B0%94%E6%BC%94%E7%AE%97%E6%B3%95" hreflang="zh" lang="zh" title="克鲁斯克尔演算法 – Chinese">中文</a></li><li class="uls-p-lang-dummy"><a href="#"></a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q797860#sitelinks-wikipedia" title="Edit interlanguage links">Edit links</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> This page was last modified on 24 December 2016, at 13:00.</li>
+<li id="footer-info-copyright">Text is available under the <a href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" rel="license">Creative Commons Attribution-ShareAlike License</a><a href="//creativecommons.org/licenses/by-sa/3.0/" rel="license" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">Privacy policy</a></li>
+<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//en.m.wikipedia.org/w/index.php?title=Kruskal%27s_algorithm&amp;mobileaction=toggle_view_mobile">Mobile view</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":62,"wgHostname":"mw1213"});});</script>
+</body>
+</html>

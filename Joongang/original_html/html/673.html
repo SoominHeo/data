@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>The overlapping dreams-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "3009496";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '3009496', $('#ACMT'), 20, 'The overlapping dreams');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="The overlapping dreams" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=3009496" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=3009496" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="hUxxhAis/hAuJoTPD22olkcyeyfrU/h8frx1Zdull3FPI+K/VoxUzbTijovlNVUJ5voloippYCjEKibLjI+JTH1zc/2ZmtaNOmsjJQYIY1UiGDXmEpAHeT11wu+iUERaRco8rzbQq0/VBOVTU/Xb1l00TsueFOLvtL23RgmWQ/oa8UFo"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;t=The+overlapping+dreams" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=The+overlapping+dreams&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;text=The+overlapping+dreams" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;The+overlapping+dreams&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;title_nobase64=The+overlapping+dreams','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '3009496');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('3009496');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">The overlapping dreams</h3>
+<h4>기시의 꿈, 아베의 꿈  <a href="javascript:popupWindow2('/news/article/option/sound.aspx?file=http://pds.joins.com/jmnet/koreajoongangdaily/_data/sound/2015/09/22092028.mp3','crm_pop',450,500,370,130,'no');"><img alt="PLAY AUDIO" src="http://images.joins.com/ui_joins/joongangdaily/common/i_playaudio.gif"/></a></h4>
+<span class="date">Sept 22,2015</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content">The security law revision by Japanese Prime Minister Shinzo Abe reminds us of the U.S.-Japan Security Treaty revision by his grandfather and former Prime Minister Nobusuke Kishi. It had long been Kishi’s ambition to have a more equal alliance with the U.S. Kishi proclaimed a new age in U.S.-Japan relations and began working to revise the Security Treaty in 1958. The Security Treaty was signed in 1951 and reflected Japan’s status as the defeated and the United States as the victorious. The U.S. Forces could exert power in case of domestic unrest in Japan. In 1960, Kishi removed the clause and stipulated a mutual defense obligation. The amendment was the critical turning point in postwar Japan and Japan’s rearmament. <br/><br/>When the security treaty was amended, unprecedented anti-government and anti-American protests swept up Japan. People were concerned about the possibility of war and Kishi’s history as an A-class war criminal. Japan was divided into the conservative and the liberals. Chair of the Japan Socialist Party Inejiro Asanuma mentioned the security treaty when visiting China and said that American imperialism was the mutual enemy of the people of Japan and China. The Kishi government mobilized the rightist groups and gangsters to suppress protests. As the protests were not subjugated, Kishi resigned in June, 1960 after the instrument of ratification were exchanged. As many as 5.6 million people participated in the protest nationwide. After Kishi’s retirement, the turmoil over the security treaty died out, as the protests had been anti-Kishi as well. This happened before Abe entered elementary school. Kishi laughed as Abe copied the protestors surrounding the residence and shouted, “We oppose security treaty!” (“Shinzo Abe and Nobusuke Kishi” by Eiji Oshita). <br/><br/>Abe’s security bill is the other side of the coin of Kishi’s US-Japan Security Treaty amendment. If Kishi had drawn the blueprints for an equal alliance, Abe made an action plan. It is considered to have opened the door to a true U.S.-Japan alliance. In fact, Abe compares his bill to his grandfather’s amendment. He said that the amendment was criticized for putting Japan at risk of war, but history proves that it was not wrong. A photo of Kishi and U.S. President Eisenhower signing the amendment is hanging on the wall of Abe’s office. <br/><br/>With the security bill, Japan’s security system and defense capacity is upgraded. The bilateral U.S.-Japan alliance through Japan’s active security contribution means that Japan’s standing on its own. Kishi’s duet of self-reliance and cooperation with the United States has been passed on to his grandson. Japan’s politics and society have changed from the days of Kishi. When the security treaty amendment was ratified in 1960, Liberal Democratic Party’s heavyweights Ichiro Kono and Takeo Miki did not vote. But the spectrum is not so wide in today’s ruling party. The lawmakers are tightly gathered around Abe. The opposition party is incompetent, and the civil society is not as influential. An overall conservative swing is evident in the society. We are facing Japan as a normal nation that is more aggressive and opinionated than ever. <br/><br/>*The author is a Tokyo correspondent of the JoongAng Ilbo. JoongAng Ilbo, Sept. 19, Page 26 <br/><br/>by OH YOUNG-HWAN <br/><br/></div></div><div class="article_dvright"><div class="article_content"> 아베 신조 일본 총리의 안보법제 정비는 55년 전 외조부 기시 노부스케 전 총리의 미일 안보조약 개정을 연상시킨다. 보다 대등한 미일동맹은 기시의  숙원이었다. 기시는 미일 신시대를 내걸고 1958년 안보조약 개정에 나섰다. 51년 체결된 안보조약은 전승국-패전국 간 색채가 강했다. 미군이 일본내 내란에 출동할 수 있도록 했다. 기시는 60년 조약 개정으로 내란 조항을 없애고 미일 공동방위를 명문화했다. 조약 개정은 일본 전후사에서 일대 전환점이었다. 일본 재무장의 한 틀이 됐다. <br/>  2년간에 걸친 안보조약 개정은 유례가 없는 반정부, 반미 데모를 불렀다. 전쟁에 대한 알레르기와 A급 전범 출신인 기시에 대한 우려가 겹쳐졌다. 일본은 보혁(保革)으로 양분됐다. 중국을 찾은 아사누마 이네지로 사회당 서기장은 안보조약을 언급하면서 “미 제국주의는 일ㆍ중 인민의 공동의 적”이라고도 했다. 기시 정권은 우익단체와 폭력단까지 동원해 시위를 막았다. 기시는 시위가 수그러들지 않자 조약 비준서 교환을 끝내고 60년 6월 사직했다. 시위 규모는 한때 전국에서 560만명에 달했다. 기시 퇴임 후 이른바 안보 소동은 잠잠해졌다. 시위는 반(反)기시 투쟁이기도 했다. 당시 아베 총리는 초등학교 입학 전이었다. 기시는 시위대에 둘러싸인 자택에서 그들을 흉내내 “안보 반대”를 외치던 아베를 보고 웃었다고 한다(『아베 신조와 기시 노부스케』,오시타 에이지). <br/>  아베의 안보법제는 기시의 미일 안보조약 개정과 동전의 양면이다. 기시가 대등한 동맹의 밑그림을 그렸다면 아베는 행동계획을 짰다. 진정한 미일 동맹의 문이 열렸다는 평가가 나온다. 실제 아베는 안보법제를 외조부의 조약 개정에 견준다. “그 당시 전쟁에 휘말린다고 비판받았지만 개정이 잘못이 아니라는 것은 역사가 증명하고 있다”고 했다. 아베 집무실에는 기시가 아이젠하워 미 대통령과 안보조약 개정에 서명한 사진도 걸려 있다고 한다. <br/>  안보 법제로 일본 안보 체제와 방위력은 한단계 업그레이드 됐다. 일본의 적극적 안보 공헌을 통한 쌍무적(雙務的) 미일동맹은 뒤집어보면 일본의 자립이기도 하다. 기시의 대미 자주와 협력의 이중주는 한 대(代)를 거쳐 손자한테서 재현됐다. 그 새 일본 정치ㆍ사회는 확 바뀌었다. 60년 안보조약 개정안 비준 땐 자민당 거물인 고노 이치로 전 부총리와 미키 다케오 전 총리가 표결에 불참했다. 지금의 자민당엔 그런 다양한 스펙트럼이 없다. 아베를 축으로 한 강철대오다. 야당은 무력하고, 시민사회의 영향력도 예전같지 않다. 사회 전반이 보수화됐다. 우리는 지금 보다 적극적으로 자기 주장을 펴는 보통국가 일본을 마주하고 있다. <br/><br/>오영환 도쿄 특파원<br/></div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=3009496&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;t=The+overlapping+dreams" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=The+overlapping+dreams&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;text=The+overlapping+dreams" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;The+overlapping+dreams&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d3009496&amp;title_nobase64=The+overlapping+dreams','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=3009496"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '3009496');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('3009496');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("3009496", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("3009496", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

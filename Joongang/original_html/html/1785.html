@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>Nothing left to do but wait-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "2980578";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '2980578', $('#ACMT'), 20, 'Nothing left to do but wait');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="Nothing left to do but wait" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2980578" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=2980578" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="a9TioVOtGZ00Qylp1/OuQbu7pOMvp8Q4/WsADQXx203TV+tpiU6SzZ2LfelR54CJev/ov19/50AU81+renPYHzN8SFq42Jz6/aEaFDouYk5fkYMw0QieHhvcKSZB0KplVEXHuHqbClbLpdNyEvLFZX6/CqawwJ7X5Ljl4YkKcdvd8IQe"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;t=Nothing+left+to+do+but+wait" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=Nothing+left+to+do+but+wait&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;text=Nothing+left+to+do+but+wait" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;Nothing+left+to+do+but+wait&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;title_nobase64=Nothing+left+to+do+but+wait','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2980578');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2980578');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">Nothing left to do but wait</h3>
+<h4>'사초 실종' 과거사 정국에서 벗어날 때</h4>
+<span class="date">Nov 18,2013</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content">The prosecution announced the results of its 114-day investigation into the whereabouts of the minutes of the 2007 inter-Korean summit talks that strangely went missing from the Presidential Archives. The focus was on why and how such significant records that should have been kept sealed in the National Archives disappeared. The ruling Saenuri Party insisted the government of President Roh Moo-hyun destroyed the records, fearing a possible fallout from his remarks suggesting a disavowal of the Northern Limit Line, the de facto border on the Yellow Sea, during a private conversation with North Korean leader Kim Jong-il. <br/><br/>The prosecution came to the conclusion that Roh ordered his aides - Baek Jong-chun, his chief secretary for diplomacy and security, and Cho Myoung-gyon, his security policy secretary - to delete the file on the minutes of the summit conversation from the presidential computer system. Cho also was ordered to revise the draft of the conversation records. The prosecution concluded the culprit behind the deletion, removal and modification of the summit transcript was the former president. The upcoming trial should concentrate on why Roh made such an order. But the prosecution declined to comment on the reason, either because of the political burden or difficulty in the investigation.<br/><br/>The two aides were indicted on charges of violating the Act on the Management of Presidential Archives. However, Moon Jae-in, Roh’s chief of staff who organized the summit talks and the DP’s presidential candidate in last December’s election, escaped legal responsibility as the prosecution couldn’t find any evidence of his involvement.<br/><br/>Moon’s accountability was questioned after he said he was in charge when the files were moved. Even though the prosecution wrapped up the investigation, Moon is not entirely free from political and moral responsibility. He is advised to keep himself low-key as the central figure of the controversial 2007 inter-Korean summit and chief of staff who was unaware of the nullification of the summit records.<br/><br/>The prosecution said it could not discover big changes between the original draft and the modified version of the minutes. The Saenuri Party claimed the modification was ordered to delete controversial remarks on the NLL. The holes in the prosecution’s investigation could only be filled by the late president. The investigation outcome does not deal as heavy a blow to living politicians. But both the ruling and opposition parties have nothing to be proud of. They better just keep quiet and await the court rulings. <br/></div></div><div class="article_dvright"><div class="article_content">2007년 남북정상회담 회의록 폐기의혹 수사 결과가 어제 발표됐다. 114일에 걸친 이른바 사초 실종 수사는 ‘누가 어떻게’라는 부분에 대해선 비교적 소상하게 밝혀 냈으나 ‘왜’라는 부분에 대해선 적극적으로 파헤치지 못했다.<br/><br/>　검찰은 회의록 폐기의 주체가 노무현 대통령이라고 명시했다. 당시 노 대통령이 백종천 외교안보실장·조명균 안보정책비서관에게 “(청와대의) e지원 시스템에 있는 회의록 파일은 없애도록 하라. 회의록을 청와대에 남겨두지 말라”는 취지의 지시를 했다는 것이다. 노 대통령은 또 조 비서관이 작성한 회의록 초본을 수정하라고 지시했다. 결국 베일에 싸였던 회의록 폐기 및 삭제·수정의 주체가 노 전 대통령으로 특정된 게 검찰 수사의 핵심이라고 할 수 있다. 앞으로 재판 과정에서 노 대통령이 도대체 왜 회의록 폐기를 지시했는지가 명확히 나와야 한다. 정치적 부담 때문인지 수사의 미비 때문인지 검찰은 노 대통령이 회의록을 폐기한 동기에 대해 언급하지 않았다.<br/><br/>　문재인 의원이 회의록 폐기의 법적 책임에서 벗어나게 된 것도 눈길을 끈다. 검찰은 “문 의원이 회의록 삭제에 관여했다는 증거가 없다”고 발표했다.<br/><br/>　당시 대통령 비서실장이자 정상회담 준비위원장으로 스스로 “내 책임하에 기록물을 이관했다”고 했던 문 의원이 과연 폐기 과정에 관여하지 않았을까. 하지만 검찰은 이 문제를 더 이상 파고들 생각이 없는 것 같다. 검찰 수사가 이 정도로 마감됐다고 해서 문 의원에 대한 정치적·도의적 책임이 면제되는 건 아닐 것이다. 그는 현재는 대화록 실종사건을 일으킨 정치인으로서, 2007년 당시엔 대화록의 폐기·삭제·수정 사실을 까맣게 몰랐던 청와대 비서실장으로서 자숙해야 한다.<br/><br/><br/><br/>　또 하나 주목할 사실은 검찰이 ‘초본이나 수정본에서 회담의 본질적인 내용에 큰 차이가 없음’을 적시한 것이다. 그동안 새누리당 쪽에선 노 대통령이 초본에서 NLL 포기로 볼 만한 내용이 많은 걸 보고 이를 수정하도록 지시했을 것이란 의심을 해왔다.<br/><br/>　검찰의 수사내용엔 말 없는 노 전 대통령이 답해야 할 것들이 많다. 그러나 살아있는 정치권한테 치명적인 타격이 되는 건 없다. 여야가 공연히 자신의 결백과 상대방 공격에 사로잡혀 요란을 떨 이유가 없는 것이다. 애초부터 핵심 관계자가 사라진 과거사 수사 아니었나. 정치권은 이제 재판으로 넘겨진 과거사 사건을 차분히 지켜보고 더 이상 정쟁화하는 행위를 중단하길 바란다.<br/><br/>　사초 실종 수사는 대통령 기록물 관리의 엄중한 교훈도 주었다. 노 전 대통령이 주도해 대통령기록물 관리법과 관련 제도를 구축한 건 평가할 만하나 실제 기록물 처리 과정에서 이를 지키지 않았기 때문이다. 법과 제도의 완비도 중요하지만 통치자와 청와대 참모들의 치열한 기록보존 의식이 절실하다고 할 것이다.<br/><br/>사초 실종 사건이 벌어질 때 15년, 30년간 볼 수 없는 대통령 지정기록물이 목록조차 없어 혼란이 가중됐는데 지정기록물의 목록만큼은 일목요연하게 정리하는 등 기술적 보완도 있어야 할 것이다.<br/><br/></div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2980578&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;t=Nothing+left+to+do+but+wait" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=Nothing+left+to+do+but+wait&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;text=Nothing+left+to+do+but+wait" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;Nothing+left+to+do+but+wait&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2980578&amp;title_nobase64=Nothing+left+to+do+but+wait','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=2980578"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2980578');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2980578');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("2980578", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("2980578", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

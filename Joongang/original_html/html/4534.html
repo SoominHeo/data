@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>In the interest of whom?-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "2915495";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '2915495', $('#ACMT'), 20, 'In the interest of whom?');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="In the interest of whom?" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2915495" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=2915495" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="GXXfqpS8jy/NhoM3EJEpsVCI7DVkJRQVm+6g6W2YRC8PfwNnQj5iQBuHarqwwk12wkhoW4J71ecaOV5n9wlEbQd8R74z6H6uE1Mc3Rge0W7MzIuf/oxZc3EeMlKsopNMQerNSZPOminidIo1ib29kt8T9xOHtvRFIwdkmPCIYtCL8FkC"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;t=In+the+interest+of+whom%3f" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=In+the+interest+of+whom%3f&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;text=In+the+interest+of+whom%3f" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;In+the+interest+of+whom%3f&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;title_nobase64=In+the+interest+of+whom%3f','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2915495');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2915495');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">In the interest of whom?</h3>
+<h4>[분수대] 수쿠크  <a href="javascript:popupWindow2('/news/article/option/sound.aspx?file=http://pds.joins.com/jmnet/koreajoongangdaily/_data/sound/2010/01/18213726.mp3','crm_pop',450,500,370,130,'no');"><img alt="PLAY AUDIO" src="http://images.joins.com/ui_joins/joongangdaily/common/i_playaudio.gif"/></a></h4>
+<span class="date">Jan 19,2010</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content"><br/><br/><!--article_--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top" width="48%"><!-- //left news --><font class="txt"><br/>Greek philosopher Aristotle was against the idea of lending money at an interest rate, because he thought that money simply breeding more money without any exchange or trade involved was unnatural. <br/><br/>The popes in medieval times thought the same way. They followed teachings from the Bible that said no one should charge a rate of interest in return for lending money, grain or any other thing that might accrue a greater value. <br/><br/>Clergymen who demanded the payment of an usury had their titles taken away. Usurers who did not repent before death were not allowed a Christian burial. <br/><br/>Even in those times, however, moneylenders still managed to charge and pay interest; the borrower would be charged a fee for remitting or exchanging money.<br/><br/>Some religious reformists who were active some 500 years ago also spoke out against charging interest on loans. Martin Luther, the German reformer, said in indignation that taking back more than the principal was stealing. He also said that moneylenders were thieves tainted with vice, and that they should be executed by having their legs torn apart. <br/><br/>As the monetary economy gradually took root and a growing number of people started to live on income from usury, however, the church had no other choice but to recognize interest as a legitimate source of income. <br/><br/>The teachings of Islam still prohibit charging riba, or interest, on loans. But Muslims have also devised a way by which they could evade these religious regulations. <br/><br/>Sukuk, the Islamic equivalent of a bond, is a typical example. Sukuk is not a loan but a financial product that is traded to evade the Islamic law that prohibits riba. <br/><br/>For example, if someone wants to borrow money to buy a machine, the bank can buy the machine itself and collect rent on it, instead of charging interest for a loan. Since a rental fee is not technically interest, it is not in violation of Islamic law. <br/><br/>There are similarities between sukuk and the asset-backed security (ABS), which is said to help achieve financial reform, because the asset-backed security is structured as a bond backed by underlying assets, and returns the profits from the assets to the bond holders. <br/><br/>The tax revision bill, which would have allowed the issuance of Islamic bonds, was suspended by the National Assembly at the end of last year. <br/><br/>On the surface, the reason was “worries over possible appropriation of funds for terror purposes.” It is said, however, that the actual reason is the antipathy of the Christian community toward Islam. <br/><br/>The Korean businesses that have looked forward to the revision, not to mention the Islamic community here, have reacted to the Assembly’s decision with disbelief. <br/><br/>They say it is absurd that the assemblymen view the established Islamic financial system with religious bias. Meanwhile, the government and the markets are starting to make their case to assemblymen again. <br/><br/>I look forward to seeing a new tax bill pass the assembly at the special parliament session to be held in February. If there are assemblymen who are reluctant to approve the bill because of religious reasons, they should recall the fact that a long time ago, a prohibition on interest collection had been the Christian way as well.<br/><br/>*The writer is a deputy business news editor of the JoongAng Ilbo.<br/><br/><br/>By Hoh Kui-seek <br/><br/><br/><br/><div class="txt_iht_03_2"><p style="margin-top:2px"><!-- //left news --></p></div></font></td><td align="center" valign="top" width="12"></td><td align="center" bgcolor="cccccc" valign="top" width="1"></td><td align="center" valign="top" width="12"></td><td valign="top" width="48%"><!-- riht news --><font class="t4" color="014A77"><b><br/>수쿠크</b></font><br/>철학자 아리스토텔레스는 돈을 빌려주고 이자를 받는 것에 반대했다. 화폐가 화폐를 생산할 수 없다는 이유였다. 중세의 교황들도 그랬다. “이자를 받지 말지니 곧 돈의 이자, 식물의 이자, 이자를 낼 만한 모든 것의 이자를 받지 말라”는 성경의 가르침을 따른 것이다. 이자를 요구한 성직자들은 직책을 박탈당했다. 회개하지 않고 죽은 대금업자에겐 기독교식 매장을 허용하지 않았다. 하지만 이 시대에도 이자 수수(授受)는 있었다. 송금이나 환전 형태로 돈을 빌려주고 수수료를 받는 방식이 활용됐다.<br/><br/>500여 년 전 등장한 일부 종교개혁가들도 이자 금지를 주장했다. “빌려준 것보다 더 많이 돌려받는 것은 도둑질이다. 고리대금업자는 악에 깊이 물든 도둑들이다. 다리를 찢어 죽이는 거열형(車裂刑)에 처해야 한다.” 이 증오에 찬 목소리의 주인공은 종교개혁가 마르틴 루터였다. 그러나 화폐경제가 뿌리를 내리면서 점점 더 많은 사람들이 이자에 의존해서 살게 되자 교회는 이자를 인정하지 않을 수 없었다.<br/><br/>이슬람교는 여전히 이자(리바)를 엄격히 금지한다. 중세 유럽인들처럼 무슬림들도 규제를 회피하기 위한 방법을 고안해 냈다. 이슬람 채권인 수쿠크가 대표적이다. 수쿠크는 돈을 빌려주는 것이 아니라 실물을 매개로 이자금지를 회피하는 금융상품이다. 예를 들어 기계를 구매하기 위해 돈을 빌리려는 사람이 있다면 은행이 직접 기계를 사들여 제공하고 이자 대신 사용료를 받는다. 사용료는 명목상 이자가 아니기 때문에 이자 금지에 어긋나지 않는다. 수쿠크는 금융혁명으로 일컬어진 자산담보부증권(ABS)과 원리에서 유사하다. ABS 역시 자산을 담보로 채권을 발행하고, 자산에서 얻는 수익금을 채권 보유자에게 돌려주는 구조이기 때문이다.<br/><br/>이슬람 채권 발행을 위한 세법 개정안이 지난해 말 국회에서 발목이 잡혔다. 표면적으론 ‘테러 자금 전용’을 걱정한다지만 밑바탕엔 기독교계의 반감이 깔려 있다고 한다. 법 개정을 기다려온 국내 기업은 물론 외신으로 소식을 접한 이슬람권도 이해할 수 없다는 반응이다. 제도화한 이슬람금융을 왜 종교와 결부시키느냐는 것이다. 정부와 시장은 다시 의원들을 설득 중이다. 다음 달 열리는 임시국회에서 개정안이 통과되길 학수고대하고 있다. 종교적 신념 때문에 꺼림칙한 의원이 있다면 이자 금지가 오랜 세월 기독교의 계율이었다는 사실을 떠올려 보는 것이 어떤가. <br/><br/>허귀식 경제부문 차장 <br/> <div class="txt_iht_03_2"><p style="margin-top:2px"><!-- riht news --></p></div></td></tr></table></div></div><div class="article_dvright"><div class="article_content"></div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2915495&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;t=In+the+interest+of+whom%3f" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=In+the+interest+of+whom%3f&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;text=In+the+interest+of+whom%3f" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;In+the+interest+of+whom%3f&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2915495&amp;title_nobase64=In+the+interest+of+whom%3f','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=2915495"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2915495');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2915495');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("2915495", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("2915495", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

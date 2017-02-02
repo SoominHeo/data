@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>Talks － at least for the time being-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "1919024";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '1919024', $('#ACMT'), 20, 'Talks － at least for the time being');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="Talks － at least for the time being" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=1919024" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=1919024" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="fKAyqUDWV9F1pwk9LzpxIbuHi4qiqeC1h2wGmrAZnqBRQjH+YOTTIC5bSQZblYQvaARNOZ510k2ChIs87RfrkL2gSA0qfAXoDRZNdOe6pDMvzj1AWGITMg9WxzxM2UoCNhwDSoYCiW2F0vPlf5wmC/y8BG79GYWkSr4nq2d77iQMX90k"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;t=Talks+%ef%bc%8d+at+least+for+the+time+being" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=Talks+%ef%bc%8d+at+least+for+the+time+being&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;text=Talks+%ef%bc%8d+at+least+for+the+time+being" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;Talks+%ef%bc%8d+at+least+for+the+time+being&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;title_nobase64=Talks+%ef%bc%8d+at+least+for+the+time+being','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '1919024');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('1919024');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">Talks － at least for the time being</h3>
+<h4></h4>
+<span class="date">Nov 01,2002</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content"><table border="0" cellpadding="0" cellspacing="0" width="528"><tr><td valign="top" width="252"><br><font class="txt">While Korean journalists in Los Cabos, Mexico, were reading U.S. President George W. Bush's lips, the American and European journalists were concentrating on the basic strategy of the Bush administration after North Korea's admission that it has a nuclear weapons development program. What came out of President Bush's mouth was a statement that North Korea could expect financial aid from international society should it give up its nuclear program. <br>
+<br>
+And what was the basic strategy of the United States expressed by President Bush in separate meetings with the leaders of South Korea, China and Japan, and then in the tripartite meeting with President Kim and Prime Minister Koizumi later on? It was that sanctions against North Korea should not be hurried, and that Northeast Asian countries had to form a coalition to put firm but subtle pressure on North Korea. <br>
+<br>
+The New York Times reported that President Bush seemed satisfied with "slowly" forming a consensus on the North Korean nuclear issue in contrast to his actions concerning Iraq. The Financial Times has also pointed out that Mr. Bush has neither proposed economic sanctions against North Korea nor demanded an immediate stop to South Korean and Japanese talks with Pyeongyang. It reported that the U.S. president seemed ready to form an "unhurried" international coalition to deal with North Korea. <br>
+<br>
+Both the New York Times and the Financial Times reports on the Bush administration's North Korea policy included a quote from U.S. Secretary of State Colin Powell. Mr. Powell said he wanted to make clear that the U.S. government would act with patience and caution so as not to create a crisis in Northeast Asia. <br>
+<br>
+All this might be a little disappointing to those who expected the results of Los Cabos to include a hard-line stance against North Korea led actively by the leaders of South Korea, the United States and Japan and agreed to, if less enthusiastically, by the Russian and Chinese leaders. That is quite a difference from the shock and controversy we saw after Pyeong-yang's admission of a nuclear program was revealed, but it is hardly surprising. Mr. Bush and his foreign affairs and security advisers say they will not tolerate a nuclear-armed North Korea, but have always thought optimistically that with cooperation from South Korea and other regional powers, North Korea could be made to give up its nuclear weapons. Such optimism was based on the calculation that North Korea's nuclear program is not yet a threat to South Korea, Japan or the United States. <br>
+<br>
+Thus, a deal was made at Los Cabos between President Bush on one side and South Korean President Kim Dae-jung and Japanese Prime Minister Juni-chiro Koizumi on the other. The United States agreed that South Korea and Japan would continue their talks with North Korea and South Korea and Japan agreed to make nuclear wea-pons the priority in their talks with Pyeongyang. Mr. Koizumi announced that ending North Korea's nuclear program would be a prerequisite for the normalization of relations between Japan and North Korea. <br>
+<br>
+Perhaps the United States yielded because it does not really expect any progress to be made through dialogue be-tween North Korea and Japan or South Korea. Making the nuclear problem the centerpiece of their discussions would only hamper their talks with Pyeongyang. North Korea was adamant that it would only talk with the United States about its nuclear program. The New York Times reported that part of Washington's North Korea strategy is to wait for President Kim's term to end before moving; that also sounds plausible. <br>
+<br>
+North Korea pranced into the minister-level meeting with South Korea just days after admitting to its nuclear program. It started the project of connecting the railroads and roads between North and South Korea and sent a delegation to Seoul for a tour of South Korean industry. It has also started negotiations for normalization with Japan. Such a two-faced attitude by North Korea is confusing, to say the least, but it is a reflection of Pyeongyang's desire to talk with South Korea, Japan and the United States. <br>
+<br>
+But time is running out for North-South reconciliation. President Kim, a faithful friend of Kim Jong-il, the North Korean leader, will soon be leaving office. What will come post-Kim Dae-jung is not clear, and once Mr. Bush is done with Iraq, the carrots that the United States is offering to Pyeongyang at present might just turn into sticks. <br>
+<br>
+* The writer is a senior columnist of the JoongAng Ilbo.</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></font><br><br><div class="txt_iht_03_2"><b>by Kim Young-hie</b></div><p style="margin-top:2px"><br><br><br><br><br><br/></br></br></br></br></br></p></br></br></br></td><td align="center" valign="top" width="12"></td><td align="center" bgcolor="cccccc" valign="top" width="1"></td><td align="center" valign="top" width="12"></td><td valign="top" width="251"><font class="t4" color="014A77"><b>한반도의 모래시계는</b></font><br><br><font class="txt">멕시코의 로스카보스에서 한국 기자들이 미국 대통령 조지 W 부시의 '입'을 주시하고 있을 때 미국과 유럽 기자들은 핵 고백 이후의 북한에 대한 부시 정부의 기본 전략을 탐지하는 데 주력했다. 부시의 입에서 나온 말은 북한이 핵 개발을 포기하면 국제사회로부터 경제적인 지원을 기대할 수 있다는 내용이다. <br>
+<br>
+그렇다면 한국.미국.중국.일본의 수뇌들이 가진 개별 정상회담이나 김대중.부시.고이즈미의 삼각 정상회담에서 탐지된 미국의 대북 기본 전략은 무엇일까. 그것은 북한에 대한 조치를 서둘지 말고 천천히 동북아시아 국가들의 연대를 만들어 북한에 단호하되 은근한 압력을 넣는다는 것이다. <br>
+<br>
+뉴욕 타임스는 부시가 이라크에서와는 대조적으로 북한의 핵 문제에서는 완만한(Slow) 컨센서스 구축에 만족하는 것으로 보인다고 보도했다. 영국의 파이낸셜 타임스도 부시가 북한에 대한 경제제재를 제안하지도 않고, 남북회담과 북.일회담의 즉각 중단을 요구하지도 않고, 서둘지 않는(Unhurried) 국제연대를 구축한다는 자세를 취한다고 보도했다. <br>
+<br>
+부시 정부의 대북 전략에 관한 뉴욕 타임스와 파이낸셜 타임스의 이런 해석은 국무장관 콜린 파월의 주목할 만한 발언으로 뒷받침된다. 파월은 이렇게 말했다. "우리는 인내심을 갖고 행동하고, 신중하게 행동하고, 동북아시아에서 위기를 유발하지 않도록 행동한다는 점을 분명히 하고 싶다. " <br>
+<br>
+***金·고이즈미와 부시의 빅딜 <br>
+<br>
+로스카보스에서 한국.미국.일본 수뇌들이 적극적으로 주도하고 중국.러시아 수뇌들이 소극적으로 동조하는 대북 강경 선언을 기대한 사람들에게는 좀 싱겁고 김새는 분위기로 보였을 것이다. 북한이 핵무기 개발 프로그램을 자백했다는 충격적인 발표, 거기서 우리가 겪은 혼란과 논란과는 너무 동떨어진 분위기가 아닌가. <br>
+<br>
+그러나 놀랄 것 없다. 부시와 그의 외교.안보 참모들은 처음부터 북한의 핵무기 개발은 결코 용납하지 않는다는 단호한 입장을 대전제로 하면서도 한반도 주변국가들이 공동으로 노력하면 북한의 핵 개발을 포기시킬 수 있을 뿐 아니라 그것을 계기로 북한 문제 자체를 해결할 수도 있다고 낙관적으로 생각했다. 이런 낙관론은 북한의 핵무기 개발 프로그램이 당장 한국과 일본 또는 미국에 위협이 되지 않는다는 인식에 바탕을 두는 것이다. <br>
+<br>
+그래서 로스카보스에서는 金.고이즈미를 한편으로 하고 부시를 다른 한편으로 하는 빅딜이 이뤄졌다. 미국은 한국과 일본이 북한과의 대화를 계속하는 데 동의하고, 한국과 일본은 북한과의 회담에서 핵 문제를 반드시 최우선 의제로 다루는 데 동의한 것이다. 고이즈미가 핵 문제 해결이 북.일관계 정상화의 조건이라고 선언한 것도 이런 배경에서다. <br>
+<br>
+어쩌면 미국의 양보는 남북,북.일대화에서 핵 문제의 의미 있는 논의를 기대할 수 없다는 판단에서 나왔는지도 모른다. 핵 문제를 논의하라는 요구 자체가 북한과의 대화에 족쇄가 되기 때문이다. 북한은, 핵은 미국과 협상할 문제라는 입장이다.<br>
+<br>
+金대통령의 임기가 끝나기를 기다리는 것이 미국의 대북 전략의 한 측면인 것 같다는 뉴욕 타임스의 보도도 설득력 있게 들린다. <br>
+<br>
+미국이 북한 핵을 대화로 푼다는 입장을 아시아.태평양지역 수뇌들이 모인 자리에서 확인하고 아시아.태평양 지역 수뇌들이 북한에 경제적인 혜택이라는 당근을 제시하면서 핵 개발 프로그램을 포기하라고 촉구한 것은 북한 핵 문제 해결에 중요한 전기(轉機)가 될지도 모른다. <br>
+<br>
+***혼란스러운 북한의 두얼굴<br>
+<br>
+문제는 공을 다시 넘겨받은 북한의 태도다. 북한은 자신들의 핵 고백이 일으킨 파문에 아랑곳없이 남북 장관급 회담에 참석하고 남북 철도와 도로 연결공사를 시작하고 실세(實勢)가 포함된 산업시찰단을 남한에 보냈다.<br>
+<br>
+일본과는 국교정상화를 위한 회담도 시작했다. 북한의 이런 두 얼굴이 혼란스럽다. 그것은 한국.미국.일본과의 대화를 갈망한다는 입장의 반영으로 보인다. <br>
+<br>
+그러나 북한은 들으라. 여유를 부릴 때가 아니다. 남북 관계의 모래시계에 그대들의 마음씨 좋은 친구 金대통령의 모래알은 몇 개 남지 않았다.<br>
+<br>
+포스트 김대중 시대가 코 앞에 왔다. 그뿐 아니다. 부시가 이라크에서 발을 뺄 수 있게 되는 날 북한에 제시하는 미국의 당근과 채찍의 비율이 달라질지도 모른다.</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></font><br><br><div class="txt_iht_03_2"><b>by 김영희 기자</b></div><p style="margin-top:2px"><br><br><br><br/></br></br></br></p></br></br></br></br></td></tr></table></div></div><div class="article_dvright"><div class="article_content"></div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=1919024&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;t=Talks+%ef%bc%8d+at+least+for+the+time+being" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=Talks+%ef%bc%8d+at+least+for+the+time+being&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;text=Talks+%ef%bc%8d+at+least+for+the+time+being" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;Talks+%ef%bc%8d+at+least+for+the+time+being&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1919024&amp;title_nobase64=Talks+%ef%bc%8d+at+least+for+the+time+being','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=1919024"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '1919024');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('1919024');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("1919024", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("1919024", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

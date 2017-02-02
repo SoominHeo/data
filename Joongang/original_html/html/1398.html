@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>The way forward-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "2988202";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '2988202', $('#ACMT'), 20, 'The way forward');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="The way forward" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2988202" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=2988202" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="nzzVIUEKTZrpq8efN9XCay5pxVlIFIsF7X+/edguL6lHnDCBMXxSts/i3dyBh4IjqQoaCacL2w3Y84ZgDnINSOdqVizZ6nr1H0m5ztXf4XfNRLhNUK+2lKQU26lfV4z2gg/sTmybqXuMZcSPMdanC1uNt/XyWmmDJzcGpSXNcN/TLj7t"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;t=The+way+forward" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=The+way+forward&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;text=The+way+forward" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;The+way+forward&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;title_nobase64=The+way+forward','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2988202');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2988202');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">The way forward</h3>
+<h4>지금 팽목항엔 따뜻한 위로가 필요하다  <a href="javascript:popupWindow2('/news/article/option/sound.aspx?file=http://pds.joins.com/jmnet/koreajoongangdaily/_data/sound/2014/04/21215004.mp3','crm_pop',450,500,370,130,'no');"><img alt="PLAY AUDIO" src="http://images.joins.com/ui_joins/joongangdaily/common/i_playaudio.gif"/></a></h4>
+<span class="date">Apr 22,2014</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content">A parent representing the families with children missing on the ferry Sewol yesterday delivered some positive news on the current status of the rescue team’s search in the sunken ship, where hundreds of high school students were trapped. “From today, the rescue team will kick off a full-fledged search. So far, divers have broken 17 windows of the ship to increase the number of guidelines from five to 10 to accelerate their rescue.” After a middle-aged man asked, “When will they enter the large cabin where over 30 students presumably gathered?” the representative said, “According to the authority, visibility is almost zero in the ship. I can’t say if that would be possible.” <br/><br/>The families are tired but are still desperate to find out what happened to their children. Some who visited a makeshift morgue about 100 meters (328 feet) away from their encampment at Jindo’s gymnasium to try to identify bodies suddenly burst into tears after confirming their worst fears, and their six days of hopes, however diminishing, were extinguished for good. <br/><br/>Families who remained in the gymnasium earnestly read the descriptions of unidentified bodies posted on a board. When a body was accompanied by an ID, the families were instantly summoned to see if the remains were indeed those of their children. <br/><br/>In the meantime, volunteers from around the country rolled up their sleeves to help the families by handing out hot meals, blankets, underwear, medicine and, as hard as they are to find, some words of comfort. But the lethargic disaster management was proven over and over again. Families wonder what the government was up to at the time of such a huge tragedy. As it turned out, the ferry and the Jindo Vessel Traffic Service had a terrible communication problem despite the urgency of the situation. Government ministries and agencies also acted in perfect disharmony and lost vital time for rescue. <br/><br/>But now is the time for everyone to extend their sympathies to the bereaved families and those with missing children. We must also applaud all the brave rescue efforts by military and civilian divers and encourage them to save any of our sons and daughters who may still be struggling to survive the cold waters. <br/><br/>On a poster on the wall of the gym are words of hope, such as, “We will wait for a miracle,” “Return to your families,” and “We’re all waiting for you.” But the clock is ticking. Let’s pray for their miraculous return. We must not repeat such a tragedy ever again.<br/><br/>JoongAng Ilbo, April 22, Page 30 <br/><br/><br/><br/></div></div><div class="article_dvright"><div class="article_content">“오늘부터 본격적인 수색이 시작됩니다. 지금까지 창문 17개를 깨뜨렸고요. (잠수요원들이 타고 들어가는) 가이드라인도 5개에서 10개로 늘려서 수색을 활발하게 벌일 예정이라고 합니다.”<br/><br/>어제(21일) 오전 10시 ‘가족 지원 상황실’ 플래카드가 붙은 진도 팽목항 대합실 앞에 실종자 가족 수십여 명이 모여 있었다. 안산 단원고 가족 대표가 실종자 수색 상황을 전달했다. 한 중년 남성이 가족 대표에게 물었다. <br/><br/> -30여명이 있던 대형 객실엔 (구조대원들이) 언제 들어갑니까.<br/><br/> “선체 안에서는 앞이 잘 보이지 않는 상태입니다. 대형 객실에 언제 진입할지는 알 수가 없습니다.”   <br/><br/>엿새째 뜬 눈으로 밤을 새운 가족들은 초췌한 얼굴로 수색 계획을 들으며 서로의 의견을 주고받았다. 같은 시간 대합실에서 100여m 떨어진 ‘신원확인소’는 비통에 잠겨 있었다. 배에서 내려진 시신을 확인하러 들어간 가족들은 “불쌍해서 어떻게 해” “얼마나 무서웠을까”하며 울음을 토해냈다. <br/><br/>세월호 침몰 사고 실종자 수색이 본격화하면서 팽목항엔 종일 긴장감이 흘렀다. 특히 조류가 느려지고 원격수중탐색장비(ROV)가 투입되는 등 수색 작업에 탄력이 붙으면서 진도 실내체육관에 있던 실종자 가족들의 발길은 팽목항으로 향했다. 가족들은 시시각각 ‘사망자 명단’ 현황판에 적히는 신원미상자 인상착의에 주목했다. <br/><br/> ‘미상/여/학생 추정/160cm, 긴 생머리....’ <br/><br/>아들, 딸과 신장이나 얼굴형, 머리 스타일이 비슷하거나, 같은 옷을 입었을 땐 가슴을 졸이며 신원확인소로 향했다. 하지만 가족들은 깊은 슬픔과 극도의 피로 속에서도 차분함을 잃지 않으려 애쓰는 모습이 역력했다. 아버지와 어머니로서 자식을 기다려야 하고, 확인해야 하고, 부둥켜안아야 하기 때문일까. <br/><br/>실내체육관에 남아 있는 가족들도 체육관 입구에 설치된 ‘신원 미확인 시신’ 상황판에 붙은 인상착의를 계속 읽어나갔다. 수습된 시신에 명찰이나 학생증이 있는 때는 불시에 호출돼 나갔다. “OOO씨 가족 어디 계세요?” 이 말이 체육관 안에 울려퍼지면 순식간에 눈물바다가 됐다. <br/><br/>전국 곳곳에서 온 자원봉사자들은 이들 실종자 가족에게 작지 않은 힘이 되고 있다. 급식, 침구류, 속옷, 양말, 의약품, 심리 상담…. 여성 자원봉사자들은 시신 수습 소식에 발을 동동 구르는 어머니를 진정시키려 팔과 어깨를 주물렀다. 50대 여성 자원봉사자는 “힘들지 않느냐”는 물음에 “가족 분들이 훨씬 힘드시지 않겠느냐”고 했다.<br/><br/>실종자 가족의 마음을 격하게 흔드는 건 무기력한 재난관리시스템의 실체가 하나 둘씩 드러나고 있다는 사실이다. 가족들은 “그렇게 큰 배가 침몰하고 있을 때 대체 제대로 움직인 게 뭐냐”고 묻고 있다. 실제 세월호 사고 당시 진도 해상교통관제센터(VTS)와의 교신 녹취록이 공개되면서 현장에서 가동돼야 할 관리 시스템이 헛돌기만 한 것으로 드러났다. 뒤이어 신속히 구조에 나서야 했던 정부 부처들도 서로 엇박자를 내며 골든 타임(결정적 시간)을 놓치고 말았다. <br/><br/>주먹구구식 상황 관리는 계속되고 있다. 범정부 사고대책본부는 어제 정례 브리핑을 통해 “그간 DNA 검사로 신원확인이 돼야 사망자 인계가 가능했으나 DNA 검사 확인서가 나오기 전이라도 가족 희망에 따라 다른 병원으로 옮길 수 있도록 인계조치를 간소화했다”고 밝혔다. 사망자 신원을 잘못 확인해 시신이 안산까지 갔다가 되돌아온 사고가 일어난 뒤 DNA 대조 검사를 강화한 바 있다. 이에 따라 꼬박 하루를 대기하게 된 유족들이 항의하자 ‘DNA 확인 후 장례’로 완화한 것이다. 그제 오후에는 안전행정부 국장이 팽목항 상황실 앞에서 기념사진을 촬영하려는 어처구니 없는 일이 벌어졌고, 파문이 커지자 사표가 수리됐다. 여기에 인터넷을 통한 유언비어 유포와 실종자 모욕·비하 글이 가족들의 상처를 덧내고 있다. <br/><br/>지금 팽목항에는 실종자들의 ‘무사귀환(無事歸還)’을 바라는 수백만, 수천만 국민의 염원이 모여 있다. 이를 악물고 고통을 견뎌내고 있는 사망자 유족과 실종자 가족들에게 위로와 배려의 손길을 내밀 때다. 외로움을 느끼지 않도록, 슬픔을 이겨낼 수 있도록 가족들의 심정에 공감하고 그들의 말에 귀를 기울여야 한다. ‘우리’라는 이름의 공동체가, 대한민국이 왜 존재하는지를 그들에게 보여줘야 한다.<br/><br/>사고 해역에서 생명을 걸고 구조 활동을 벌이고 있는 해군 특수전여단(UDT)과 해난구조대(SSU) 대원, 민간 잠수사들에게도 뜨거운 응원과 격려의 박수를 보내야 한다. 그들의 땀방울이 바다 속에 있는 우리 아들, 딸들을 끌어올릴 것이다. <br/><br/> “기다릴께~ 기적!!” “꼭! 가족 품으로!!!” “사랑하는 OO! 얼른 만나자.” “사랑하는 내 딸. 보고 싶다.” “온 국민은 기다린다.” “꼭 살아와요.”<br/><br/>지난 주말 실내체육관 앞에 붙었던 대자보에 가족과 자원봉사자들이 적은 희망의 문구들이다. 시간이 많이 남지 않았다. 모두 손을 모으고 가족의 마음으로 기적을 기도하자. 사망자 유족에게는 “힘내시라”는 따뜻한 한마디를 전하자. 아이들을 허망하게 보내야 했던 대형 참사의 비극은 더 이상 되풀이하지 말자. 그런 마음들이 모여 이번 위기를 극복해내길 기대한다. <br/><br/>진도 팽목항&gt;</div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=2988202&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;t=The+way+forward" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=The+way+forward&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;text=The+way+forward" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;The+way+forward&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d2988202&amp;title_nobase64=The+way+forward','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=2988202"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '2988202');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('2988202');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("2988202", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("2988202", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

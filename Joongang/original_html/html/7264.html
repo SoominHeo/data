@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><link href="http://images.joins.com/ui_c/fvc_joins.ico" rel="shortcut icon"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_common.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_sub.css" rel="stylesheet" type="text/css"/><link href="http://static.joins.com/jmnet/ui/css/joongangdaily_article.css" rel="stylesheet" type="text/css"/>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/jquery.lazyload-ad-1.4.2-min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/common.js" type="text/javascript"></script>
+<script src="http://static.joins.com/portal/ui/makecrmpcookie.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/png24.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/toplogomenu_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/script/joongangdaily/right_joongangdaily.js" type="text/javascript"></script>
+<script src="http://static.joins.com/jmnet/ui/footer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/cookies.js" type="text/javascript"></script>
+<title>What people are talking about-INSIDE Korea JoongAng Daily</title>
+<script src="/_ui/js/mobile_redirect.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/ClipboardCopy.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/displayArticleComponent.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/articleOption.js" type="text/javascript"></script>
+<script src="http://comment.joins.com/jdaily/comment.js" type="text/JavaScript"></script>
+<script charset="utf-8" src="http://static.joins.com/common/ui/script/articleCounter.js" type="text/JavaScript"></script>
+<script src="http://koreajoongangdaily.joins.com/_ui/js/idic.js" type="text/JavaScript"></script>
+<script src="http://static.joins.com/common/ui/script/jwplayer.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/swfobject.js" type="text/javascript"></script>
+<script src="http://static.joins.com/common/ui/script/player.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.domain="joins.com";
+    var sArticleId = "1999613";
+    var sSiteType = "joongangdaily";
+    var sServiceCode = "060201";
+    var sSearchTitle = escape("");
+    //코멘트에 사용
+   	document.write("<div id='fb-root'></div>");
+    document.write("<scr"+"ipt ' src='http://connect.facebook.net/en_US/all.js'></scr"+"ipt>");
+
+    $(document).ready(function ($)
+    {
+    	getJoongAngDailyJHot("jhot_click", sSiteType);
+    	getSearchPhotoArticle("search_photo_article", "포토핫뉴스", sSiteType);
+    	// 11.07.01 광고  s
+    	fn_articleSpaceAD("space_ad", sSiteType); // 스페이스 ad 배너 ,시작 2011.05.04
+    	//getArticleShapePopUpAd();	// 쉐이프팝업
+    	getArticleContentMsAd(); //렉탱글 광고
+    	fn_articleBottomTextBanner("divArticleBottomTextBannerInline", sSiteType); 	//	하단 텍스트 배너
+    	fn_articleBottomBrandTextAd("brandtext_area", sSiteType); 			// 하단브랜드텍스트 광고
+    	fn_articleBottomBizLinkAd("biz_link_area", sSiteType); 				// 하단 비즈링크광고
+    	fn_articleBottomSponsorAD("sponsor_link_area", sSiteType); 			// 하단 스폰서링크광고
+    	fn_articleAdnetworkBanner("divArticleAdnetworkBanner", sSiteType); //애드네트워크 배너
+    	// 11.07.01 광고  e
+    	//코멘트 함수호출
+    	TCOMMENT('koreajoongangdaily.joins.com/news/article/article.aspx?aid', '1999613', $('#ACMT'), 20, 'What people are talking about');
+    	getSeriesbyTitle(sSearchTitle);
+    });
+
+ function getSeriesbyTitle(sTitle) {
+     if (sTitle != "") {
+
+         try {
+             var str = "";
+             //$.getScript("http://find.joins.com/search/news_asp_list_xml_json_UTF8.asp?page_size=10&news_sch=&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+			 $.getScript("http://find.joins.com/search/jds_asp_service_xml_json_UTF8.asp?page_size=10&news_sch=titlesub&news_source=9&mc=&news_start_num=1&query=" + sTitle, function () {
+                 if (typeof (ARTICLE_SEARCH_LIST_JSON) != "undefined") {
+                     str = str + "<div id=\"related_story\"><ul class=\"bd list_cr n\">";
+                     var tjson = ARTICLE_SEARCH_LIST_JSON.data;
+
+                     for (i = 0; i < tjson.length; i++) {
+                         str = str + "<li  class=\"blt\">";
+                         str = str + "<a href=\"http://find.joins.com/Search_Link_joogangdaily.asp?total_id=" + tjson[i].total_id + "&strCtype=joongangdaily&query=" + sTitle + "\">" + unescape(tjson[i].title).replace(/\\\"/g, "\"") + "</a>";
+                         str = str + "</li>";
+                     }
+                     str = str + "</ul></div>";
+                     $(".article_middle_ad").before(str);
+                 }
+             });
+         } catch (e) { }
+
+     }
+ }
+</script>
+<meta content="What people are talking about" property="og:title"/>
+<meta content="" property="og:image"/>
+<meta content="" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="244506448904436" property="fb:app_id"/>
+<meta content="http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=1999613" property="og:url"/>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/lib/transparency.min.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/utils/jquery.utils.js" type="text/javascript"></script>
+<script src="http://static.joins.com/joongang_15re/scripts/layout.js" type="text/javascript"></script>
+<title>
+</title></head>
+<body>
+<script type="text/javascript">
+	layout.gnb.renderHtml('gray');
+</script>
+<div id="space_ad"></div>
+<div id="doc">
+<h1>중앙데일리</h1>
+<div id="space_ad"></div>
+<script type="text/javascript">toplogomenu("06|060201|");</script>
+<div id="container">
+<form action="./Article.aspx?aid=1999613" id="form1" method="post">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="Cnt7KWXetxwvxGpOey1eohM0EVJDvYT2Vx4UjKN5m+NYf2MOz1Neg3XQnHsAlVsJDZ+Mn8SEoVv/2sDZUsNRrJpNLioiQ2X/aY358pSm/SPdSqjy4dzKL0OdRchGpioDjlp8LrSfnLfRSjsgQ1IhlAi3eMWVKrl9V72H4x3lUyH1leY7"/>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="8996C338"/>
+<div id="subcontent">
+<!-- Begin: Main block -->
+<div id="article">
+<div class="hd">
+<div class="article_options_area">
+<div class="atricle_sc">
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;t=What+people+are+talking+about" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=What+people+are+talking+about&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;text=What+people+are+talking+about" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;What+people+are+talking+about&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;title_nobase64=What+people+are+talking+about','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer1', 'send_article_layer1');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer1" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url1" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer1')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div class="article_options">
+<span class="font"><a href="javascript:void(0);" onclick="fnFontPlus();"><img alt="plus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_plus.gif"/></a><a href="javascript:void(0);" onclick="fnFontMinus();"><img alt="minus" src="http://images.joins.com/ui_joins/joongangdaily/common/b_minus.gif"/></a></span>
+<span class="bar">|</span>
+<!-- span class="article_textad"><a href="javascript:iDicNews();" title="아이딕:기사영어단어"><img src="http://images.joins.com/ui_joins/joongangdaily/common/b_arti.gif" alt="기사단어" />기사단어</a></span>
+							<span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer1');" onmouseover="fn_btn_function_layer('on', 'print_layer1');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer1" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '1999613');" onmouseout="fn_btn_function_layer('off', 'mail_layer1');" onmouseover="fn_btn_function_layer('on', 'mail_layer1');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer1" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('1999613');" onmouseout="fn_btn_function_layer('off', 'scrap_layer1');" onmouseover="fn_btn_function_layer('on', 'scrap_layer1');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer1" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div><!-- //article_options -->
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box" id=""><!-- 클릭시 on class넣어주세요 -->
+<div class="shadow">
+<input class="text" name="" type="text" value="http://bitly/d2Fay"/>
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href=""><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</div>
+</div>
+<!-- //URL 팝업 -->
+</div>
+<div id="article_print">
+<div class="article_m" id="articletitle">
+<div class="title">
+<h3 id="sTitle_a">What people are talking about</h3>
+<h4></h4>
+<span class="date">June 25,2003</span>
+</div>
+</div>
+<div class="bd article04 article_m" id="articlebody">
+<div class="article_dvleft"><div class="article_content"><!--article_--><table border="0" cellpadding="0" cellspacing="0" width="528"><tr><td valign="top" width="252"><!-- //left news --><font class="txt"><br>
+<br>
+The conversation was the same over lunch a few days ago. Our country is in serious trouble, someone started.  Whether we voted for him or not, we urgently need President Roh Moo-hyun to find stability and show more ability, another person said. Someone else voiced the opinion that the Roh administration’s biggest crisis was the lack of public trust because of the president’s frequent verbal mistakes.  Get Mr. Roh to get his words straight, he suggested.<br>
+<br>
+A more pessimistic member of our group said it was too late to expect anything from the Roh government. Only when the opposition party takes the general elections next year and either a “cohabitation” government is formed or the cabinet is reshuffled can we expect to have any kind of hope, the pessimist remarked.<br>
+<br>
+These, however, cannot be solutions to the problem.  The president is unlikely to clip his own wings by allowing a cohabitation government and there is no guarantee that such a government would fare any better.  Yes, the president should watch his tongue but that alone will not solve the problems of our country.<br>
+<br>
+Yet, the situation at hand is too serious to be allowed to continue. South Korea is sandwiched between rising tension between North Korea and the United States over Pyeongyang’s nuclear program and an economy that has sunk to a dangerous level.  The National Assembly and political parties seem to have disappeared since the presidential election, whereas labor strikes and selfish interest groups have taken over the country.  The problem, to put it simply, is the government’s incompetence.  Unfortunately, the government leaves us very much in doubt as to its capabilities because so far, all it has done is whine.  This could be the longest five years in Korean history.<br>
+<br>
+I would like to make two suggestions on stabilizing the Roh administration.<br>
+<br>
+First, it must mobilize all potential party forces. Until now, the Roh administration has left all important matters to the Blue House team and the cabinet.  All manners of union strikes and collective action are aimed straight at the Blue House.  The Blue House is suffering from a state of extreme exhaustion.<br>
+<br>
+The Roh government has no regional support bases. It must break from this state of self-imposed isolation. There are plenty of social forces that the government can mobilize.  First, there is the governing New Millennium Democrats.  Albeit deeply divided into pro-Roh and anti-Roh factions, but the party still can be used as a stabilizing or supplementary force in politics.  It is to the government’s detriment that there is a schism between the government and the party. The government claims that it promotes a culture of healthy debate yet it acts otherwise in incapacitating the National Assembly and the governing party.<br>
+<br>
+Most positions by various interest groups, such as labor unions’ demands on the implementation of the five-day week, and opposition to the Saemangeum reclamation project and the new education information system, have to do with policies.  This is a burden the administration and the legislative must share. In a “normal state,” such issues are debated in the representative bodies and among political parties. This is not happening in our country now, however.  Everyone with a picket sign heads straight for the Blue House.<br>
+<br>
+The government should abandon its narrow scope, which leaves it in self-isolation, and seek to widen its support base.  The Blue House staff need not overwork themselves. There are Millennium Democratic legislators more than capable of sharing the burden, including the highly-admired Chough Soon-hyung. Also, a political agreement with the government party and the opposition party in opposing illegal strikes would make things much easier for the president.<br>
+<br>
+The other suggestion concerns the command of the bureaucracy.  An administrative bureaucrat by principle must follow the president’s orders.  The president should not beg to be listened to and obeyed.  Mr. Roh, however, seems to be doing too much of just that these days.  “Invest in me . . . invest in Roh Moo-hyun now.” But people are saying they will not because the costs are too high.  It is quite a pity.<br>
+<br>
+A bureaucrat has objectives to be promoted and advanced.  A bureaucrat needs a concrete goal and a standard of procedure.  During the days of President Park Chung Hee, bureaucrats had concrete goals, such as promoting industry, exports, construction and rural development.  What can a bureaucrat do these days?  Vague terms, such as “reconstruction of the state,” “cultural reform” and “renovation of governmental affairs” do not inspire a bureaucrat to push for policy implementation.<br>
+<br>
+Yet it is only when the bureaucrats get moving that the administration gets moving and social problems are handled at the lower administrative levels, as they should be, instead of issues being shunted  directly to the Blue House.<br>
+<br>
+Many people are worried about the state of our country these days.  Everywhere in society there are voices that express worry about the downfall of Korea .  The Roh administration must address these concerns promptly and confidently.  No other answer is needed, only the ability to solve the pile of national issues at hand with the assurance of stability.<br>
+<br>
+The writer is a senior columnist of the JoongAng Ilbo.</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></font><br>
+<br>
+<div class="txt_iht_03_2"><b>by Song Chin-hyok</b><p style="margin-top:2px"><!-- //left news --></p></div></br></br></td><td align="center" valign="top" width="12"></td><td align="center" bgcolor="cccccc" valign="top" width="1"></td><td align="center" valign="top" width="12"></td><td valign="top" width="251"><!-- riht news --><font class="t4" color="014A77"><b>'弱體 정부'로는 어렵다</b></font><br>
+<br>
+<font class="txt">며칠 전 점심 자리에서 이런 얘기들이 나왔다. 지금 우리 상황은 보통 난국이 아니다. 타개해 나가자면 밉든 곱든 노무현 정부의 안정과 역량강화가 시급하지 않으냐.<br>
+<br>
+무슨 방법이 있겠느냐. 그러자 대뜸 한 사람이 "지금 盧정부의 가장 큰 위기는 대통령 설화(舌禍)가 빚은 신뢰성의 위기"라며 더 이상 盧정권의 자기 실수가 안 나와야 한다고 했다. 다른 어떤 이는 비관론자였다.<br>
+<br>
+"盧정부로서는 어렵다는 게 이미 판명됐다"면서 내년 총선의 야당 승리로 야당내각이 들어서는 여야 동거정부 또는 조기 내각제 개헌 등의 정계아이디어를 소개했다.<br>
+<br>
+***盧정권 역량강화 두가지 방안<br>
+<br>
+그러나 따지고 보면 이런 얘기들이 문제의 해답은 못 되는 것 같다. 재임 중 대통령이 자기권력을 제한하는 동거정부로 나갈 것 같지도 않고 또 그 정부가 잘 된다는 보장도 없다. 대통령의 말조심은 꼭 필요하지만 그것만으로 난국이 풀릴 수도 없다.<br>
+<br>
+그렇다고 지금 상황은 이대로 가만 있기에는 너무 심각한 것 같다. 안보는 북핵을 둘러싼 북.미 간 긴장고조 속에 샌드위치 격이 돼 있고, 경제 침체는 벌써 위험수준이며 정치는 대선 이후 국회 부재(不在).정당 부재라 할 만큼 기능을 잃고 있다.<br>
+<br>
+그런 가운데 파업과 집단이기주의.국론분열이 나라를 휩쓸고 있다. 문제는 이런 난국을 헤쳐나갈 盧정권의 '실력'인데 여태 시스템 타령만 할뿐 통 미덥지가 못하다. 이렇게 5년을 어떻게 가겠느냐는 소리가 도처에서 나온다. 무슨 방법이 있을까. 필자는 盧정권의 안정과 역량강화를 위해 두가지를 말하고 싶다.<br>
+<br>
+하나는 범여(汎與)역량동원체제로 나가야 한다는 점이다. 지금 보면 盧정권은 주요 문제들을 청와대팀과 내각만으로 다뤄나가고 있다. 각종 파업이나 집단행동도 거의 청와대를 목표로 삼고 있다. 청와대만 바쁘고 죽을 지경인 형국이다.<br>
+<br>
+盧정권엔 지금 여당도 없고 역성을 들어줄 지역기반도 아직은 없다. 이런 고립화.소수화 현상부터 깨야 한다. 盧정권도 동원할 세력은 많다. 우선 민주당이 있다. 친노(親盧).반노(反盧)로 갈등이 많지만 대통령이 하기에 따라 정권안정세력 또는 보조세력으로 얼마든지 활용할 수 있다. 그걸 못하고 있는 것은 실책이다.<br>
+<br>
+토론공화국을 외치면서 토론의 본산이라 할 국회와 정당을 무력화 상태로 두는 것은 앞뒤가 안맞는 일이다. 지금 각종 집단행동의 쟁점도 주 5일제.새만금.교육행정정보시스템(NEIS) 등 제도와 정책사항이 대부분이다. 입법-행정부가 같이 져야 할 짐이다. 이런 문제로 국회.정당에서 격론이 벌어지고 이익집단들이 그 추이를 지켜보는 과정이 있어야 정상국가다. 그러나 지금은 어떤가. 바로 다 청와대로 가지 않는가.<br>
+<br>
+이처럼 스스로를 고립시키는 좁은 코드에서 벗어나 내편을 넓혀 나간다면 동원가능한 지혜와 역량이 엄청나게 확대될 수 있다. 굳이 왕수석만 바쁠 게 아니라 신망높은 조순형(趙舜衡)의원도 좀 뛰게 하고, 정치를 통해 '파업반대 여야합의'같은 것도 만들어낸다면 일이 얼마나 수월해질까.<br>
+<br>
+또 한가지는 공직사회 장악문제다. 행정부 공무원은 당연히 대통령 지시를 따라야 한다. 대통령이 따라 달라고 부탁하고 간청할 대상이 아니다. 그러나 요즘 보면 盧대통령은 공무원들에게 사뭇 사정을 하는 것 같다. "나한테 투자하라" "지금 노무현은 안된다고 하는데 투자하면 배당이 클 것"이라는 말을 하고 다닌다. 처량한 일이다. 공무원은 승진과 영전을 바라는 사람들이다. 어떻게 하면 승진.영전할 수 있을지 구체적인 목표와 기준을 줘야 뛰게 된다.<br>
+<br>
+***공무원에게 간청하는 대통령?<br>
+<br>
+과거 박정희 대통령 시절에는 증산.수출.건설.새마을운동 등 구체적 목표가 있었다. 지금 공무원들은 무엇을 잘 해야 출세할 수 있을까. 국가개조니 문화개혁이니 업무혁신이니 하는 모호하고 추상적인 말로는 공무원을 움직이기 어렵다. 공무원이 뛰고 각급 행정조직이 움직여야 사회갈등이 바로 청와대로 가지 않고 초기에 하급행정단계에서 걸러질 수 있게 된다.<br>
+<br>
+요즘 많은 사람이 시국을 걱정하고 있다. 대한민국이 지금 떠내려가고 있다는 걱정소리가 도처에서 나온다. 盧정부는 이런 걱정에 빨리 자신있는 회답을 보내야 한다. 산적한 국가 현안들을 안정감있게 해결하는 '능력'말고는 다른 회답은 소용없을 것이다.</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></font><br>
+<br>
+<div class="txt_iht_03_2"><b>송진혁 논설고문</b><p style="margin-top:2px"><!-- riht news --></p></div></br></br></br></br></td></tr></table> </div></div><div class="article_dvright"><div class="article_content"></div></div><br/><br/><div id="divArticleBottomTextBannerInline" style="display:none;"></div><div class="article_msn_ad" id="__inline_ms_da_ad__" style="padding-top:0px;margin-top:0px;height:200px;"></div>
+</div>
+</div>
+</div>
+<div class="article_m" id="language">
+<span></span>
+<span></span>
+</div>
+<div id="related_story" style="display:;">
+<div class="hd">
+</div>
+<ul class="bd list_cr n">
+</ul>
+</div>
+<div id="divArticleBottomTextBanner" style="display:none;"></div>
+<div id="jhot_click" style="display:none;"></div>
+<div id="divArticleBottomBizlink"></div>
+<div class="articleoptions_share">
+<var class="tw">
+<a class="twitter-share-button" data-count="horizontal" href="http://twitter.com/share">Tweet</a><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</var>
+<var class="fb">
+<iframe allowtransparency="true" class="fb_ltr" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/like.php?href=http://koreajoongangdaily.joins.com/news/article/article.aspx?aid=1999613&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font=tahoma&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:60px; height:21px;" title="Like this content on Facebook."></iframe>
+</var>
+<ul class="article_launch">
+<li class="e" title="페이스북"><a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;t=What+people+are+talking+about" target="_blank">페이스북</a></li>
+<li class="c" title="트위터"><a href="http://twitter.com/share?text=What+people+are+talking+about&amp;url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613" target="_blank">트위터</a></li>
+<li class="f" title="MSN"><a href="http://profile.live.com/badge?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;text=What+people+are+talking+about" target="_blank">MSN</a></li>
+<!--li class="a" title="미투데이"><a href="http://me2day.net/posts/new?new_post[body]=&quot;What+people+are+talking+about&quot;:http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&new_post[tags]=%ec%a1%b0%ec%9d%b8%ec%8a%a4+%eb%89%b4%ec%8a%a4+%ec%8a%a4%ed%81%ac%eb%9e%a9" target="_blank">미투데이</a></li-->
+<li class="g" title="싸이 공감"><a href="javascript:void(0);" onclick="javascript:window.open('http://csp.cyworld.com/bi/bi_recommend_pop.php?url=http%3a%2f%2fkoreajoongangdaily.joins.com%2fnews%2farticle%2farticle.aspx%3faid%3d1999613&amp;title_nobase64=What+people+are+talking+about','recom_icon_pop','width=400,height=364,scrollbars=no,resizable=no');">싸이 공감</a></li>
+</ul>
+<div class="fl_url">
+<span class="bar">|</span>
+<span class="text"><a href="javascript:void(0);" onclick="fn_article_url_shortcut_layer('on', 'article_shortcut_layer2', 'send_article_layer2');">URL 줄이기</a></span>
+</div>
+<!-- URL 팝업 -->
+<div class="popup_box url_box on" id="article_shortcut_layer2" style="display:none;">
+<div class="shadow">
+<input class="text" id="txt_article_shortcut_url2" readonly="" type="text" value="">
+<button class="period_submit" title="확인" type="submit"><span class="hidden">복사</span></button>
+<a class="layer_close" href="javascript:void(0);" onclick="fn_btn_function_layer('off', 'article_shortcut_layer2')"><span class="hidden">URL 줄이기 레이어</span> 닫기</a>
+</input></div>
+</div>
+<!-- //URL 팝업 -->
+<div class="article_options">
+<!--span class="text"><iframe border="0" frameborder="0" scrolling="no" src="http://koreajoongangdaily.joins.com/_ui/ad/iwordAd.aspx?aid=1999613"></iframe></span-->
+<!--span class="bar">|</span-->
+<span class="text"><a href="javascript:void(0);" onclick="ArticleDic();"><img alt="dictionary" src="http://images.joins.com/ui_joins/joongangdaily/common/b_dic.gif"/> dictionary</a></span>
+<span class="bar">|</span>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendPrint('joongangdaily','','');" onmouseout="fn_btn_function_layer('off', 'print_layer2');" onmouseover="fn_btn_function_layer('on', 'print_layer2');"><img alt="프린트" src="http://images.joins.com/ui_joins/joongangdaily/common/b_print.gif"/></a>
+<div class="option_layer print_layer" id="print_layer2" style="display:none;"><span>프린트</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="fnSendEmail('joongangdaily', '1999613');" onmouseout="fn_btn_function_layer('off', 'mail_layer2');" onmouseover="fn_btn_function_layer('on', 'mail_layer2');"><img alt="메일로보내기" class="b" src="http://images.joins.com/ui_joins/joongangdaily/common/b_email.gif"/></a>
+<div class="option_layer mail_layer" id="mail_layer2" style="display:none;"><span>메일로보내기</span><var></var></div>
+</strong>
+<strong>
+<a href="javascript:void(0);" onclick="ArticleBlogScrap('1999613');" onmouseout="fn_btn_function_layer('off', 'scrap_layer2');" onmouseover="fn_btn_function_layer('on', 'scrap_layer2');"><img alt="내블로그에 저장" class="c" src="http://images.joins.com/ui_joins/joongangdaily/common/b_scrap.gif"/></a>
+<div class="option_layer scrap_layer" id="scrap_layer2" style="display:none;"><span>내블로그에 저장</span><var></var></div>
+</strong>
+</div>
+</div>
+<!-- 포토뉴스 -->
+<div class="relation_news" id="search_photo_article"></div>
+<!-- 브랜드텍스트 -->
+<div class="brandtext_area" style="display:none;"></div>
+<!-- 비즈링크 -->
+<div class="biz_link_area ad_link_area" style="display:none;"></div>
+<!-- 스폰서링크 -->
+<div class="sponsor_link_area ad_link_area" style="display:none;"></div>
+<!-- 소셜댓글박스 -->
+<div id="ACMT"></div>
+<!-- 애드네트워크 배너 -->
+<div id="divArticleAdnetworkBanner" style="display:none"></div>
+<!-- End: Main block -->
+</div><!-- //subcontent -->
+</form>
+<script type="text/javascript">
+    fn_display_article_right("06");
+
+	if($("div.jtbc_vod").length > 0)
+	{
+		$("div.jtbc_vod").each(function(){
+			var sRelJTBCVodId = $(this).attr("id");
+			sRelJTBCVodId = sRelJTBCVodId.replace("div_", "");
+			getRelateJTBCVod(sRelJTBCVodId, "joongangDaily");
+		});
+	}
+</script>
+</div>
+<script type="text/javascript">
+	/* 2013-01-10 이승인 : 네이버 뉴스스탠드용 Counter 계산 */
+	/*if(document.referrer.indexOf("newsstand.naver.com") != -1)
+	{
+		fnArticleCounterCheck("1999613", "0", "0", "JDO", "r");
+	}*/
+	fnArticleCounterCheck("1999613", "0", "0", "JD", "r");
+</script>
+<!--블로그 전송용 폼-->
+<form action="http://blog.joins.com/center/joins/outbound_scrap_pre.asp" method="post" name="frmSaveBlog">
+<input name="baseurl" type="hidden" value="http://koreajoongangdaily.joins.com">
+<input name="user_id" type="hidden" value="">
+<input name="source" type="hidden" value="">
+<input name="board" type="hidden" value="jd_news_scrap">
+<input name="board_idx" type="hidden" value="">
+<textarea name="subject" style="display:none"></textarea>
+<textarea name="content" style="display:none"></textarea>
+</input></input></input></input></input></form>
+<script type="text/javascript">fn_display_bottom("joongangdaily");</script>
+</div>
+</body>
+</html>

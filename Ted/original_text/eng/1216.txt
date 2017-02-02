@@ -1,0 +1,133 @@
+id="t-0"&&The idea behind the Stuxnet computer worm is actually quite simple.
+id="t-5000"&&We don't want Iran to get the bomb.
+id="t-8000"&&Their major asset for developing nuclear weapons is the Natanz uranium enrichment facility.
+id="t-15000"&&The gray boxes that you see, these are real-time control systems.
+id="t-20000"&&Now if we manage to compromise these systems that control drive speeds and valves, we can actually cause a lot of problems with the centrifuge.
+id="t-31000"&&The gray boxes don't run Windows software; they are a completely different technology.
+id="t-36000"&&But if we manage to place a good Windows virus on a notebook that is used by a maintenance engineer to configure this gray box, then we are in business.
+id="t-50000"&&And this is the plot behind Stuxnet. 
+
+id="t-53000"&&So we start with a Windows dropper.
+id="t-58000"&&The payload goes onto the gray box, damages the centrifuge, and the Iranian nuclear program is delayed -- mission accomplished.
+id="t-67000"&&That's easy, huh?
+id="t-69000"&&I want to tell you how we found that out.
+id="t-72000"&&When we started our research on Stuxnet six months ago, it was completely unknown what the purpose of this thing was.
+id="t-78000"&&The only thing that was known is it's very, very complex on the Windows part, the dropper part, used multiple zero-day vulnerabilities.
+id="t-86000"&&And it seemed to want to do something with these gray boxes, these real-time control systems.
+id="t-91000"&&So that got our attention, and we started a lab project where we infected our environment with Stuxnet and checked this thing out.
+id="t-101000"&&And then some very funny things happened.
+id="t-104000"&&Stuxnet behaved like a lab rat that didn't like our cheese -- sniffed, but didn't want to eat.
+id="t-112000"&&Didn't make sense to me.
+id="t-114000"&&And after we experimented with different flavors of cheese, I realized, well, this is a directed attack.
+id="t-121000"&&It's completely directed.
+id="t-123000"&&The dropper is prowling actively on the gray box if a specific configuration is found, and even if the actual program code that it's trying to infect is actually running on that target.
+id="t-136000"&&And if not, Stuxnet does nothing. 
+
+id="t-139000"&&So that really got my attention, and we started to work on this nearly around the clock, because I thought, "Well, we don't know what the target is.
+id="t-148000"&&It could be, let's say for example, a U.S. power plant, or a chemical plant in Germany.
+id="t-154000"&&So we better find out what the target is soon."
+id="t-157000"&&So we extracted and decompiled the attack code, and we discovered that it's structured in two digital bombs -- a smaller one and a bigger one.
+id="t-167000"&&And we also saw that they are very professionally engineered by people who obviously had all insider information.
+id="t-175000"&&They knew all the bits and bites that they had to attack.
+id="t-179000"&&They probably even know the shoe size of the operator.
+id="t-182000"&&So they know everything. 
+
+id="t-184000"&&And if you have heard that the dropper of Stuxnet is complex and high-tech, let me tell you this: the payload is rocket science.
+id="t-193000"&&It's way above everything that we have ever seen before.
+id="t-198000"&&Here you see a sample of this actual attack code.
+id="t-201000"&&We are talking about -- around about 15,000 lines of code.
+id="t-206000"&&Looks pretty much like old-style assembly language.
+id="t-209000"&&And I want to tell you how we were able to make sense out of this code.
+id="t-213000"&&So what we were looking for is, first of all, system function calls, because we know what they do. 
+
+id="t-218000"&&And then we were looking for timers and data structures and trying to relate them to the real world -- to potential real world targets.
+id="t-226000"&&So we do need target theories that we can prove or disprove.
+id="t-232000"&&In order to get target theories, we remember that it's definitely hardcore sabotage, it must be a high-value target and it is most likely located in Iran, because that's where most of the infections had been reported.
+id="t-247000"&&Now you don't find several thousand targets in that area.
+id="t-250000"&&It basically boils down to the Bushehr nuclear power plant and to the Natanz fuel enrichment plant. 
+
+id="t-256000"&&So I told my assistant, "Get me a list of all centrifuge and power plant experts from our client base."
+id="t-261000"&&And I phoned them up and picked their brain in an effort to match their expertise with what we found in code and data.
+id="t-268000"&&And that worked pretty well.
+id="t-270000"&&So we were able to associate the small digital warhead with the rotor control.
+id="t-276000"&&The rotor is that moving part within the centrifuge, that black object that you see.
+id="t-281000"&&And if you manipulate the speed of this rotor, you are actually able to crack the rotor and eventually even have the centrifuge explode.
+id="t-290000"&&What we also saw is that the goal of the attack was really to do it slowly and creepy -- obviously in an effort to drive maintenance engineers crazy, that they would not be able to figure this out quickly. 
+
+id="t-305000"&&The big digital warhead -- we had a shot at this by looking very closely at data and data structures.
+id="t-312000"&&So for example, the number 164 really stands out in that code; you can't overlook it.
+id="t-318000"&&I started to research scientific literature on how these centrifuges are actually built in Natanz and found they are structured in what is called a cascade, and each cascade holds 164 centrifuges.
+id="t-332000"&&So that made sense, that was a match. 
+
+id="t-334000"&&And it even got better.
+id="t-336000"&&These centrifuges in Iran are subdivided into 15, what is called, stages.
+id="t-342000"&&And guess what we found in the attack code?
+id="t-344000"&&An almost identical structure.
+id="t-346000"&&So again, that was a real good match.
+id="t-349000"&&And this gave us very high confidence for what we were looking at.
+id="t-352000"&&Now don't get me wrong here, it didn't go like this.
+id="t-355000"&&These results have been obtained over several weeks of really hard labor.
+id="t-361000"&&And we often went into just a dead end and had to recover. 
+
+id="t-366000"&&Anyway, so we figured out that both digital warheads were actually aiming at one and the same target, but from different angles.
+id="t-374000"&&The small warhead is taking one cascade, and spinning up the rotors and slowing them down, and the big warhead is talking to six cascades and manipulating valves.
+id="t-386000"&&So in all, we are very confident that we have actually determined what the target is.
+id="t-390000"&&It is Natanz, and it is only Natanz.
+id="t-393000"&&So we don't have to worry that other targets might be hit by Stuxnet. 
+
+id="t-399000"&&Here's some very cool stuff that we saw -- really knocked my socks off.
+id="t-404000"&&Down there is the gray box, and on the top you see the centrifuges.
+id="t-409000"&&Now what this thing does is it intercepts the input values from sensors -- so for example, from pressure sensors and vibration sensors -- and it provides legitimate program code, which is still running during the attack, with fake input data.
+id="t-425000"&&And as a matter of fact, this fake input data is actually prerecorded by Stuxnet.
+id="t-430000"&&So it's just like from the Hollywood movies where during the heist, the observation camera is fed with prerecorded video.
+id="t-437000"&&That's cool, huh? 
+
+id="t-440000"&&The idea here is obviously not only to fool the operators in the control room.
+id="t-445000"&&It actually is much more dangerous and aggressive.
+id="t-449000"&&The idea is to circumvent a digital safety system.
+id="t-455000"&&We need digital safety systems where a human operator could not act quick enough.
+id="t-460000"&&So for example, in a power plant, when your big steam turbine gets too over speed, you must open relief valves within a millisecond.
+id="t-468000"&&Obviously, this cannot be done by a human operator.
+id="t-471000"&&So this is where we need digital safety systems.
+id="t-473000"&&And when they are compromised, then real bad things can happen.
+id="t-478000"&&Your plant can blow up.
+id="t-480000"&&And neither your operators nor your safety system will notice it.
+id="t-483000"&&That's scary. 
+
+id="t-485000"&&But it gets worse.
+id="t-487000"&&And this is very important, what I'm going to say.
+id="t-490000"&&Think about this: this attack is generic.
+id="t-495000"&&It doesn't have anything to do, in specifics, with centrifuges, with uranium enrichment.
+id="t-504000"&&So it would work as well, for example, in a power plant or in an automobile factory.
+id="t-512000"&&It is generic.
+id="t-514000"&&And you don't have -- as an attacker -- you don't have to deliver this payload by a USB stick, as we saw it in the case of Stuxnet.
+id="t-523000"&&You could also use conventional worm technology for spreading.
+id="t-526000"&&Just spread it as wide as possible.
+id="t-529000"&&And if you do that, what you end up with is a cyber weapon of mass destruction.
+id="t-539000"&&That's the consequence that we have to face.
+id="t-544000"&&So unfortunately, the biggest number of targets for such attacks are not in the Middle East.
+id="t-552000"&&They're in the United States and Europe and in Japan.
+id="t-555000"&&So all of the green areas, these are your target-rich environments.
+id="t-560000"&&We have to face the consequences, and we better start to prepare right now. 
+
+id="t-566000"&&Thanks. 
+
+id="t-568000"&&(Applause) 
+
+id="t-574000"&&Chris Anderson: I've got a question.
+id="t-578000"&&Ralph, it's been quite widely reported that people assume that Mossad is the main entity behind this.
+id="t-584000"&&Is that your opinion? 
+
+id="t-587000"&&Ralph Langner: Okay, you really want to hear that?
+id="t-587000"&&Ralph Langner: Okay, you really want to hear that?
+id="t-587000"&&Ralph Langner: Okay, you really want to hear that?
+id="t-591000"&&My opinion is that the Mossad is involved, but that the leading force is not Israel.
+id="t-597000"&&So the leading force behind that is the cyber superpower.
+id="t-602000"&&There is only one, and that's the United States -- fortunately, fortunately.
+id="t-608000"&&Because otherwise, our problems would even be bigger. 
+
+CA: Thank you for scaring the living daylights out of us.
+CA: Thank you for scaring the living daylights out of us.
+
+id="t-568000"&&(Applause) 
+

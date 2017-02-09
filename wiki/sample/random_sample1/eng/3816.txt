@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Delaunay triangulation - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Delaunay_triangulation","wgTitle":"Delaunay triangulation","wgCurRevisionId":752704464,"wgRevisionId":752704464,"wgArticleId":8864,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["CS1 errors: dates","Triangulation (geometry)"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Delaunay_triangulation","wgRelevantArticleId":8864,"wgRequestId":"WH-dYwpAAD0AAQwZ@RwAAAAU","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q192445","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","mediawiki.page.gallery.styles":"ready","ext.math.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","ext.math.scripts","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.page.gallery.styles%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.7" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Delaunay_triangulation" rel="alternate"/>
+<link href="/w/index.php?title=Delaunay_triangulation&amp;action=edit" rel="alternate" title="Edit this page" type="application/x-wiki"/>
+<link href="/w/index.php?title=Delaunay_triangulation&amp;action=edit" rel="edit" title="Edit this page"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="Wikipedia (en)" type="application/opensearchdescription+xml"/>
+<link href="//en.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://en.wikipedia.org/wiki/Delaunay_triangulation" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Delaunay_triangulation rootpage-Delaunay_triangulation skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="en">Delaunay triangulation</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><div class="thumb tright">
+<div class="thumbinner" style="width:282px;"><a class="image" href="/wiki/File:Delaunay_circumcircles_vectorial.svg"><img alt="" class="thumbimage" data-file-height="500" data-file-width="500" height="280" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/db/Delaunay_circumcircles_vectorial.svg/280px-Delaunay_circumcircles_vectorial.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/db/Delaunay_circumcircles_vectorial.svg/420px-Delaunay_circumcircles_vectorial.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/db/Delaunay_circumcircles_vectorial.svg/560px-Delaunay_circumcircles_vectorial.svg.png 2x" width="280"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:Delaunay_circumcircles_vectorial.svg" title="Enlarge"></a></div>
+A Delaunay triangulation in the plane with circumcircles shown</div>
+</div>
+</div>
+<p>In <a href="/wiki/Mathematics" title="Mathematics">mathematics</a> and <a href="/wiki/Computational_geometry" title="Computational geometry">computational geometry</a>, a <b>Delaunay triangulation</b> for a set <b>P</b> of points in a plane is a <a href="/wiki/Triangulation_(geometry)" title="Triangulation (geometry)">triangulation</a> DT(<b>P</b>) such that no point in <b>P</b> is inside the <a class="mw-redirect" href="/wiki/Circumcircle#Triangles" title="Circumcircle">circumcircle</a> of any <a href="/wiki/Triangle" title="Triangle">triangle</a> in DT(<b>P</b>). Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation; they tend to avoid <a class="mw-redirect" href="/wiki/Sliver_triangle" title="Sliver triangle">sliver triangles</a>. The triangulation is named after <a href="/wiki/Boris_Delaunay" title="Boris Delaunay">Boris Delaunay</a> for his work on this topic from 1934.<sup class="reference" id="cite_ref-Delaunay1934_1-0"><a href="#cite_note-Delaunay1934-1">[1]</a></sup></p>
+<p>For a set of points on the same line there is no Delaunay triangulation (the notion of triangulation is degenerate for this case). For four or more points on the same circle (e.g., the vertices of a rectangle) the Delaunay triangulation is not unique: each of the two possible triangulations that split the <a href="/wiki/Quadrilateral" title="Quadrilateral">quadrangle</a> into two triangles satisfies the "Delaunay condition", i.e., the requirement that the circumcircles of all triangles have empty interiors.</p>
+<p>By considering circumscribed spheres, the notion of Delaunay triangulation extends to three and higher dimensions. Generalizations are possible to metrics other than Euclidean. However, in these cases a Delaunay triangulation is not guaranteed to exist or be unique.</p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Relationship_with_the_Voronoi_diagram"><span class="tocnumber">1</span> <span class="toctext">Relationship with the Voronoi diagram</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#d-dimensional_Delaunay"><span class="tocnumber">2</span> <span class="toctext"><i>d</i>-dimensional Delaunay</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Properties"><span class="tocnumber">3</span> <span class="toctext">Properties</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Visual_Delaunay_definition:_Flipping"><span class="tocnumber">4</span> <span class="toctext">Visual Delaunay definition: Flipping</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Algorithms"><span class="tocnumber">5</span> <span class="toctext">Algorithms</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Flip_algorithms"><span class="tocnumber">5.1</span> <span class="toctext">Flip algorithms</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Incremental"><span class="tocnumber">5.2</span> <span class="toctext">Incremental</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Divide_and_conquer"><span class="tocnumber">5.3</span> <span class="toctext">Divide and conquer</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Sweephull"><span class="tocnumber">5.4</span> <span class="toctext">Sweephull</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#Applications"><span class="tocnumber">6</span> <span class="toctext">Applications</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#See_also"><span class="tocnumber">7</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#References"><span class="tocnumber">8</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#External_links"><span class="tocnumber">9</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Relationship_with_the_Voronoi_diagram">Relationship with the Voronoi diagram</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=1" title="Edit section: Relationship with the Voronoi diagram">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The Delaunay <a href="/wiki/Triangulation_(geometry)" title="Triangulation (geometry)">triangulation</a> of a <a href="/wiki/Discrete_space" title="Discrete space">discrete</a> point set <b>P</b> in <a href="/wiki/General_position" title="General position">general position</a> corresponds to the <a href="/wiki/Dual_graph" title="Dual graph">dual graph</a> of the <a href="/wiki/Voronoi_diagram" title="Voronoi diagram">Voronoi diagram</a> for <b>P</b>. Special cases include the existence of three points on a line and four points on circle.</p>
+<ul class="gallery mw-gallery-traditional">
+<li class="gallerybox" style="width: 155px">
+<div style="width: 155px">
+<div class="thumb" style="width: 150px;">
+<div style="margin:15px auto;"><a class="image" href="/wiki/File:Delaunay_circumcircles_centers.svg"><img alt="" data-file-height="361" data-file-width="337" height="120" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Delaunay_circumcircles_centers.svg/112px-Delaunay_circumcircles_centers.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Delaunay_circumcircles_centers.svg/168px-Delaunay_circumcircles_centers.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Delaunay_circumcircles_centers.svg/224px-Delaunay_circumcircles_centers.svg.png 2x" width="112"/></a></div>
+</div>
+<div class="gallerytext">
+<p>The Delaunay triangulation with all the circumcircles and their centers (in red).</p>
+</div>
+</div>
+</li>
+<li class="gallerybox" style="width: 155px">
+<div style="width: 155px">
+<div class="thumb" style="width: 150px;">
+<div style="margin:15px auto;"><a class="image" href="/wiki/File:Delaunay_Voronoi.svg"><img alt="" data-file-height="441" data-file-width="441" height="120" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/56/Delaunay_Voronoi.svg/120px-Delaunay_Voronoi.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/56/Delaunay_Voronoi.svg/180px-Delaunay_Voronoi.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/56/Delaunay_Voronoi.svg/240px-Delaunay_Voronoi.svg.png 2x" width="120"/></a></div>
+</div>
+<div class="gallerytext">
+<p>Connecting the centers of the circumcircles produces the <a href="/wiki/Voronoi_diagram" title="Voronoi diagram">Voronoi diagram</a> (in red).</p>
+</div>
+</div>
+</li>
+</ul>
+<h2><span class="mw-headline" id="d-dimensional_Delaunay"><i>d</i>-dimensional Delaunay</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=2" title="Edit section: d-dimensional Delaunay">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>For a set <b>P</b> of points in the (<i>d</i>-dimensional) <a href="/wiki/Euclidean_space" title="Euclidean space">Euclidean space</a>, a <b>Delaunay triangulation</b> is a <a href="/wiki/Triangulation_(geometry)" title="Triangulation (geometry)">triangulation</a> DT(<b>P</b>) such that no point in <b>P</b> is inside the <a class="mw-redirect" href="/wiki/Circumcircle" title="Circumcircle">circum-hypersphere</a> of any <a href="/wiki/Simplex" title="Simplex">simplex</a> in DT(<b>P</b>). It is known<sup class="reference" id="cite_ref-Delaunay1934_1-1"><a href="#cite_note-Delaunay1934-1">[1]</a></sup> that there exists a unique Delaunay triangulation for <b>P</b> if <b>P</b> is a set of points in <i><a href="/wiki/General_position" title="General position">general position</a></i>; that is, the affine hull of <b>P</b> is <i>d</i>-dimensional and no set of <i>d</i> + 2 points in <b>P</b> lie on the boundary of a ball whose interior does not intersect <b>P</b>.</p>
+<p>The problem of finding the Delaunay triangulation of a set of points in <i>d</i>-dimensional Euclidean space can be converted to the problem of finding the <a href="/wiki/Convex_hull" title="Convex hull">convex hull</a> of a set of points in (<i>d</i> + 1)-dimensional space, by giving each point <i>p</i> an extra coordinate equal to |<i>p</i>|<sup>2</sup>, taking the bottom side of the convex hull, and mapping back to <i>d</i>-dimensional space by deleting the last coordinate. As the convex hull is unique, so is the triangulation, assuming all facets of the convex hull are <a href="/wiki/Simplex" title="Simplex">simplices</a>. Nonsimplicial facets only occur when <i>d</i> + 2 of the original points lie on the same <i>d</i>-<a href="/wiki/Hypersphere" title="Hypersphere">hypersphere</a>, i.e., the points are not in general position.</p>
+<h2><span class="mw-headline" id="Properties">Properties</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=3" title="Edit section: Properties">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a class="image" href="/wiki/File:Example_steps_in_Delauney_triangularization.png"><img alt="" class="thumbimage" data-file-height="163" data-file-width="462" height="78" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Example_steps_in_Delauney_triangularization.png/220px-Example_steps_in_Delauney_triangularization.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Example_steps_in_Delauney_triangularization.png/330px-Example_steps_in_Delauney_triangularization.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Example_steps_in_Delauney_triangularization.png/440px-Example_steps_in_Delauney_triangularization.png 2x" width="220"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:Example_steps_in_Delauney_triangularization.png" title="Enlarge"></a></div>
+Example steps</div>
+</div>
+</div>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a class="image" href="/wiki/File:Delaunay_triangulation_does_not_minimize_edge_length.gif"><img alt="" class="thumbimage" data-file-height="288" data-file-width="432" height="147" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Delaunay_triangulation_does_not_minimize_edge_length.gif/220px-Delaunay_triangulation_does_not_minimize_edge_length.gif" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/82/Delaunay_triangulation_does_not_minimize_edge_length.gif/330px-Delaunay_triangulation_does_not_minimize_edge_length.gif 1.5x, //upload.wikimedia.org/wikipedia/commons/8/82/Delaunay_triangulation_does_not_minimize_edge_length.gif 2x" width="220"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:Delaunay_triangulation_does_not_minimize_edge_length.gif" title="Enlarge"></a></div>
+Each frame of the animation shows a Delaunay triangulation of the four points. Halfway through, the triangulating edge flips showing that the Delaunay triangulation maximizes the minimum angle, not the edge-length of the triangles.</div>
+</div>
+</div>
+<p>Let <i>n</i> be the number of points and <i>d</i> the number of dimensions.</p>
+<ul>
+<li>The union of all simplices in the triangulation is the convex hull of the points.</li>
+<li>The Delaunay triangulation contains <i>O</i>(<i>n</i><sup>⌈<i>d</i> / 2⌉</sup>) simplices.<sup class="reference" id="cite_ref-2"><a href="#cite_note-2">[2]</a></sup></li>
+<li>In the plane (<i>d</i> = 2), if there are <i>b</i> vertices on the convex hull, then any triangulation of the points has at most 2<i>n</i> − 2 − <i>b</i> triangles, plus one exterior face (see <a href="/wiki/Euler_characteristic" title="Euler characteristic">Euler characteristic</a>).</li>
+<li>In the plane, each vertex has on average six surrounding triangles.</li>
+<li>In the plane, the Delaunay triangulation maximizes the minimum angle. Compared to any other triangulation of the points, the smallest angle in the Delaunay triangulation is at least as large as the smallest angle in any other. However, the Delaunay triangulation does not necessarily minimize the maximum angle.<sup class="reference" id="cite_ref-3"><a href="#cite_note-3">[3]</a></sup> The Delaunay triangulation also does not necessarily minimize the length of the edges.</li>
+<li>A circle circumscribing any Delaunay triangle does not contain any other input points in its interior.</li>
+<li>If a circle passing through two of the input points doesn't contain any other of them in its interior, then the segment connecting the two points is an edge of a Delaunay triangulation of the given points.</li>
+<li>Each triangle of the Delaunay triangulation of a set of points in <i>d</i>-dimensional spaces corresponds to a facet of <a href="/wiki/Convex_hull" title="Convex hull">convex hull</a> of the projection of the points onto a (<i>d</i> + 1)-dimensional <a href="/wiki/Paraboloid" title="Paraboloid">paraboloid</a>, and vice versa.</li>
+<li>The closest neighbor <i>b</i> to any point <i>p</i> is on an edge <i>bp</i> in the Delaunay triangulation since the <a href="/wiki/Nearest_neighbor_graph" title="Nearest neighbor graph">nearest neighbor graph</a> is a subgraph of the Delaunay triangulation.</li>
+<li>The Delaunay triangulation is a <a href="/wiki/Geometric_spanner" title="Geometric spanner">geometric spanner</a>: the shortest path between two vertices, along Delaunay edges, is known to be no longer than <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mrow class="MJX-TeXAtom-ORD">
+<mfrac>
+<mrow>
+<mn>4</mn>
+<mi>π<!-- π --></mi>
+</mrow>
+<mrow>
+<mn>3</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<msqrt>
+<mn>3</mn>
+</msqrt>
+</mrow>
+</mrow>
+</mfrac>
+</mrow>
+<mo>≈<!-- ≈ --></mo>
+<mn>2.418</mn>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle {\frac {4\pi }{3{\sqrt {3}}}}\approx 2.418}</annotation>
+</semantics>
+</math></span><img alt="\frac{4\pi}{3\sqrt{3}} \approx 2.418" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/82bf9110defdcf71af74c585454e07771d7bace0" style="vertical-align: -2.838ex; width:13.586ex; height:6.343ex;"/></span> times the Euclidean distance between them.</li>
+</ul>
+<h2><span class="mw-headline" id="Visual_Delaunay_definition:_Flipping">Visual Delaunay definition: Flipping</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=4" title="Edit section: Visual Delaunay definition: Flipping">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>From the above properties an important feature arises: Looking at two triangles ABD and BCD with the common edge BD (see figures), if the sum of the angles α and γ is less than or equal to 180°, the triangles meet the Delaunay condition.</p>
+<p>This is an important property because it allows the use of a <i>flipping</i> technique. If two triangles do not meet the Delaunay condition, switching the common edge BD for the common edge AC produces two triangles that do meet the Delaunay condition:</p>
+<ul class="gallery mw-gallery-traditional">
+<li class="gallerybox" style="width: 155px">
+<div style="width: 155px">
+<div class="thumb" style="width: 150px;">
+<div style="margin:15px auto;"><a class="image" href="/wiki/File:Delaunay_geometry.png"><img alt="" data-file-height="521" data-file-width="436" height="120" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Delaunay_geometry.png/100px-Delaunay_geometry.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Delaunay_geometry.png/151px-Delaunay_geometry.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Delaunay_geometry.png/201px-Delaunay_geometry.png 2x" width="100"/></a></div>
+</div>
+<div class="gallerytext">
+<p>This triangulation does not meet the Delaunay condition (the sum of α and γ is bigger than 180°).</p>
+</div>
+</div>
+</li>
+<li class="gallerybox" style="width: 155px">
+<div style="width: 155px">
+<div class="thumb" style="width: 150px;">
+<div style="margin:22.5px auto;"><a class="image" href="/wiki/File:Delaunay_before_flip.png"><img alt="" data-file-height="309" data-file-width="352" height="105" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Delaunay_before_flip.png/120px-Delaunay_before_flip.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Delaunay_before_flip.png/180px-Delaunay_before_flip.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Delaunay_before_flip.png/240px-Delaunay_before_flip.png 2x" width="120"/></a></div>
+</div>
+<div class="gallerytext">
+<p>This triangulation does not meet the Delaunay condition (the circumcircles contain more than three points).</p>
+</div>
+</div>
+</li>
+<li class="gallerybox" style="width: 155px">
+<div style="width: 155px">
+<div class="thumb" style="width: 150px;">
+<div style="margin:15px auto;"><a class="image" href="/wiki/File:Delaunay_after_flip.png"><img alt="" data-file-height="296" data-file-width="270" height="120" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Delaunay_after_flip.png/109px-Delaunay_after_flip.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Delaunay_after_flip.png/164px-Delaunay_after_flip.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Delaunay_after_flip.png/219px-Delaunay_after_flip.png 2x" width="109"/></a></div>
+</div>
+<div class="gallerytext">
+<p><i>Flipping</i> the common edge produces a Delaunay triangulation for the four points.</p>
+</div>
+</div>
+</li>
+</ul>
+<p>This operation is called a <i>flip</i>, and can be generalised to three and higher dimensions.<sup class="reference" id="cite_ref-DRS_4-0"><a href="#cite_note-DRS-4">[4]</a></sup></p>
+<h2><span class="mw-headline" id="Algorithms">Algorithms</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=5" title="Edit section: Algorithms">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Many algorithms for computing Delaunay triangulations rely on fast operations for detecting when a point is within a triangle's circumcircle and an efficient data structure for storing triangles and edges. In two dimensions, one way to detect if point <i>D</i> lies in the circumcircle of <i>A</i>, <i>B</i>, <i>C</i> is to evaluate the <a href="/wiki/Determinant" title="Determinant">determinant</a>:<sup class="reference" id="cite_ref-5"><a href="#cite_note-5">[5]</a></sup></p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mrow class="MJX-TeXAtom-ORD">
+<mrow>
+<mo>|</mo>
+<mtable columnspacing="1em" rowspacing="4pt">
+<mtr>
+<mtd>
+<msub>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msubsup>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>+</mo>
+<msubsup>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msubsup>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>+</mo>
+<msubsup>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msubsup>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>+</mo>
+<msubsup>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>+</mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+</mtd>
+<mtd>
+<mn>1</mn>
+</mtd>
+</mtr>
+</mtable>
+<mo>|</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mrow>
+<mo>|</mo>
+<mtable columnspacing="1em" rowspacing="4pt">
+<mtr>
+<mtd>
+<msub>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+<mo>+</mo>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>A</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+<mo>+</mo>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>B</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+</mtd>
+</mtr>
+<mtr>
+<mtd>
+<msub>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<msub>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+<mo>−<!-- − --></mo>
+<msub>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+</msub>
+</mtd>
+<mtd>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>x</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+<mo>+</mo>
+<mo stretchy="false">(</mo>
+<msubsup>
+<mi>C</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo>−<!-- − --></mo>
+<msubsup>
+<mi>D</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>y</mi>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msubsup>
+<mo stretchy="false">)</mo>
+</mtd>
+</mtr>
+</mtable>
+<mo>|</mo>
+</mrow>
+</mrow>
+<mo>&gt;</mo>
+<mn>0</mn>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle {\begin{vmatrix}A_{x}&amp;A_{y}&amp;A_{x}^{2}+A_{y}^{2}&amp;1\\B_{x}&amp;B_{y}&amp;B_{x}^{2}+B_{y}^{2}&amp;1\\C_{x}&amp;C_{y}&amp;C_{x}^{2}+C_{y}^{2}&amp;1\\D_{x}&amp;D_{y}&amp;D_{x}^{2}+D_{y}^{2}&amp;1\end{vmatrix}}={\begin{vmatrix}A_{x}-D_{x}&amp;A_{y}-D_{y}&amp;(A_{x}^{2}-D_{x}^{2})+(A_{y}^{2}-D_{y}^{2})\\B_{x}-D_{x}&amp;B_{y}-D_{y}&amp;(B_{x}^{2}-D_{x}^{2})+(B_{y}^{2}-D_{y}^{2})\\C_{x}-D_{x}&amp;C_{y}-D_{y}&amp;(C_{x}^{2}-D_{x}^{2})+(C_{y}^{2}-D_{y}^{2})\end{vmatrix}}&gt;0}</annotation>
+</semantics>
+</math></span><img alt="\begin{vmatrix}
+A_x &amp; A_y &amp; A_x^2 + A_y^2 &amp; 1\\
+B_x &amp; B_y &amp; B_x^2 + B_y^2 &amp; 1\\
+C_x &amp; C_y &amp; C_x^2 + C_y^2 &amp; 1\\
+D_x &amp; D_y &amp; D_x^2 + D_y^2 &amp; 1
+\end{vmatrix} = \begin{vmatrix}
+A_x - D_x &amp; A_y - D_y &amp; (A_x^2 - D_x^2) + (A_y^2 - D_y^2) \\
+B_x - D_x &amp; B_y - D_y &amp; (B_x^2 - D_x^2) + (B_y^2 - D_y^2) \\
+C_x - D_x &amp; C_y - D_y &amp; (C_x^2 - D_x^2) + (C_y^2 - D_y^2)
+\end{vmatrix} &gt; 0
+" aria-hidden="true" class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f32a85a0b784d4a9dd9cd176808a8355542c1d30" style="vertical-align: -6.096ex; margin-bottom: -0.242ex; width:81.084ex; height:13.843ex;"/></span></dd>
+</dl>
+<p>When <i>A</i>, <i>B</i> and <i>C</i> are sorted in a <a class="mw-redirect" href="/wiki/Counterclockwise" title="Counterclockwise">counterclockwise</a> order, this determinant is positive if and only if <i>D</i> lies inside the circumcircle.</p>
+<h3><span class="mw-headline" id="Flip_algorithms">Flip algorithms</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=6" title="Edit section: Flip algorithms">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>As mentioned above, if a triangle is non-Delaunay, we can flip one of its edges. This leads to a straightforward algorithm: construct any triangulation of the points, and then flip edges until no triangle is non-Delaunay. Unfortunately, this can take O(<i>n</i><sup>2</sup>) edge flips.<sup class="reference" id="cite_ref-hurtado_6-0"><a href="#cite_note-hurtado-6">[6]</a></sup> While this algorithm can be generalised to three and higher dimensions, its convergence is not guaranteed in these cases, as it is conditioned to the connectedness of the underlying <a href="/wiki/Flip_graph" title="Flip graph">flip graph</a>: this graph is connected for two dimensional sets of points, but may be disconnected in higher dimensions.<sup class="reference" id="cite_ref-DRS_4-1"><a href="#cite_note-DRS-4">[4]</a></sup></p>
+<h3><span class="mw-headline" id="Incremental">Incremental</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=7" title="Edit section: Incremental">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>The most straightforward way of efficiently computing the Delaunay triangulation is to repeatedly add one vertex at a time, retriangulating the affected parts of the graph. When a vertex <i>v</i> is added, we split in three the triangle that contains <i>v</i>, then we apply the flip algorithm. Done naïvely, this will take O(<i>n</i>) time: we search through all the triangles to find the one that contains <i>v</i>, then we potentially flip away every triangle. Then the overall runtime is O(<i>n</i><sup>2</sup>).</p>
+<p>If we insert vertices in random order, it turns out (by a somewhat intricate proof) that each insertion will flip, on average, only O(1) triangles – although sometimes it will flip many more.<sup class="reference" id="cite_ref-7"><a href="#cite_note-7">[7]</a></sup> This still leaves the point location time to improve. We can store the history of the splits and flips performed: each triangle stores a pointer to the two or three triangles that replaced it. To find the triangle that contains <i>v</i>, we start at a root triangle, and follow the pointer that points to a triangle that contains <i>v</i>, until we find a triangle that has not yet been replaced. On average, this will also take O(log <i>n</i>) time. Over all vertices, then, this takes O(<i>n</i> log <i>n</i>) time.<sup class="reference" id="cite_ref-deBerg_8-0"><a href="#cite_note-deBerg-8">[8]</a></sup> While the technique extends to higher dimension (as proved by Edelsbrunner and Shah<sup class="reference" id="cite_ref-9"><a href="#cite_note-9">[9]</a></sup>), the runtime can be exponential in the dimension even if the final Delaunay triangulation is small.</p>
+<p>The <a href="/wiki/Bowyer%E2%80%93Watson_algorithm" title="Bowyer–Watson algorithm">Bowyer–Watson algorithm</a> provides another approach for incremental construction. It gives an alternative to edge flipping for computing the Delaunay triangles containing a newly inserted vertex.</p>
+<h3><span class="mw-headline" id="Divide_and_conquer">Divide and conquer</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=8" title="Edit section: Divide and conquer">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>A <a href="/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm">divide and conquer algorithm</a> for triangulations in two dimensions is due to Lee and Schachter which was improved by <a href="/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Guibas</a> and <a href="/wiki/Jorge_Stolfi" title="Jorge Stolfi">Stolfi</a><sup class="reference" id="cite_ref-10"><a href="#cite_note-10">[10]</a></sup> and later by Dwyer. In this algorithm, one recursively draws a line to split the vertices into two sets. The Delaunay triangulation is computed for each set, and then the two sets are merged along the splitting line. Using some clever tricks, the merge operation can be done in time O(<i>n</i>), so the total running time is O(<i>n</i> log <i>n</i>).<sup class="reference" id="cite_ref-Leach1992_11-0"><a href="#cite_note-Leach1992-11">[11]</a></sup></p>
+<p>For certain types of point sets, such as a uniform random distribution, by intelligently picking the splitting lines the expected time can be reduced to O(<i>n</i> log log <i>n</i>) while still maintaining worst-case performance.</p>
+<p>A divide and conquer paradigm to performing a triangulation in <i>d</i> dimensions is presented in "DeWall: A fast divide and conquer Delaunay triangulation algorithm in E<sup><i>d</i></sup>" by P. Cignoni, C. Montani, R. Scopigno.<sup class="reference" id="cite_ref-12"><a href="#cite_note-12">[12]</a></sup></p>
+<p>Divide and conquer has been shown to be the fastest DT generation technique.<sup class="reference" id="cite_ref-13"><a href="#cite_note-13">[13]</a></sup><sup class="reference" id="cite_ref-14"><a href="#cite_note-14">[14]</a></sup></p>
+<h3><span class="mw-headline" id="Sweephull">Sweephull</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=9" title="Edit section: Sweephull">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Sweephull<sup class="reference" id="cite_ref-15"><a href="#cite_note-15">[15]</a></sup> is a hybrid technique for 2D Delaunay triangulation that uses a radially propagating sweep-hull, and a flipping algorithm. The sweep-hull is created sequentially by iterating a radially-sorted set of 2D points, and connecting triangles to the visible part of the convex hull, which gives a non-overlapping triangulation. One can build a convex hull in this manner so long as the order of points guarantees no point would fall within the triangle. But, radially sorting should minimize flipping by being highly Delaunay to start. This is then paired with a ﬁnal iterative triangle ﬂipping step.</p>
+<h2><span class="mw-headline" id="Applications">Applications</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=10" title="Edit section: Applications">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The <a href="/wiki/Euclidean_minimum_spanning_tree" title="Euclidean minimum spanning tree">Euclidean minimum spanning tree</a> of a set of points is a subset of the Delaunay triangulation of the same points, and this can be exploited to compute it efficiently.</p>
+<p>For modelling terrain or other objects given a set of sample points, the Delaunay triangulation gives a nice set of triangles to use as polygons in the model. In particular, the Delaunay triangulation avoids narrow triangles (as they have large circumcircles compared to their area). See <a href="/wiki/Triangulated_irregular_network" title="Triangulated irregular network">triangulated irregular network</a>.</p>
+<p>Delaunay triangulations can be used to determine the density or intensity of points samplings by means of the <a href="/wiki/Delaunay_tessellation_field_estimator" title="Delaunay tessellation field estimator">DTFE</a>.</p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:252px;"><a class="image" href="/wiki/File:Delaunay_Triangulation_(100_Points).svg"><img alt="" class="thumbimage" data-file-height="360" data-file-width="360" height="250" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Delaunay_Triangulation_%28100_Points%29.svg/250px-Delaunay_Triangulation_%28100_Points%29.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Delaunay_Triangulation_%28100_Points%29.svg/375px-Delaunay_Triangulation_%28100_Points%29.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Delaunay_Triangulation_%28100_Points%29.svg/500px-Delaunay_Triangulation_%28100_Points%29.svg.png 2x" width="250"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:Delaunay_Triangulation_(100_Points).svg" title="Enlarge"></a></div>
+The Delaunay triangulation of a random set of 100 points in a plane.</div>
+</div>
+</div>
+<p>Delaunay triangulations are often used to build meshes for space-discretised solvers such as the <a href="/wiki/Finite_element_method" title="Finite element method">finite element method</a> and the <a href="/wiki/Finite_volume_method" title="Finite volume method">finite volume method</a> of physics simulation, because of the angle guarantee and because fast triangulation algorithms have been developed. Typically, the domain to be meshed is specified as a coarse <a href="/wiki/Simplicial_complex" title="Simplicial complex">simplicial complex</a>; for the mesh to be numerically stable, it must be refined, for instance by using <a href="/wiki/Ruppert%27s_algorithm" title="Ruppert's algorithm">Ruppert's algorithm</a>.</p>
+<p>The increasing popularity of <a href="/wiki/Finite_element_method" title="Finite element method">finite element method</a> and <a href="/wiki/Boundary_element_method" title="Boundary element method">boundary element method</a> techniques increases the incentive to improve automatic meshing algorithms. However, all of these algorithms can create distorted and even unusable grid elements. Fortunately, several techniques exist which can take an existing mesh and improve its quality. For example, smoothing (also referred to as mesh refinement) is one such method, which repositions nodal locations so as to minimize element distortion. The <a href="/wiki/Stretched_grid_method" title="Stretched grid method">stretched grid method</a> allows the generation of pseudo-regular meshes that meet the Delaunay criteria easily and quickly in a one-step solution.</p>
+<p><a class="mw-redirect" href="/wiki/Constrained_Delaunay_Triangulation" title="Constrained Delaunay Triangulation">Constrained Delaunay Triangulation</a> has found applications in path planning in automated driving <sup class="reference" id="cite_ref-16"><a href="#cite_note-16">[16]</a></sup></p>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=11" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Beta_skeleton" title="Beta skeleton">Beta skeleton</a></li>
+<li><a href="/wiki/Constrained_Delaunay_triangulation" title="Constrained Delaunay triangulation">Constrained Delaunay triangulation</a></li>
+<li><a href="/wiki/Delaunay_tessellation_field_estimator" title="Delaunay tessellation field estimator">Delaunay tessellation field estimator</a></li>
+<li><a href="/wiki/Flip_graph" title="Flip graph">Flip graph</a></li>
+<li><a href="/wiki/Gabriel_graph" title="Gabriel graph">Gabriel graph</a></li>
+<li><a href="/wiki/Gradient_pattern_analysis" title="Gradient pattern analysis">Gradient pattern analysis</a></li>
+<li><a href="/wiki/Pitteway_triangulation" title="Pitteway triangulation">Pitteway triangulation</a></li>
+<li><a href="/wiki/Urquhart_graph" title="Urquhart graph">Urquhart graph</a></li>
+<li><a href="/wiki/Voronoi_diagram" title="Voronoi diagram">Voronoi diagram</a></li>
+<li><a href="/wiki/Convex_hull_algorithms" title="Convex hull algorithms">Convex hull algorithms</a></li>
+<li><a class="mw-redirect" href="/wiki/Quasitriangulation" title="Quasitriangulation">Quasitriangulation</a></li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=12" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-Delaunay1934-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-Delaunay1934_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Delaunay1934_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Boris_Delaunay" title="Boris Delaunay">Delaunay, Boris</a> (1934). <a class="external text" href="http://mi.mathnet.ru/eng/izv4937" rel="nofollow">"Sur la sphère vide"</a>. <i>Bulletin de l'Académie des Sciences de l'URSS, Classe des sciences mathématiques et naturelles</i>. <b>6</b>: 793–800.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Sur+la+sph%C3%A8re+vide&amp;rft.aufirst=Boris&amp;rft.aulast=Delaunay&amp;rft.date=1934&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fmi.mathnet.ru%2Feng%2Fizv4937&amp;rft.jtitle=Bulletin+de+l%27Acad%C3%A9mie+des+Sciences+de+l%27URSS%2C+Classe+des+sciences+math%C3%A9matiques+et+naturelles&amp;rft.pages=793-800&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=6"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><cite class="citation journal">Seidel, Raimund (1995). <a class="external text" href="http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6TYS-3YVD096-C&amp;_user=108429&amp;_coverDate=09%2F30%2F1995&amp;_rdoc=1&amp;_fmt=high&amp;_orig=search&amp;_origin=search&amp;_sort=d&amp;_docanchor=&amp;view=c&amp;_acct=C000059713&amp;_version=1&amp;_urlVersion=0&amp;_userid=108429&amp;md5=70a4159a39ed8ab2c6709025aa77d5de&amp;searchtype=a" rel="nofollow">"The upper bound theorem for polytopes: an easy proof of its asymptotic version"</a>. <i><a href="/wiki/Computational_Geometry_(journal)" title="Computational Geometry (journal)">Computational Geometry</a></i>. <b>5</b> (2): 115–116. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1016%2F0925-7721%2895%2900013-Y" rel="nofollow">10.1016/0925-7721(95)00013-Y</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=The+upper+bound+theorem+for+polytopes%3A+an+easy+proof+of+its+asymptotic+version&amp;rft.aufirst=Raimund&amp;rft.aulast=Seidel&amp;rft.date=1995&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.sciencedirect.com%2Fscience%3F_ob%3DArticleURL%26_udi%3DB6TYS-3YVD096-C%26_user%3D108429%26_coverDate%3D09%252F30%252F1995%26_rdoc%3D1%26_fmt%3Dhigh%26_orig%3Dsearch%26_origin%3Dsearch%26_sort%3Dd%26_docanchor%3D%26view%3Dc%26_acct%3DC000059713%26_version%3D1%26_urlVersion%3D0%26_userid%3D108429%26md5%3D70a4159a39ed8ab2c6709025aa77d5de%26searchtype%3Da&amp;rft_id=info%3Adoi%2F10.1016%2F0925-7721%2895%2900013-Y&amp;rft.issue=2&amp;rft.jtitle=Computational+Geometry&amp;rft.pages=115-116&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=5"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFEdelsbrunnerTanWaupotitsch1992"><a href="/wiki/Herbert_Edelsbrunner" title="Herbert Edelsbrunner">Edelsbrunner, Herbert</a>; Tan, Tiow Seng; Waupotitsch, Roman (1992), "An <i>O</i>(<i>n</i><sup>2</sup> log <i>n</i>) time algorithm for the minmax angle triangulation", <i>SIAM Journal on Scientific and Statistical Computing</i>, <b>13</b> (4): 994–1008, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1137%2F0913058" rel="nofollow">10.1137/0913058</a>, <a href="/wiki/Mathematical_Reviews" title="Mathematical Reviews">MR</a> <a class="external text" href="//www.ams.org/mathscinet-getitem?mr=1166172" rel="nofollow">1166172</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=An+O%28n%3Csup%3E2%3C%2Fsup%3E+log+n%29+time+algorithm+for+the+minmax+angle+triangulation&amp;rft.aufirst=Herbert&amp;rft.aulast=Edelsbrunner&amp;rft.au=Tan%2C+Tiow+Seng&amp;rft.au=Waupotitsch%2C+Roman&amp;rft.date=1992&amp;rft.genre=article&amp;rft_id=%2F%2Fwww.ams.org%2Fmathscinet-getitem%3Fmr%3D1166172&amp;rft_id=info%3Adoi%2F10.1137%2F0913058&amp;rft.issue=4&amp;rft.jtitle=SIAM+Journal+on+Scientific+and+Statistical+Computing&amp;rft.pages=994-1008&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=13"><span style="display:none;"> </span></span>.</span></li>
+<li id="cite_note-DRS-4"><span class="mw-cite-backlink">^ <a href="#cite_ref-DRS_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-DRS_4-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation book"><a href="/wiki/Jes%C3%BAs_A._De_Loera" title="Jesús A. De Loera">De Loera, Jesús A.</a>; Rambau, Jörg; <a href="/wiki/Francisco_Santos_Leal" title="Francisco Santos Leal">Santos, Francisco</a> (2010). <i>Triangulations, Structures for Algorithms and Applications</i>. Algorithms and Computation in Mathematics. <b>25</b>. Springer.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.aufirst=Jes%C3%BAs+A.&amp;rft.aulast=De+Loera&amp;rft.au=Rambau%2C+J%C3%B6rg&amp;rft.au=Santos%2C+Francisco&amp;rft.btitle=Triangulations%2C+Structures+for+Algorithms+and+Applications&amp;rft.date=2010&amp;rft.genre=book&amp;rft.pub=Springer&amp;rft.series=Algorithms+and+Computation+in+Mathematics&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-5"><span class="mw-cite-backlink"><b><a href="#cite_ref-5">^</a></b></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Guibas, Leonidas</a>; <a href="/wiki/Jorge_Stolfi" title="Jorge Stolfi">Stolfi, Jorge</a> (1985). <a class="external text" href="http://portal.acm.org/citation.cfm?id=282923" rel="nofollow">"Primitives for the manipulation of general subdivisions and the computation of Voronoi"</a>. <i><a href="/wiki/ACM_Transactions_on_Graphics" title="ACM Transactions on Graphics">ACM Transactions on Graphics</a></i>. <b>4</b> (2): 74–123. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1145%2F282918.282923" rel="nofollow">10.1145/282918.282923</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Primitives+for+the+manipulation+of+general+subdivisions+and+the+computation+of+Voronoi&amp;rft.aufirst=Leonidas&amp;rft.aulast=Guibas&amp;rft.au=Stolfi%2C+Jorge&amp;rft.date=1985&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fportal.acm.org%2Fcitation.cfm%3Fid%3D282923&amp;rft_id=info%3Adoi%2F10.1145%2F282918.282923&amp;rft.issue=2&amp;rft.jtitle=ACM+Transactions+on+Graphics&amp;rft.pages=74-123&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=4"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-hurtado-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-hurtado_6-0">^</a></b></span> <span class="reference-text"><cite class="citation news">Hurtado, F.; M. Noy; J. Urrutia (1999). <a class="external text" href="http://dx.doi.org/10.1007/PL00009464" rel="nofollow">"Flipping Edges in Triangulations"</a>. <i>Discrete &amp; Computational Geometry</i>. <b>22</b> (3). pp. 333–346.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Flipping+Edges+in+Triangulations&amp;rft.aufirst=F.&amp;rft.au=J.+Urrutia&amp;rft.aulast=Hurtado&amp;rft.au=M.+Noy&amp;rft.date=1999&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fdx.doi.org%2F10.1007%2FPL00009464&amp;rft.issue=3&amp;rft.jtitle=Discrete+%26+Computational+Geometry&amp;rft.pages=333-346&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=22"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Leonidas_J._Guibas" title="Leonidas J. Guibas">Guibas, Leonidas J.</a>; <a href="/wiki/Donald_Knuth" title="Donald Knuth">Knuth, Donald E.</a>; <a href="/wiki/Micha_Sharir" title="Micha Sharir">Sharir, Micha</a> (1992). <a class="external text" href="http://www.springerlink.com/content/p8377h68j82l6860" rel="nofollow">"Randomized incremental construction of Delaunay and Voronoi diagrams"</a>. <i><a href="/wiki/Algorithmica" title="Algorithmica">Algorithmica</a></i>. <b>7</b>: 381–413. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1007%2FBF01758770" rel="nofollow">10.1007/BF01758770</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Randomized+incremental+construction+of+Delaunay+and+Voronoi+diagrams&amp;rft.aufirst=Leonidas+J.&amp;rft.au=Knuth%2C+Donald+E.&amp;rft.aulast=Guibas&amp;rft.au=Sharir%2C+Micha&amp;rft.date=1992&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.springerlink.com%2Fcontent%2Fp8377h68j82l6860&amp;rft_id=info%3Adoi%2F10.1007%2FBF01758770&amp;rft.jtitle=Algorithmica&amp;rft.pages=381-413&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=7"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-deBerg-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-deBerg_8-0">^</a></b></span> <span class="reference-text"><cite class="citation book">de Berg, Mark; Otfried Cheong; Marc van Kreveld; Mark Overmars (2008). <a class="external text" href="http://www.cs.uu.nl/geobook/interpolation.pdf" rel="nofollow"><i>Computational Geometry: Algorithms and Applications</i></a> <span style="font-size:85%;">(PDF)</span>. Springer-Verlag. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a> <a href="/wiki/Special:BookSources/978-3-540-77973-5" title="Special:BookSources/978-3-540-77973-5">978-3-540-77973-5</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.aufirst=Mark&amp;rft.aulast=de+Berg&amp;rft.au=Marc+van+Kreveld&amp;rft.au=Mark+Overmars&amp;rft.au=Otfried+Cheong&amp;rft.btitle=Computational+Geometry%3A+Algorithms+and+Applications&amp;rft.date=2008&amp;rft.genre=book&amp;rft_id=http%3A%2F%2Fwww.cs.uu.nl%2Fgeobook%2Finterpolation.pdf&amp;rft.isbn=978-3-540-77973-5&amp;rft.pub=Springer-Verlag&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-9"><span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Herbert_Edelsbrunner" title="Herbert Edelsbrunner">Edelsbrunner, Herbert</a>; Shah, Nimish (1996). <a class="external text" href="http://www.springerlink.com/content/4gdja72vx1qmg44x/?p=a74909a339d9498cbff326f08b084b4c&amp;pi=1" rel="nofollow">"Incremental Topological Flipping Works for Regular Triangulations"</a>. <i><a href="/wiki/Algorithmica" title="Algorithmica">Algorithmica</a></i>. <b>15</b> (3): 223–241. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1007%2FBF01975867" rel="nofollow">10.1007/BF01975867</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Incremental+Topological+Flipping+Works+for+Regular+Triangulations&amp;rft.aufirst=Herbert&amp;rft.aulast=Edelsbrunner&amp;rft.au=Shah%2C+Nimish&amp;rft.date=1996&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.springerlink.com%2Fcontent%2F4gdja72vx1qmg44x%2F%3Fp%3Da74909a339d9498cbff326f08b084b4c%26pi%3D1&amp;rft_id=info%3Adoi%2F10.1007%2FBF01975867&amp;rft.issue=3&amp;rft.jtitle=Algorithmica&amp;rft.pages=223-241&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=15"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-10"><span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><a class="external text" href="http://www.geom.uiuc.edu/~samuelp/del_project.html" rel="nofollow">Computing Constrained Delaunay Triangulations</a></span></li>
+<li id="cite_note-Leach1992-11"><span class="mw-cite-backlink"><b><a href="#cite_ref-Leach1992_11-0">^</a></b></span> <span class="reference-text"><cite class="citation journal">Leach, G. (June 1992). "<i>Improving Worst-Case Optimal Delaunay Triangulation Algorithms.</i>". <a href="/wiki/CiteSeerX" title="CiteSeerX">CiteSeerX</a> <span class="plainlinks"><a class="external text" href="//citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.56.2323" rel="nofollow">10.1.1.56.2323</a><span style="margin-left:0.1em"><img alt="Freely accessible" data-file-height="813" data-file-width="512" height="14" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/9px-Lock-green.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/14px-Lock-green.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/18px-Lock-green.svg.png 2x" title="Freely accessible" width="9"/></span></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=Improving+Worst-Case+Optimal+Delaunay+Triangulation+Algorithms.&amp;rft.aufirst=G.&amp;rft.aulast=Leach&amp;rft.date=1992-06&amp;rft.genre=article&amp;rft_id=%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fsummary%3Fdoi%3D10.1.1.56.2323&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><cite class="citation journal">Cignoni, P.; C. Montani; R. Scopigno (1998). "DeWall: A fast divide and conquer Delaunay triangulation algorithm in E<sup>d</sup>". <i>Computer-Aided Design</i>. <b>30</b> (5): 333–341. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1016%2FS0010-4485%2897%2900082-1" rel="nofollow">10.1016/S0010-4485(97)00082-1</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.atitle=DeWall%3A+A+fast+divide+and+conquer+Delaunay+triangulation+algorithm+in+E%3Csup%3Ed%3C%2Fsup%3E&amp;rft.au=C.+Montani&amp;rft.aufirst=P.&amp;rft.aulast=Cignoni&amp;rft.au=R.+Scopigno&amp;rft.date=1998&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.1016%2FS0010-4485%2897%2900082-1&amp;rft.issue=5&amp;rft.jtitle=Computer-Aided+Design&amp;rft.pages=333-341&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=30"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-13"><span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text">A Comparison of Sequential Delaunay Triangulation Algorithms <a class="external free" href="http://www.cs.berkeley.edu/~jrs/meshpapers/SuDrysdale.pdf" rel="nofollow">http://www.cs.berkeley.edu/~jrs/meshpapers/SuDrysdale.pdf</a></span></li>
+<li id="cite_note-14"><span class="mw-cite-backlink"><b><a href="#cite_ref-14">^</a></b></span> <span class="reference-text"><a class="external free" href="http://www.cs.cmu.edu/~quake/tripaper/triangle2.html" rel="nofollow">http://www.cs.cmu.edu/~quake/tripaper/triangle2.html</a></span></li>
+<li id="cite_note-15"><span class="mw-cite-backlink"><b><a href="#cite_ref-15">^</a></b></span> <span class="reference-text"><a class="external text" href="http://www.s-hull.org/paper/s_hull.pdf" rel="nofollow">S-hull</a></span></li>
+<li id="cite_note-16"><span class="mw-cite-backlink"><b><a href="#cite_ref-16">^</a></b></span> <span class="reference-text"><a class="external free" href="http://web.mit.edu/mobility/publications/IV2012_Anderson_Karumanchi_Iagnemma.pdf" rel="nofollow">http://web.mit.edu/mobility/publications/IV2012_Anderson_Karumanchi_Iagnemma.pdf</a></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Delaunay_triangulation&amp;action=edit&amp;section=13" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li>Delaunay triangulation in <a href="/wiki/CGAL" title="CGAL">CGAL</a>, the Computational Geometry Algorithms Library:
+<ul>
+<li><cite class="citation web">Yvinec, Mariette. <a class="external text" href="http://www.cgal.org/Pkg/Triangulation2" rel="nofollow">"2D Triangulation"</a><span class="reference-accessdate">. Retrieved April 2010</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.aufirst=Mariette&amp;rft.aulast=Yvinec&amp;rft.btitle=2D+Triangulation&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.cgal.org%2FPkg%2FTriangulation2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="error citation-comment" style="font-size:100%">Check date values in: <code style="color:inherit; border:inherit; padding:inherit;">|access-date=</code> (<a href="/wiki/Help:CS1_errors#bad_date" title="Help:CS1 errors">help</a>)</span></li>
+<li><cite class="citation web">Pion, Sylvain; Teillaud, Monique. <a class="external text" href="http://www.cgal.org/Pkg/Triangulation3" rel="nofollow">"3D Triangulations"</a><span class="reference-accessdate">. Retrieved April 2010</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.aufirst=Sylvain&amp;rft.aulast=Pion&amp;rft.au=Teillaud%2C+Monique&amp;rft.btitle=3D+Triangulations&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.cgal.org%2FPkg%2FTriangulation3&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="error citation-comment" style="font-size:100%">Check date values in: <code style="color:inherit; border:inherit; padding:inherit;">|access-date=</code> (<a href="/wiki/Help:CS1_errors#bad_date" title="Help:CS1 errors">help</a>)</span></li>
+<li><cite class="citation web">Hornus, Samuel; Devillers, Olivier; Jamin, Clément. <a class="external text" href="http://www.cgal.org/Pkg/Triangulations" rel="nofollow">"dD Triangulations"</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.au=Devillers%2C+Olivier&amp;rft.aufirst=Samuel&amp;rft.au=Jamin%2C+Cl%C3%A9ment&amp;rft.aulast=Hornus&amp;rft.btitle=dD+Triangulations&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.cgal.org%2FPkg%2FTriangulations&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></li>
+<li><cite class="citation web">Hert, Susan; Seel, Michael. <a class="external text" href="http://www.cgal.org/Pkg/ConvexHullD" rel="nofollow">"dD Convex Hulls and Delaunay Triangulations"</a><span class="reference-accessdate">. Retrieved April 2010</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.aufirst=Susan&amp;rft.aulast=Hert&amp;rft.au=Seel%2C+Michael&amp;rft.btitle=dD+Convex+Hulls+and+Delaunay+Triangulations&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.cgal.org%2FPkg%2FConvexHullD&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="error citation-comment" style="font-size:100%">Check date values in: <code style="color:inherit; border:inherit; padding:inherit;">|access-date=</code> (<a href="/wiki/Help:CS1_errors#bad_date" title="Help:CS1 errors">help</a>)</span></li>
+</ul>
+</li>
+<li><cite class="citation web"><a class="external text" href="http://mathworld.wolfram.com/DelaunayTriangulation.html" rel="nofollow">"Delaunay triangulation"</a>. Wolfram MathWorld<span class="reference-accessdate">. Retrieved April 2010</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3ADelaunay+triangulation&amp;rft.btitle=Delaunay+triangulation&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmathworld.wolfram.com%2FDelaunayTriangulation.html&amp;rft.pub=Wolfram+MathWorld&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="error citation-comment" style="font-size:100%">Check date values in: <code style="color:inherit; border:inherit; padding:inherit;">|access-date=</code> (<a href="/wiki/Help:CS1_errors#bad_date" title="Help:CS1 errors">help</a>)</span></li>
+</ul>
+<!-- 
+NewPP limit report
+Parsed by mw1174
+Cached time: 20161227125413
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.192 seconds
+Real time usage: 0.252 seconds
+Preprocessor visited node count: 823/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 29945/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 4/40
+Expensive parser function count: 0/500
+Lua time usage: 0.087/10.000 seconds
+Lua memory usage: 2.82 MB/50 MB
+-->
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  149.153      1 - -total
+ 84.98%  126.744      1 - Template:Reflist
+ 50.12%   74.760      7 - Template:Cite_journal
+ 14.70%   21.931      5 - Template:Cite_web
+  8.15%   12.163      2 - Template:Cite_book
+  5.83%    8.695      1 - Template:Citation
+  3.84%    5.720      1 - Template:Cite_news
+-->
+<!-- Saved in parser cache with key enwiki:pcache:idhash:8864-0!*!0!!en!4!*!math=5 and timestamp 20161227125413 and revision id 752704464
+ -->
+<noscript><img alt="" height="1" src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Delaunay_triangulation&amp;oldid=752704464">https://en.wikipedia.org/w/index.php?title=Delaunay_triangulation&amp;oldid=752704464</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Triangulation_(geometry)" title="Category:Triangulation (geometry)">Triangulation (geometry)</a></li></ul></div><div class="mw-hidden-catlinks mw-hidden-cats-hidden" id="mw-hidden-catlinks">Hidden categories: <ul><li><a href="/wiki/Category:CS1_errors:_dates" title="Category:CS1 errors: dates">CS1 errors: dates</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>Navigation menu</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">Personal tools</h3>
+<ul>
+<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]">Talk</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Delaunay+triangulation" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=Special:UserLogin&amp;returnto=Delaunay+triangulation" title="You're encouraged to log in; however, it's not mandatory. [o]">Log in</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">Namespaces</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/Delaunay_triangulation" title="View the content page [c]">Article</a></span></li>
+<li id="ca-talk"><span><a accesskey="t" href="/wiki/Talk:Delaunay_triangulation" rel="discussion" title="Discussion about the content page [t]">Talk</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>Variants</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">Views</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/Delaunay_triangulation">Read</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=Delaunay_triangulation&amp;action=edit" title="Edit this page [e]">Edit</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=Delaunay_triangulation&amp;action=history" title="Past revisions of this page [h]">View history</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">Search</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" type="search"/><input name="title" type="hidden" value="Special:Search"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="Search Wikipedia for this text" type="submit" value="Search"/><input class="searchButton" id="searchButton" name="go" title="Go to a page with this exact name if it exists" type="submit" value="Go"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page" title="Visit the main page"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">Navigation</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/Main_Page" title="Visit the main page [z]">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/Special:Random" title="Load a random article [x]">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-interaction-label" class="portal" id="p-interaction" role="navigation">
+<h3 id="p-interaction-label">Interaction</h3>
+<div class="body">
+<ul>
+<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">Tools</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/Special:WhatLinksHere/Delaunay_triangulation" title="List of all English Wikipedia pages containing links to this page [j]">What links here</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/Special:RecentChangesLinked/Delaunay_triangulation" rel="nofollow" title="Recent changes in pages linked from this page [k]">Related changes</a></li><li id="t-upload"><a accesskey="u" href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]">Upload file</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/Special:SpecialPages" title="A list of all special pages [q]">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Delaunay_triangulation&amp;oldid=752704464" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Delaunay_triangulation&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q192445" title="Link to connected data repository item [g]">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Delaunay_triangulation&amp;id=752704464" title="Information on how to cite this page">Cite this page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">Print/export</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Delaunay+triangulation">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Delaunay+triangulation&amp;returnto=Delaunay+triangulation&amp;oldid=752704464&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=Delaunay_triangulation&amp;printable=yes" title="Printable version of this page [p]">Printable version</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-wikibase-otherprojects-label" class="portal" id="p-wikibase-otherprojects" role="navigation">
+<h3 id="p-wikibase-otherprojects-label">In other projects</h3>
+<div class="body">
+<ul>
+<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:Delaunay_triangulation" hreflang="en">Wikimedia Commons</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">Languages</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-ar"><a class="interlanguage-link-target" href="https://ar.wikipedia.org/wiki/%D8%AA%D8%AB%D9%84%D9%8A%D8%AB_%D8%AF%D9%8A%D9%84%D8%A7%D9%88%D9%86%D9%8A" hreflang="ar" lang="ar" title="تثليث ديلاوني – Arabic">العربية</a></li><li class="interlanguage-link interwiki-ca"><a class="interlanguage-link-target" href="https://ca.wikipedia.org/wiki/Triangulaci%C3%B3_de_Delaunay" hreflang="ca" lang="ca" title="Triangulació de Delaunay – Catalan">Català</a></li><li class="interlanguage-link interwiki-de"><a class="interlanguage-link-target" href="https://de.wikipedia.org/wiki/Delaunay-Triangulierung" hreflang="de" lang="de" title="Delaunay-Triangulierung – German">Deutsch</a></li><li class="interlanguage-link interwiki-et"><a class="interlanguage-link-target" href="https://et.wikipedia.org/wiki/Delaunay_triangulatsioon" hreflang="et" lang="et" title="Delaunay triangulatsioon – Estonian">Eesti</a></li><li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/wiki/Triangulaci%C3%B3n_de_Delaunay" hreflang="es" lang="es" title="Triangulación de Delaunay – Spanish">Español</a></li><li class="interlanguage-link interwiki-fa"><a class="interlanguage-link-target" href="https://fa.wikipedia.org/wiki/%D9%85%D8%AB%D9%84%D8%AB%E2%80%8C%D8%A8%D9%86%D8%AF%DB%8C_%D8%AF%DB%8C%D9%84%D8%A7%D9%86%DB%8C" hreflang="fa" lang="fa" title="مثلث‌بندی دیلانی – Persian">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a class="interlanguage-link-target" href="https://fr.wikipedia.org/wiki/Triangulation_de_Delaunay" hreflang="fr" lang="fr" title="Triangulation de Delaunay – French">Français</a></li><li class="interlanguage-link interwiki-ko"><a class="interlanguage-link-target" href="https://ko.wikipedia.org/wiki/%EB%8D%B8%EB%A1%9C%EB%84%A4_%EC%82%BC%EA%B0%81%EB%B6%84%ED%95%A0" hreflang="ko" lang="ko" title="델로네 삼각분할 – Korean">한국어</a></li><li class="interlanguage-link interwiki-it"><a class="interlanguage-link-target" href="https://it.wikipedia.org/wiki/Triangolazione_di_Delaunay" hreflang="it" lang="it" title="Triangolazione di Delaunay – Italian">Italiano</a></li><li class="interlanguage-link interwiki-he"><a class="interlanguage-link-target" href="https://he.wikipedia.org/wiki/%D7%A9%D7%99%D7%9C%D7%95%D7%A9_%D7%93%D7%9C%D7%95%D7%A0%D7%99" hreflang="he" lang="he" title="שילוש דלוני – Hebrew">עברית</a></li><li class="interlanguage-link interwiki-hu"><a class="interlanguage-link-target" href="https://hu.wikipedia.org/wiki/Delauney-h%C3%A1romsz%C3%B6gel%C3%A9s" hreflang="hu" lang="hu" title="Delauney-háromszögelés – Hungarian">Magyar</a></li><li class="interlanguage-link interwiki-nl"><a class="interlanguage-link-target" href="https://nl.wikipedia.org/wiki/Delaunay-triangulatie" hreflang="nl" lang="nl" title="Delaunay-triangulatie – Dutch">Nederlands</a></li><li class="interlanguage-link interwiki-ja"><a class="interlanguage-link-target" href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%AD%E3%83%8D%E3%83%BC%E5%9B%B3" hreflang="ja" lang="ja" title="ドロネー図 – Japanese">日本語</a></li><li class="interlanguage-link interwiki-pl"><a class="interlanguage-link-target" href="https://pl.wikipedia.org/wiki/Triangulacja_Delone" hreflang="pl" lang="pl" title="Triangulacja Delone – Polish">Polski</a></li><li class="interlanguage-link interwiki-pt"><a class="interlanguage-link-target" href="https://pt.wikipedia.org/wiki/Triangula%C3%A7%C3%A3o_de_Delaunay" hreflang="pt" lang="pt" title="Triangulação de Delaunay – Portuguese">Português</a></li><li class="interlanguage-link interwiki-ro"><a class="interlanguage-link-target" href="https://ro.wikipedia.org/wiki/Triangula%C8%9Bia_Delaunay_paralel%C4%83" hreflang="ro" lang="ro" title="Triangulația Delaunay paralelă – Romanian">Română</a></li><li class="interlanguage-link interwiki-ru"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B8%D0%B0%D0%BD%D0%B3%D1%83%D0%BB%D1%8F%D1%86%D0%B8%D1%8F_%D0%94%D0%B5%D0%BB%D0%BE%D0%BD%D0%B5" hreflang="ru" lang="ru" title="Триангуляция Делоне – Russian">Русский</a></li><li class="interlanguage-link interwiki-sl"><a class="interlanguage-link-target" href="https://sl.wikipedia.org/wiki/Delaunayeva_triangulacija" hreflang="sl" lang="sl" title="Delaunayeva triangulacija – Slovenian">Slovenščina</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/%D0%A2%D1%80%D1%96%D0%B0%D0%BD%D0%B3%D1%83%D0%BB%D1%8F%D1%86%D1%96%D1%8F_%D0%94%D0%B5%D0%BB%D0%BE%D0%BD%D0%B5" hreflang="uk" lang="uk" title="Тріангуляція Делоне – Ukrainian">Українська</a></li><li class="interlanguage-link interwiki-ur"><a class="interlanguage-link-target" href="https://ur.wikipedia.org/wiki/%D8%AF%DB%8C_%D9%84%D8%A7%D9%88%D9%86%DB%92_%D9%85%D8%AB%D9%84%D8%AB%DB%8C" hreflang="ur" lang="ur" title="دی لاونے مثلثی – Urdu">اردو</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/%E5%BE%B7%E5%8B%9E%E5%85%A7%E4%B8%89%E8%A7%92%E5%8C%96" hreflang="zh" lang="zh" title="德勞內三角化 – Chinese">中文</a></li><li class="uls-p-lang-dummy"><a href="#"></a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q192445#sitelinks-wikipedia" title="Edit interlanguage links">Edit links</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> This page was last modified on 2 December 2016, at 20:20.</li>
+<li id="footer-info-copyright">Text is available under the <a href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" rel="license">Creative Commons Attribution-ShareAlike License</a><a href="//creativecommons.org/licenses/by-sa/3.0/" rel="license" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">Privacy policy</a></li>
+<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//en.m.wikipedia.org/w/index.php?title=Delaunay_triangulation&amp;mobileaction=toggle_view_mobile">Mobile view</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":75,"wgHostname":"mw1266"});});</script>
+</body>
+</html>

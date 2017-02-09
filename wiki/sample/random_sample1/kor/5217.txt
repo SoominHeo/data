@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>마이크로소프트의 예외 처리 메커니즘 - 위키백과, 우리 모두의 백과사전</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"마이크로소프트의_예외_처리_메커니즘","wgTitle":"마이크로소프트의 예외 처리 메커니즘","wgCurRevisionId":16923986,"wgRevisionId":16923986,"wgArticleId":1418878,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["인용 오류 - 날짜","제어 흐름","마이크로소프트 API"],"wgBreakFrames":false,"wgPageContentLanguage":"ko","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"ko","wgMonthNames":["","1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"wgMonthNamesShort":["","1","2","3","4","5","6","7","8","9","10","11","12"],"wgRelevantPageName":"마이크로소프트의_예외_처리_메커니즘","wgRelevantArticleId":1418878,"wgRequestId":"WIzpRQpAMFcAAI988WUAAABS","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"ko","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"ko","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"한국어","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q4444364","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0tic6pn",function($,jQuery,require,module){mw.user.options.set({"variant":"ko"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.ReferenceTooltips","ext.gadget.directcommons","ext.gadget.refToolbar","ext.centralauth.centralautologin","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=ko&amp;modules=ext.cite.styles%7Cext.gadget.ReferenceTooltips%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=ko&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=ko&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.9" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/ko.m.wikipedia.org/wiki/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" rel="alternate"/>
+<link href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit" rel="alternate" title="편집" type="application/x-wiki"/>
+<link href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit" rel="edit" title="편집"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="위키백과 (ko)" type="application/opensearchdescription+xml"/>
+<link href="//ko.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://ko.wikipedia.org/wiki/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-마이크로소프트의_예외_처리_메커니즘 rootpage-마이크로소프트의_예외_처리_메커니즘 skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="ko">마이크로소프트의 예외 처리 메커니즘</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">위키백과, 우리 모두의 백과사전.</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					이동:					<a href="#mw-head">둘러보기</a>, 					<a href="#p-search">검색</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="ko"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><p><a href="/wiki/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8_%EC%9C%88%EB%8F%84%EC%9A%B0" title="마이크로소프트 윈도우">마이크로소프트 윈도우</a> <a href="/wiki/%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C" title="운영 체제">운영 체제</a>는 운영 체제 특성에 기반한 예외 처리 메커니즘을 사용한다.</p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>목차</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#.EA.B5.AC.EC.A1.B0.ED.99.94.EB.90.9C_.EC.98.88.EC.99.B8_.EC.B2.98.EB.A6.AC_.28SEH_:_Structured_Exception_Handling.29"><span class="tocnumber">1</span> <span class="toctext">구조화된 예외 처리 (SEH : Structured Exception Handling)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#.EC.82.AC.EC.9A.A9"><span class="tocnumber">1.1</span> <span class="toctext">사용</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#.EA.B5.AC.ED.98.84"><span class="tocnumber">1.2</span> <span class="toctext">구현</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#.EB.B2.A1.ED.84.B0.ED.99.94.EB.90.9C_.EC.98.88.EC.99.B8_.EC.B2.98.EB.A6.AC_.28VEH_:Vectored_Exception_Handling.29"><span class="tocnumber">2</span> <span class="toctext">벡터화된 예외 처리 (VEH :Vectored Exception Handling)</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#.EB.85.B8.ED.8A.B8"><span class="tocnumber">3</span> <span class="toctext">노트</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#.EA.B0.81.EC.A3.BC"><span class="tocnumber">4</span> <span class="toctext">각주</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#.EB.B0.94.EA.B9.A5_.EA.B3.A0.EB.A6.AC"><span class="tocnumber">5</span> <span class="toctext">바깥 고리</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id=".EA.B5.AC.EC.A1.B0.ED.99.94.EB.90.9C_.EC.98.88.EC.99.B8_.EC.B2.98.EB.A6.AC_.28SEH_:_Structured_Exception_Handling.29"><span id="SEH"></span>구조화된 예외 처리 (SEH : Structured Exception Handling)</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=1" title="부분 편집: 구조화된 예외 처리 (SEH : Structured Exception Handling)">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>마이크로소프트 구조화된 예외 처리 (Microsoft Structured Exception Handling)는 윈도우를 위한 네이티브 예외 처리 메커니즘이며 VEH의 전신이다.<sup class="reference" id="cite_ref-devx_1-0"><a href="#cite_note-devx-1">[1]</a></sup> 이것은 표준 C++ 예외에는 존재하지 않는 <code>finally</code> 메커니즘을 특징으로 갖는다(그러나 대부분의 <a href="/wiki/%EB%AA%85%EB%A0%B9%ED%98%95_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D" title="명령형 프로그래밍">명령형 프로그래밍</a> 언어들에서는 이후 소개되었다). SEH는 실행의 각 <a href="/wiki/%EC%8A%A4%EB%A0%88%EB%93%9C" title="스레드">스레드</a>를 위해 독립적으로 설치되고 처리된다.</p>
+<p>SEH의 마이크로소프트 구현은 <a href="/wiki/%EB%B3%BC%EB%9E%9C%EB%93%9C" title="볼랜드">볼랜드</a>, <a class="external text" href="http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=5,628,016" rel="nofollow">미국 특허 5,628,016</a><span class="PDFlink noprint"><a class="external text" href="http://www.pat2pdf.org/pat2pdf/foo.pl?number=5,628,016" rel="nofollow"> </a></span> 라이선스의 특허권에 기반한다. 오픈소스 운영 체제 시스템들은 이 특허권 때문에 SEH 기반 메커니즘을 채택하는 것을 꺼린다.<sup class="reference" id="cite_ref-2"><a href="#cite_note-2">[2]</a></sup></p>
+<h3><span class="mw-headline" id=".EC.82.AC.EC.9A.A9">사용</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=2" title="부분 편집: 사용">편집</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>마이크로소프트는 SEH를 단지 컴파일러 수준에서의 프로그래밍 기법으로 지원한다. MS 비주얼 C++ 컴파일러는 이 목적을 위해 세개의 표준화되지 않은 키워드: <code>__try</code>, <code>__except</code> 그리고 <code>__finally</code> 라는 특징을 갖는다. 다른 예외 처리 측면들은 수많은 윈도우 API 함수들의 지원을 받는다.<sup class="reference" id="cite_ref-3"><a href="#cite_note-3">[3]</a></sup> 예를 들면 SEH 예외를 직접 일으키기 위한 <code>RaiseException</code>가 있다.</p>
+<h3><span class="mw-headline" id=".EA.B5.AC.ED.98.84">구현</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=3" title="부분 편집: 구현">편집</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>윈도우에서 실행의 각 스레드는 자신의 <a href="/wiki/%EC%8A%A4%EB%A0%88%EB%93%9C_%EC%A0%95%EB%B3%B4_%EB%B8%94%EB%A1%9D" title="스레드 정보 블록">스레드 정보 블록</a>의 시작에서 문서화되지 않은 _EXCEPTION_REGISTRATION_RECORD 리스트와의 연결을 갖는다. <code>__try</code> 선언은 근본적으로 컴파일러에서 정의된 <code>EH_prolog</code> 함수를 호출한다. 이 함수는 스택에서 _EXCEPTION_REGISTRATION_RECORD 를 할당하며, 이것은 <code>msvcrt.dll</code>에서 <code>__except_handler3</code> 함수를 가리키고,<sup class="reference" id="cite_ref-4"><a href="#cite_note-4">[a]</a></sup><sup class="reference" id="cite_ref-5"><a href="#cite_note-5">[b]</a></sup> 리스트의 헤드에 레코드를 추가한다. <code>__try</code> 블록의 끝에서 컴파일러에서 정의된 역 연산을 수행하는 <code>EH_epilog</code> 함수가 호출된다. 이 컴파일러에서 정의된 루틴들은 인라인화될 수 있다. 모든 프로그래머가 정의한 <code>__except</code> 와 <code>__finally</code> 블록들은 <code>__except_handler3</code> 내부에서 호출된다. 만약 이러한 블록들이 존재한다면 생성된 _EXCEPTION_REGISTRATION_RECORD 는 소수의 추가적인 필드들로 확장되며, 이것은 <code>__except_handler3</code>에 의해 사용된다.<sup class="reference" id="cite_ref-6"><a href="#cite_note-6">[4]</a></sup></p>
+<p>사용자 모드 코드에서의 예외의 경우, 운영 체제는 <sup class="reference" id="cite_ref-7"><a href="#cite_note-7">[c]</a></sup> 핸들러 신호가 예외를 처리하거나 리스트가 끝날 때까지 스레드의 _EXCEPTION_REGISTRATION_RECORD 리스트를 분석하고 순서에 따라 각 예외 처리기를 호출한다. 리스트의 마지막은 항상 <a class="new" href="/w/index.php?title=%EC%9D%BC%EB%B0%98_%EB%B3%B4%ED%98%B8_%EC%9E%A5%EC%95%A0&amp;action=edit&amp;redlink=1" title="일반 보호 장애 (없는 문서)">일반 보호 장애</a>를 표시하는 <code>kernel32!</code><code>UnhandledExceptionFilter</code>이다.<sup class="reference" id="cite_ref-8"><a href="#cite_note-8">[d]</a></sup> 그 후 리스트는 처리기에게 사용된 자원들을 청소할 기회를 주며 한번 더 순회된다. 마지막으로 실행은 커널 모드로 반환되는데<sup class="reference" id="cite_ref-9"><a href="#cite_note-9">[e]</a></sup> 여기는 프로세스가 재개되거나 종료되는 곳이다.</p>
+<h2><span class="mw-headline" id=".EB.B2.A1.ED.84.B0.ED.99.94.EB.90.9C_.EC.98.88.EC.99.B8_.EC.B2.98.EB.A6.AC_.28VEH_:Vectored_Exception_Handling.29"><span id="VEH"></span>벡터화된 예외 처리 (VEH :Vectored Exception Handling)</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=4" title="부분 편집: 벡터화된 예외 처리 (VEH :Vectored Exception Handling)">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>벡터화된 예외 처리(Vectored Exception Handling)는 <a href="/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0_XP" title="윈도우 XP">윈도우 XP</a>에서 도입되었다.<sup class="reference" id="cite_ref-VEH_10-0"><a href="#cite_note-VEH-10">[5]</a></sup> VEH는 C++과 비주얼 베이직 같은 언어를 사용하는 윈도우 프로그래머에게 사용 가능하게 만들어 졌다. VEH는 SEH를 대체하는 것이 아니라 VEH가 SEH보다 더 높은 우선 순위를 가짐으로써 공존한다.<sup class="reference" id="cite_ref-devx_1-1"><a href="#cite_note-devx-1">[1]</a></sup><sup class="reference" id="cite_ref-VEH_10-1"><a href="#cite_note-VEH-10">[5]</a></sup> SEH와 비교해서, VEH는 더 전통적인 <a class="new" href="/w/index.php?title=%EC%95%8C%EB%A6%BC_%EC%BD%9C%EB%B0%B1_%EC%8A%A4%ED%82%B4&amp;action=edit&amp;redlink=1" title="알림 콜백 스킴 (없는 문서)">알림 콜백 스킴</a>과 닮았다.<sup class="reference" id="cite_ref-11"><a href="#cite_note-11">[6]</a></sup></p>
+<h2><span class="mw-headline" id=".EB.85.B8.ED.8A.B8">노트</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=5" title="부분 편집: 노트">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist columns references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: lower-alpha;">
+<ol class="references">
+<li id="cite_note-4"><span class="mw-cite-backlink"><a href="#cite_ref-4">↑</a></span> <span class="reference-text">이름은 VC 런타임의 버전들에 따라 다르다.</span></li>
+<li id="cite_note-5"><span class="mw-cite-backlink"><a href="#cite_ref-5">↑</a></span> <span class="reference-text">VC 런타임과 정적으로 링크된 다른 프로그램들 뿐만 아니라 <code>ntdll.dll</code>와 <code>kernel32.dll</code>는 컴파일된 이 함수를 갖는다.</span></li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><a href="#cite_ref-7">↑</a></span> <span class="reference-text">더 구체적으로, <code>ntdll!RtlDispatchException</code> 시스템 루틴은 이후 <code>nt!KiDispatchException</code> 커널 함수에서 호출되는 <code>ntdll!KiUserExceptionDispatcher</code>로부터 호출된다.(<cite class="citation web">Ken Johnson (2007년 11월 16일). <a class="external text" href="http://www.nynaeve.net/?p=201" rel="nofollow">“A catalog of NTDLL kernel mode to user mode callbacks, part 2: KiUserExceptionDispatcher”</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Ken+Johnson&amp;rft.btitle=A+catalog+of+NTDLL+kernel+mode+to+user+mode+callbacks%2C+part+2%3A+KiUserExceptionDispatcher&amp;rft.date=2007-11-16&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.nynaeve.net%2F%3Fp%3D201&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> for details)</span></li>
+<li id="cite_note-8"><span class="mw-cite-backlink"><a href="#cite_ref-8">↑</a></span> <span class="reference-text">이 메시지는 프로세스의 <a class="external text" href="http://msdn.microsoft.com/en-us/library/ms680548%28VS.85%29.aspx" rel="nofollow">error mode</a>를 변경함으로써 조용해진다; 기본 마지막 처리기는 <a class="external text" href="http://msdn.microsoft.com/en-us/library/ms680634(VS.85).aspx" rel="nofollow">SetUnhandledExceptionFilter</a>로 대체될 수 있다.</span></li>
+<li id="cite_note-9"><span class="mw-cite-backlink"><a href="#cite_ref-9">↑</a></span> <span class="reference-text"><code>ntdll!KiUserExceptionDispatcher</code>은 <code>nt!ZwContinue</code> 또는 <code>nt!ZwRaiseException</code>를 호출한다.</span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id=".EA.B0.81.EC.A3.BC">각주</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=6" title="부분 편집: 각주">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist columns references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-devx-1"><span class="mw-cite-backlink">↑ <sup><a href="#cite_ref-devx_1-0">가</a></sup> <sup><a href="#cite_ref-devx_1-1">나</a></sup></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://web.archive.org/web/20080118162324/http://www.devx.com/microsoftISV/Article/15992" rel="nofollow">“Vectored Exception Handling in Windows Server 2003 (Through Internet Archive)”</a>. 2008년 1월 18일에 <a class="external text" href="http://www.devx.com/microsoftISV/Article/15992" rel="nofollow">원본 문서</a>에서 보존된 문서.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.btitle=Vectored+Exception+Handling+in+Windows+Server+2003+%28Through+Internet+Archive%29&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.devx.com%2FmicrosoftISV%2FArticle%2F15992&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><a href="#cite_ref-2">↑</a></span> <span class="reference-text"><cite class="citation web">Matt Miller [aka skape] (September 2006). <a class="external text" href="http://uninformed.org/index.cgi?v=5&amp;a=2&amp;p=4" rel="nofollow">“Preventing the Exploitation of SEH Overwrites”</a>. Uninformed Journal.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Matt+Miller+%5Baka+skape%5D&amp;rft.btitle=Preventing+the+Exploitation+of+SEH+Overwrites&amp;rft.date=2006-09&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Funinformed.org%2Findex.cgi%3Fv%3D5%26a%3D2%26p%3D4&amp;rft.pub=Uninformed+Journal&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3">↑</a></span> <span class="reference-text"><cite class="citation web">Microsoft Corp. (2009년 11월 12일). <a class="external text" href="http://msdn.microsoft.com/en-us/library/ms680659%28VS.85%29.aspx" rel="nofollow">“Structured Exception Handling Functions”</a>. 《MSDN Library》<span class="reference-accessdate">. 2009년 11월 17일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.atitle=Structured+Exception+Handling+Functions&amp;rft.au=Microsoft+Corp.&amp;rft.date=2009-11-12&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fms680659%2528VS.85%2529.aspx&amp;rft.jtitle=MSDN+Library&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><a href="#cite_ref-6">↑</a></span> <span class="reference-text"><cite class="citation web">Peter Kleissner (February 2009). <a class="external text" href="http://stoned-vienna.com/html/index.php?page=windows-exception-handling" rel="nofollow">“Windows Exception Handling”</a><span class="reference-accessdate">. 2009년 11월 21일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Peter+Kleissner&amp;rft.btitle=Windows+Exception+Handling&amp;rft.date=2009-02&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fstoned-vienna.com%2Fhtml%2Findex.php%3Fpage%3Dwindows-exception-handling&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-VEH-10"><span class="mw-cite-backlink">↑ <sup><a href="#cite_ref-VEH_10-0">가</a></sup> <sup><a href="#cite_ref-VEH_10-1">나</a></sup></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://msdn.microsoft.com/en-us/magazine/cc301714.aspx" rel="nofollow">“New Vectored Exception Handling in Windows XP”</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.btitle=New+Vectored+Exception+Handling+in+Windows+XP&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Fmagazine%2Fcc301714.aspx&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-11"><span class="mw-cite-backlink"><a href="#cite_ref-11">↑</a></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://msdn.microsoft.com/en-us/magazine/cc300448.aspx" rel="nofollow">“Windows Server 2003 Discover Improved System Info, New Kernel, Debugging, Security, and UI APIs”</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.btitle=Windows+Server+2003+Discover+Improved+System+Info%2C+New+Kernel%2C+Debugging%2C+Security%2C+and+UI+APIs&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Fmagazine%2Fcc300448.aspx&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id=".EB.B0.94.EA.B9.A5_.EA.B3.A0.EB.A6.AC">바깥 고리</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;section=7" title="부분 편집: 바깥 고리">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><cite class="citation web">Microsoft Corp. (2009년 11월 12일). <a class="external text" href="http://msdn.microsoft.com/en-us/library/ms680657%28VS.85%29.aspx" rel="nofollow">“Structured Exception Handling”</a>. 《MSDN Library》<span class="reference-accessdate">. 2009년 11월 17일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.atitle=Structured+Exception+Handling&amp;rft.au=Microsoft+Corp.&amp;rft.date=2009-11-12&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Flibrary%2Fms680657%2528VS.85%2529.aspx&amp;rft.jtitle=MSDN+Library&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></li>
+<li><cite class="citation journal"><a class="new" href="/w/index.php?title=Matt_Pietrek&amp;action=edit&amp;redlink=1" title="Matt Pietrek (없는 문서)">Matt Pietrek</a> (Jan 1997). <a class="external text" href="http://www.microsoft.com/msj/0197/Exception/Exception.aspx" rel="nofollow">“A Crash Course on the Depths of Win32 Structured Exception Handling”</a>. 《MSJ》 <b>12</b> (1).</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.atitle=A+Crash+Course+on+the+Depths+of+Win32+Structured+Exception+Handling&amp;rft.au=Matt+Pietrek&amp;rft.date=1997-01&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.microsoft.com%2Fmsj%2F0197%2FException%2FException.aspx&amp;rft.issue=1&amp;rft.jtitle=MSJ&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=12"><span style="display:none;"> </span></span> Note that the examples given there do not work as-is on modern Windows systems (post XP SP2) due to the changes Microsoft made to address the security issues present in the early SEH design. The examples still work on later versions of Windows if compiled with <code>/link /safeseh:no</code>.</li>
+<li><cite class="citation web"><a class="external text" href="https://www.tortall.net/projects/yasm/manual/html/objfmt-win32-safeseh.html" rel="nofollow">“win32: Safe Structured Exception Handling”</a>. <a class="new" href="/w/index.php?title=Yasm&amp;action=edit&amp;redlink=1" title="Yasm (없는 문서)">Yasm</a> manual.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.btitle=win32%3A+Safe+Structured+Exception+Handling&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.tortall.net%2Fprojects%2Fyasm%2Fmanual%2Fhtml%2Fobjfmt-win32-safeseh.html&amp;rft.pub=Yasm+manual&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></li>
+<li><a class="external text" href="http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=7,480,919" rel="nofollow">US patent 7,480,919 - Safe exceptions</a><span class="PDFlink noprint"><a class="external text" href="http://www.pat2pdf.org/pat2pdf/foo.pl?number=7,480,919" rel="nofollow"> </a></span></li>
+<li><cite class="citation web">Johannes Passing (2008년 5월 20일). <a class="external text" href="http://jpassing.com/2008/05/20/fun-with-low-level-seh/" rel="nofollow">“Fun with low level SEH”</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Johannes+Passing&amp;rft.btitle=Fun+with+low+level+SEH&amp;rft.date=2008-05-20&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fjpassing.com%2F2008%2F05%2F20%2Ffun-with-low-level-seh%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> Covers the obscure details needed to get low-level SEH (and particularly SafeSEH) code to work on more modern Windows.</li>
+<li><cite class="citation web">Igor Skochinsky (Monday, March 6, 2006 12:02.38 CST). <a class="external text" href="http://www.openrce.org/articles/full_view/21" rel="nofollow">“Reversing Microsoft Visual C++ Part I: Exception Handling”</a>. OpenRCE<span class="reference-accessdate">. 2009년 11월 17일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Igor+Skochinsky&amp;rft.btitle=Reversing+Microsoft+Visual+C%2B%2B+Part+I%3A+Exception+Handling&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.openrce.org%2Farticles%2Ffull_view%2F21&amp;rft.pub=OpenRCE&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> <span class="error citation-comment" style="display:none;font-size:100%">다음 날짜 값 확인 필요: <code style="color:inherit; border:inherit; padding:inherit;">|date=</code> (<a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EC%9D%B8%EC%9A%A9_%EC%98%A4%EB%A5%98_%EB%8F%84%EC%9B%80%EB%A7%90#bad_date" title="위키백과:인용 오류 도움말">도움말</a>)</span></li>
+<li><cite class="citation web">Matt Miller (2009년 2월 2일). <a class="external text" href="http://blogs.technet.com/b/srd/archive/2009/02/02/preventing-the-exploitation-of-seh-overwrites-with-sehop.aspx" rel="nofollow">“Preventing the Exploitation of Structured Exception Handler (SEH) Overwrites with SEHOP”</a>. Technet.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Matt+Miller&amp;rft.btitle=Preventing+the+Exploitation+of+Structured+Exception+Handler+%28SEH%29+Overwrites+with+SEHOP&amp;rft.date=2009-02-02&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fblogs.technet.com%2Fb%2Fsrd%2Farchive%2F2009%2F02%2F02%2Fpreventing-the-exploitation-of-seh-overwrites-with-sehop.aspx&amp;rft.pub=Technet&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></li>
+<li><cite class="citation web">Stéfan Le Berre, Damien Cauquil (2009년 12월 22일). <a class="external text" href="http://www.sysdream.com/sites/default/files/sehop_en.pdf" rel="nofollow">“Bypassing SEHOP”</a> <span style="font-size:85%;">(PDF)</span>. Sysdream.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=St%C3%A9fan+Le+Berre%2C+Damien+Cauquil&amp;rft.btitle=Bypassing+SEHOP&amp;rft.date=2009-12-22&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.sysdream.com%2Fsites%2Fdefault%2Ffiles%2Fsehop_en.pdf&amp;rft.pub=Sysdream&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></li>
+<li><cite class="citation web">Joshua J. Drake (2012년 1월 10일). <a class="external text" href="http://blog.accuvant.com/jdrakeaccuvant/old-meets-new-microsoft-windows-safeseh-incompatibility/" rel="nofollow">“Old Meets New: Microsoft Windows SafeSEH Incompatibility”</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%88%EC%A6%98&amp;rft.au=Joshua+J.+Drake&amp;rft.btitle=Old+Meets+New%3A+Microsoft+Windows+SafeSEH+Incompatibility&amp;rft.date=2012-01-10&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fblog.accuvant.com%2Fjdrakeaccuvant%2Fold-meets-new-microsoft-windows-safeseh-incompatibility%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span> An article explaining why Windows 7 SP1 ignores SafeSEH for some older binaries, while Windows XP SP3 honors it.</li>
+</ul>
+<!-- 
+NewPP limit report
+Parsed by mw1219
+Cached time: 20170113114825
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.132 seconds
+Real time usage: 0.157 seconds
+Preprocessor visited node count: 723/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 26635/2097152 bytes
+Template argument size: 1816/2097152 bytes
+Highest expansion depth: 8/40
+Expensive parser function count: 0/500
+Lua time usage: 0.071/10.000 seconds
+Lua memory usage: 2.97 MB/50 MB
+-->
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  136.260      1 - -total
+ 60.65%   82.645     14 - 틀:웹_인용
+ 29.29%   39.912      5 - 틀:Efn
+ 28.47%   38.796      2 - 틀:각주
+ 12.60%   17.163      2 - 틀:앵커
+  6.41%    8.738      1 - 틀:Notelist
+  3.36%    4.581      1 - 틀:저널_인용
+  0.91%    1.241      2 - 틀:미국_특허
+  0.88%    1.197      2 - 틀:다단_너비
+-->
+<!-- Saved in parser cache with key kowiki:pcache:idhash:1418878-0!*!0!!ko!*!* and timestamp 20170113114825 and revision id 16923986
+ -->
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.log.warn("Gadget \"ReferenceTooltips\" styles loaded twice. Migrate to type=general. See \u003Chttps://phabricator.wikimedia.org/T42284\u003E.");});</script><noscript><img alt="" height="1" src="//ko.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						원본 주소 "<a dir="ltr" href="https://ko.wikipedia.org/w/index.php?title=마이크로소프트의_예외_처리_메커니즘&amp;oldid=16923986">https://ko.wikipedia.org/w/index.php?title=마이크로소프트의_예외_처리_메커니즘&amp;oldid=16923986</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/%ED%8A%B9%EC%88%98:%EB%B6%84%EB%A5%98" title="특수:분류">분류</a>: <ul><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EC%A0%9C%EC%96%B4_%ED%9D%90%EB%A6%84" title="분류:제어 흐름">제어 흐름</a></li><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8_API" title="분류:마이크로소프트 API">마이크로소프트 API</a></li></ul></div><div class="mw-hidden-catlinks mw-hidden-cats-hidden" id="mw-hidden-catlinks">숨은 분류: <ul><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EC%9D%B8%EC%9A%A9_%EC%98%A4%EB%A5%98_-_%EB%82%A0%EC%A7%9C" title="분류:인용 오류 - 날짜">인용 오류 - 날짜</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>둘러보기 메뉴</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">개인 도구</h3>
+<ul>
+<li id="pt-anonuserpage">로그인하지 않음</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/%ED%8A%B9%EC%88%98:%EB%82%B4%EC%82%AC%EC%9A%A9%EC%9E%90%ED%86%A0%EB%A1%A0" title="현재 사용하는 IP 주소에 대한 토론 문서 [n]">토론</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/%ED%8A%B9%EC%88%98:%EB%82%B4%EA%B8%B0%EC%97%AC" title="이 IP 주소의 편집 목록 [y]">기여</a></li><li id="pt-createaccount"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EA%B3%84%EC%A0%95%EB%A7%8C%EB%93%A4%EA%B8%B0&amp;returnto=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" title="계정을 만들고 로그인하는 것이 좋습니다; 하지만, 필수는 아닙니다">계정 만들기</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EB%A1%9C%EA%B7%B8%EC%9D%B8&amp;returnto=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" title="위키백과에 로그인하면 여러가지 편리한 기능을 사용할 수 있습니다. [o]">로그인</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">이름공간</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" title="본문 보기 [c]">문서</a></span></li>
+<li class="new" id="ca-talk"><span><a accesskey="t" href="/w/index.php?title=%ED%86%A0%EB%A1%A0:%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit&amp;redlink=1" rel="discussion" title="문서의 내용에 대한 토론 문서 [t]">토론</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>변수</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">보기</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98">읽기</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=edit" title="이 문서 편집하기 [e]">편집</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=history" title="이 문서의 과거 편집 내역입니다. [h]">역사 보기</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>더 보기</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">검색</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="위키백과 검색" title="위키백과 검색 [f]" type="search"/><input name="title" type="hidden" value="특수:검색"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="이 문자열이 포함된 문서 검색" type="submit" value="검색"/><input class="searchButton" id="searchButton" name="go" title="이 이름의 문서가 존재하면 그 문서로 바로 가기" type="submit" value="보기"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8C%80%EB%AC%B8" title="대문으로 가기"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">둘러보기</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8C%80%EB%AC%B8" title="대문으로 가기 [z]">대문</a></li><li id="n-portal"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EC%82%AC%EC%9A%A9%EC%9E%90_%EB%AA%A8%EC%9E%84" title="위키백과 참여자를 위한 토론/대화 공간입니다.">사용자 모임</a></li><li id="n-currentevents"><a href="/wiki/%ED%8F%AC%ED%84%B8:%EC%9A%94%EC%A6%98_%ED%99%94%EC%A0%9C" title="최근의 소식 알아 보기">요즘 화제</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/%ED%8A%B9%EC%88%98:%EC%B5%9C%EA%B7%BC%EB%B0%94%EB%80%9C" title="위키의 최근 바뀐 목록 [r]">최근 바뀜</a></li><li id="n-index"><a href="/wiki/%ED%8A%B9%EC%88%98:%EB%AA%A8%EB%93%A0%EB%AC%B8%EC%84%9C">모든 문서 보기</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/%ED%8A%B9%EC%88%98:%EC%9E%84%EC%9D%98%EB%AC%B8%EC%84%9C" title="임의 문서 불러오기 [x]">임의 문서로</a></li><li id="n-help"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8F%84%EC%9B%80%EB%A7%90" title="도움말">도움말</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_ko.wikipedia.org&amp;uselang=ko" title="지원을 기다립니다">기부</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">도구</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/%ED%8A%B9%EC%88%98:%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%EB%AC%B8%EC%84%9C/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" title="여기를 가리키는 모든 위키 문서의 목록 [j]">여기를 가리키는 문서</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/%ED%8A%B9%EC%88%98:%EB%A7%81%ED%81%AC%EC%B5%9C%EA%B7%BC%EB%B0%94%EB%80%9C/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98" rel="nofollow" title="이 문서에서 링크한 문서의 최근 바뀜 [k]">가리키는 글의 바뀜</a></li><li id="t-upload"><a accesskey="u" href="/wiki/위키백과:파일_올리기" title="파일 올리기 [u]">파일 올리기</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/%ED%8A%B9%EC%88%98:%ED%8A%B9%EC%88%98%EB%AC%B8%EC%84%9C" title="모든 특수 문서의 목록 [q]">특수 문서 목록</a></li><li id="t-permalink"><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;oldid=16923986" title="문서의 이 판에 대한 고유링크">고유 링크</a></li><li id="t-info"><a href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;action=info" title="이 문서에 대한 자세한 정보">문서 정보</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q4444364" title="데이터 저장소에 연결된 항목을 가리키는 링크 [g]">위키데이터 항목</a></li><li id="t-cite"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%9D%B4%EB%AC%B8%EC%84%9C%EC%9D%B8%EC%9A%A9&amp;page=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;id=16923986" title="이 문서를 인용하는 방법에 대한 정보">이 문서 인용하기</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">인쇄/내보내기</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%B1%85&amp;bookcmd=book_creator&amp;referer=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98">책 만들기</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%B1%85&amp;bookcmd=render_article&amp;arttitle=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;returnto=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98+%EC%98%88%EC%99%B8+%EC%B2%98%EB%A6%AC+%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;oldid=16923986&amp;writer=rdf2latex">PDF로 다운로드</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;printable=yes" title="이 문서의 인쇄용 판 [p]">인쇄용 판</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">다른 언어</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-en"><a class="interlanguage-link-target" href="https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms" hreflang="en" lang="en" title="Microsoft-specific exception handling mechanisms – 영어">English</a></li><li class="interlanguage-link interwiki-ru"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B8%D1%81%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B9" hreflang="ru" lang="ru" title="Структурированная обработка исключений – 러시아어">Русский</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/SEH" hreflang="uk" lang="uk" title="SEH – 우크라이나어">Українська</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86" hreflang="zh" lang="zh" title="结构化异常处理 – 중국어">中文</a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q4444364#sitelinks-wikipedia" title="언어 인터위키 링크 편집">링크 편집</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> 이 문서는 2016년 7월 19일 (화) 13:41에 마지막으로 바뀌었습니다.</li>
+<li id="footer-info-copyright">모든 문서는 <a href="//ko.wikipedia.org/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0</a>에 따라 사용할 수 있으며, 추가적인 조건이 적용될 수 있습니다. 자세한 내용은 <a href="//wikimediafoundation.org/wiki/Terms_of_Use/ko">이용 약관</a>을 참고하십시오.<br/>Wikipedia®는 미국 및 다른 국가에 등록되어 있는 <a class="internal" href="http://www.wikimediafoundation.org">Wikimedia Foundation, Inc.</a> 소유의 등록 상표입니다.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">개인정보 정책</a></li>
+<li id="footer-places-about"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EC%86%8C%EA%B0%9C" title="위키백과:소개">위키백과 소개</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%A9%B4%EC%B1%85_%EC%A1%B0%ED%95%AD" title="위키백과:면책 조항">면책 조항</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">개발자</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">쿠키 정책</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//ko.m.wikipedia.org/w/index.php?title=%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%86%8C%ED%94%84%ED%8A%B8%EC%9D%98_%EC%98%88%EC%99%B8_%EC%B2%98%EB%A6%AC_%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&amp;mobileaction=toggle_view_mobile">모바일 보기</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":85,"wgHostname":"mw1252"});});</script>
+</body>
+</html>

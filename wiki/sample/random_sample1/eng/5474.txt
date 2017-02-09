@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Memory leak - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Memory_leak","wgTitle":"Memory leak","wgCurRevisionId":760513557,"wgRevisionId":760513557,"wgArticleId":19609,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Articles lacking in-text citations from September 2007","All articles lacking in-text citations","Articles with example pseudocode","Software bugs","Software anomalies"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Memory_leak","wgRelevantArticleId":19609,"wgRequestId":"WIUCfwpAAD8AAVU2CyMAAACI","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q751740","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.pygments":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.pygments%2CwikimediaBadges%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.8" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Memory_leak" rel="alternate"/>
+<link href="/w/index.php?title=Memory_leak&amp;action=edit" rel="alternate" title="Edit this page" type="application/x-wiki"/>
+<link href="/w/index.php?title=Memory_leak&amp;action=edit" rel="edit" title="Edit this page"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="Wikipedia (en)" type="application/opensearchdescription+xml"/>
+<link href="//en.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://en.wikipedia.org/wiki/Memory_leak" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Memory_leak rootpage-Memory_leak skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="en">Memory leak</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><p>In <a href="/wiki/Computer_science" title="Computer science">computer science</a>, a <b>memory leak</b> is a type of <a href="/wiki/Resource_leak" title="Resource leak">resource leak</a> that occurs when a <a href="/wiki/Computer_program" title="Computer program">computer program</a> incorrectly manages <a class="mw-redirect" href="/wiki/Memory_allocation" title="Memory allocation">memory allocations</a><sup class="reference" id="cite_ref-1"><a href="#cite_note-1">[1]</a></sup> in such a way that memory which is no longer needed is not released. In <a href="/wiki/Object-oriented_programming" title="Object-oriented programming">object-oriented programming</a>, a memory leak may happen when an <a href="/wiki/Object_(computer_science)" title="Object (computer science)">object</a> is stored in memory but cannot be accessed by the running code.<sup class="reference" id="cite_ref-2"><a href="#cite_note-2">[2]</a></sup> A memory leak has symptoms similar to a number of other problems and generally can only be diagnosed by a programmer with access to the program's source code.</p>
+<p>Because they can exhaust available system memory as an application runs, memory leaks are often the cause of or a contributing factor to <a href="/wiki/Software_aging" title="Software aging">software aging</a>.</p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Consequences"><span class="tocnumber">1</span> <span class="toctext">Consequences</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#An_example_of_memory_leak"><span class="tocnumber">1.1</span> <span class="toctext">An example of memory leak</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="#Programming_issues"><span class="tocnumber">2</span> <span class="toctext">Programming issues</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#RAII"><span class="tocnumber">3</span> <span class="toctext">RAII</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Reference_counting_and_cyclic_references"><span class="tocnumber">4</span> <span class="toctext">Reference counting and cyclic references</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Effects"><span class="tocnumber">5</span> <span class="toctext">Effects</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Other_memory_consumers"><span class="tocnumber">6</span> <span class="toctext">Other memory consumers</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#A_simple_example_in_C"><span class="tocnumber">7</span> <span class="toctext">A simple example in C</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#References"><span class="tocnumber">9</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#External_links"><span class="tocnumber">10</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Consequences">Consequences</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=1" title="Edit section: Consequences">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>A memory leak reduces the performance of the computer by reducing the amount of available memory. Eventually, in the worst case, too much of the available memory may become allocated and all or part of the system or device stops working correctly, the application fails, or the system slows down vastly due to <a href="/wiki/Thrashing_(computer_science)" title="Thrashing (computer science)">thrashing</a>.</p>
+<p>Memory leaks may not be serious or even detectable by normal means. In modern operating systems, normal memory used by an application is released when the application terminates. This means that a memory leak in a program that only runs for a short time may not be noticed and is rarely serious.</p>
+<p>Much more serious leaks include those:</p>
+<ul>
+<li>where the program runs for an extended time and consumes additional memory over time, such as background tasks on servers, but especially in <a href="/wiki/Embedded_system" title="Embedded system">embedded devices</a> which may be left running for many years</li>
+<li>where new memory is allocated frequently for one-time tasks, such as when rendering the frames of a computer game or animated video</li>
+<li>where the program can request memory — such as <a class="mw-redirect" href="/wiki/Shared_memory_(interprocess_communication)" title="Shared memory (interprocess communication)">shared memory</a> — that is not released, even when the program terminates</li>
+<li>where memory is very limited, such as in an <a href="/wiki/Embedded_system" title="Embedded system">embedded system</a> or portable device</li>
+<li>where the leak occurs within the operating system or <a href="/wiki/Memory_management" title="Memory management">memory manager</a></li>
+<li>when a system <a href="/wiki/Device_driver" title="Device driver">device driver</a> causes the leak</li>
+<li>running on an operating system that does not automatically release memory on program termination.</li>
+</ul>
+<h3><span class="mw-headline" id="An_example_of_memory_leak">An example of memory leak</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=2" title="Edit section: An example of memory leak">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>The following example, written in <a href="/wiki/Pseudocode" title="Pseudocode">pseudocode</a>, is intended to show how a memory leak can come about, and its effects, without needing any programming knowledge. The program in this case is part of some very simple software designed to control an <a href="/wiki/Elevator" title="Elevator">elevator</a>. This part of the program is run whenever anyone inside the elevator presses the button for a floor.</p>
+<pre>
+When a button is pressed:
+  Get some memory, which will be used to remember the floor number
+  Put the floor number into the memory
+  Are we already on the target floor?
+    If so, we have nothing to do: finished
+    Otherwise:
+      Wait until the lift is idle
+      Go to the required floor
+      Release the memory we used to remember the floor number
+</pre>
+<p>The memory leak would occur if the floor number requested is the same floor that the elevator is on; the condition for releasing the memory would be skipped. Each time this case occurs, more memory is leaked.</p>
+<p>Cases like this wouldn't usually have any immediate effects. People do not often press the button for the floor they are already on, and in any case, the elevator might have enough spare memory that this could happen hundreds or thousands of times. However, the elevator will eventually run out of memory. This could take months or years, so it might not be discovered despite thorough testing.</p>
+<p>The consequences would be unpleasant; at the very least, the elevator would stop responding to requests to move to another floor (like when you call the elevator or when someone is inside and presses the floor buttons). If other parts of the program need memory (a part assigned to open and close the door, for example), then someone may be trapped inside, or if no one is in, then no one would be able to use the elevator since the software cannot open the door.</p>
+<p>The memory leak lasts until the system is reset. For example: if the elevator's power were turned off or in a power outage, the program would stop running. When power was turned on again, the program would restart and all the memory would be available again, but the slow process of memory leak would restart together with the program, eventually prejudicing the correct running of the system.</p>
+<p>The leak in the above example can be corrected by bringing the 'release' operation outside of the conditional:</p>
+<pre>
+When a button is pressed:
+  Get some memory, which will be used to remember the floor number
+  Put the floor number into the memory
+  Are we already on the target floor?
+    If not:
+      Wait until the lift is idle
+      Go to the required floor
+  Release the memory we used to remember the floor number
+</pre>
+<h2><span class="mw-headline" id="Programming_issues">Programming issues</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=3" title="Edit section: Programming issues">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Memory leaks are a common error in programming, especially when using <a href="/wiki/Programming_language" title="Programming language">languages</a> that have no built in automatic <a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">garbage collection</a>, such as <a href="/wiki/C_(programming_language)" title="C (programming language)">C</a> and <a href="/wiki/C%2B%2B" title="C++">C++</a>. Typically, a memory leak occurs because <a class="mw-redirect" href="/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation">dynamically allocated</a> memory has become <a href="/wiki/Unreachable_memory" title="Unreachable memory">unreachable</a>. The prevalence of memory leak <a href="/wiki/Software_bug" title="Software bug">bugs</a> has led to the development of a number of <a href="/wiki/Debugging" title="Debugging">debugging</a> <a href="/wiki/Programming_tool" title="Programming tool">tools</a> to detect unreachable memory. <i><a href="/wiki/BoundsChecker" title="BoundsChecker">BoundsChecker</a></i>, <i><a class="new" href="/w/index.php?title=Deleaker&amp;action=edit&amp;redlink=1" title="Deleaker (page does not exist)">Deleaker</a></i>, <i><a class="mw-redirect" href="/wiki/IBM_Rational_Purify" title="IBM Rational Purify">IBM Rational Purify</a></i>, <i><a href="/wiki/Valgrind" title="Valgrind">Valgrind</a></i>, <i><a href="/wiki/Parasoft" title="Parasoft">Parasoft</a> <a href="/wiki/Insure%2B%2B" title="Insure++">Insure++</a></i>, <i><a href="/wiki/DynamoRIO#Dr._Memory" title="DynamoRIO">Dr. Memory</a></i> and <i><a href="/wiki/Memwatch" title="Memwatch">memwatch</a></i> are some of the more popular <a href="/wiki/Memory_debugger" title="Memory debugger">memory debuggers</a> for C and C++ programs. "Conservative" garbage collection capabilities can be added to any programming language that lacks it as a built-in feature, and libraries for doing this are available for C and C++ programs. A conservative collector finds and reclaims most, but not all, unreachable memory.</p>
+<p>Although the <a href="/wiki/Memory_management" title="Memory management">memory manager</a> can recover unreachable memory, it cannot free memory that is still reachable and therefore potentially still useful. Modern memory managers therefore provide techniques for programmers to semantically mark memory with varying levels of usefulness, which correspond to varying levels of <i>reachability</i>. The memory manager does not free an object that is strongly reachable. An object is strongly reachable if it is reachable either directly by a <a class="mw-redirect" href="/wiki/Strong_reference" title="Strong reference">strong reference</a> or indirectly by a chain of strong references. (A <i>strong reference</i> is a reference that, unlike a <a href="/wiki/Weak_reference" title="Weak reference">weak reference</a>, prevents an object from being garbage collected.) To prevent this, the developer is responsible for cleaning up references after use, typically by setting the reference to <a href="/wiki/Null_pointer" title="Null pointer">null</a> once it is no longer needed and, if necessary, by deregistering any <a class="mw-redirect" href="/wiki/Event_listener" title="Event listener">event listeners</a> that maintain strong references to the object.</p>
+<p>In general, automatic memory management is more robust and convenient for developers, as they don't need to implement freeing routines or worry about the sequence in which cleanup is performed or be concerned about whether or not an object is still referenced. It is easier for a programmer to know when a reference is no longer needed than to know when an object is no longer referenced. However, automatic memory management can impose a performance overhead, and it does not eliminate all of the programming errors that cause memory leaks.</p>
+<h2><span class="mw-headline" id="RAII">RAII</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=4" title="Edit section: RAII">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="hatnote" role="note">Main article: <a class="mw-redirect" href="/wiki/Resource_Acquisition_Is_Initialization" title="Resource Acquisition Is Initialization">Resource Acquisition Is Initialization</a></div>
+<p><b>RAII</b>, short for <a class="mw-redirect" href="/wiki/Resource_Acquisition_Is_Initialization" title="Resource Acquisition Is Initialization">Resource Acquisition Is Initialization</a>, is an approach to the problem commonly taken in <a href="/wiki/C%2B%2B" title="C++">C++</a>, <a class="mw-redirect" href="/wiki/D_programming_language" title="D programming language">D</a>, and <a href="/wiki/Ada_(programming_language)" title="Ada (programming language)">Ada</a>. It involves associating scoped objects with the acquired resources, and automatically releasing the resources once the objects are out of scope. Unlike garbage collection, RAII has the advantage of knowing when objects exist and when they do not. Compare the following C and C++ examples:</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="cm">/* C version */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="n">calloc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="n">do_some_work</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+  <span class="n">free</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="c1">// C++ version</span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">array</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">do_some_work</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>The C version, as implemented in the example, requires explicit deallocation; the array is <a class="mw-redirect" href="/wiki/Dynamic_memory_allocation" title="Dynamic memory allocation">dynamically allocated</a> (from the heap in most C implementations), and continues to exist until explicitly freed.</p>
+<p>The C++ version requires no explicit deallocation; it will always occur automatically as soon as the object <code>array</code> goes out of scope, including if an exception is thrown. This avoids some of the overhead of <a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">garbage collection</a> schemes. And because object destructors can free resources other than memory, RAII helps to prevent the <a href="/wiki/Handle_leak" title="Handle leak">leaking of input and output resources accessed through a handle</a>, which mark-and-sweep garbage collection does not handle gracefully. These include open files, open windows, user notifications, objects in a graphics drawing library, thread synchronisation primitives such as critical sections, network connections, and connections to the <a href="/wiki/Windows_Registry" title="Windows Registry">Windows Registry</a> or another database.</p>
+<p>However, using RAII correctly is not always easy and has its own pitfalls. For instance, if one is not careful, it is possible to create <a href="/wiki/Dangling_pointer" title="Dangling pointer">dangling pointers</a> (or references) by returning data by reference, only to have that data be deleted when its containing object goes out of scope.</p>
+<p><a href="/wiki/D_(programming_language)" title="D (programming language)">D</a> uses a combination of RAII and garbage collection, employing automatic destruction when it is clear that an object cannot be accessed outside its original scope, and garbage collection otherwise.</p>
+<h2><span class="mw-headline" id="Reference_counting_and_cyclic_references">Reference counting and cyclic references</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=5" title="Edit section: Reference counting and cyclic references">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>More modern <a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">garbage collection</a> schemes are often based on a notion of reachability – if you don't have a usable reference to the memory in question, it can be collected. Other garbage collection schemes can be based on <a href="/wiki/Reference_counting" title="Reference counting">reference counting</a>, where an object is responsible for keeping track of how many references are pointing to it. If the number goes down to zero, the object is expected to release itself and allow its memory to be reclaimed. The flaw with this model is that it doesn't cope with cyclic references, and this is why nowadays most programmers are prepared to accept the burden of the more costly mark and sweep type of systems.</p>
+<p>The following <a href="/wiki/Visual_Basic" title="Visual Basic">Visual Basic</a> code illustrates the canonical reference-counting memory leak:</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="k">Dim</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+<span class="k">Set</span> <span class="n">A</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">"Some.Thing"</span><span class="p">)</span>
+<span class="k">Set</span> <span class="n">B</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">"Some.Thing"</span><span class="p">)</span>
+<span class="c">' At this point, the two objects each have one reference,</span>
+
+<span class="k">Set</span> <span class="n">A</span><span class="p">.</span><span class="n">member</span> <span class="o">=</span> <span class="n">B</span>
+<span class="k">Set</span> <span class="n">B</span><span class="p">.</span><span class="n">member</span> <span class="o">=</span> <span class="n">A</span>
+<span class="c">' Now they each have two references.</span>
+
+<span class="k">Set</span> <span class="n">A</span> <span class="o">=</span> <span class="k">Nothing</span>   <span class="c">' You could still get out of it...</span>
+
+<span class="k">Set</span> <span class="n">B</span> <span class="o">=</span> <span class="k">Nothing</span>   <span class="c">' And now you've got a memory leak!</span>
+
+<span class="k">End</span>
+</pre></div>
+<p>In practice, this trivial example would be spotted straight away and fixed. In most real examples, the cycle of references spans more than two objects, and is more difficult to detect.</p>
+<p>A well-known example of this kind of leak came to prominence with the rise of <a class="mw-redirect" href="/wiki/AJAX" title="AJAX">AJAX</a> programming techniques in <a href="/wiki/Web_browser" title="Web browser">web browsers</a> in the <a href="/wiki/Lapsed_listener_problem" title="Lapsed listener problem">lapsed listener problem</a>. <a href="/wiki/JavaScript" title="JavaScript">JavaScript</a> code which associated a <a href="/wiki/Document_Object_Model" title="Document Object Model">DOM</a> element with an event handler, and failed to remove the reference before exiting, would leak memory (AJAX web pages keep a given DOM alive for a lot longer than traditional web pages, so this leak was much more apparent).</p>
+<h2><span class="mw-headline" id="Effects">Effects</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=6" title="Edit section: Effects">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>If a program has a memory leak and its memory usage is steadily increasing, there will not usually be an immediate symptom. Every physical system has a finite amount of memory, and if the memory leak is not contained (for example, by restarting the leaking program) it will sooner or later start to cause problems.</p>
+<p>Most modern consumer desktop <a class="mw-redirect" href="/wiki/Operating_systems" title="Operating systems">operating systems</a> have both <a class="mw-redirect" href="/wiki/Main_memory" title="Main memory">main memory</a> which is physically housed in RAM microchips, and <a class="mw-redirect" href="/wiki/Secondary_storage" title="Secondary storage">secondary storage</a> such as a <a class="mw-redirect" href="/wiki/Hard_drive" title="Hard drive">hard drive</a>. Memory allocation is dynamic – each process gets as much memory as it requests. Active <a href="/wiki/Paging" title="Paging">pages</a> are transferred into main memory for fast access; inactive pages are pushed out to secondary storage to make room, as needed. When a single process starts consuming a large amount of memory, it usually occupies more and more of main memory, pushing other programs out to secondary storage – usually significantly slowing performance of the system. Even if the leaking program is terminated, it may take some time for other programs to swap back into main memory, and for performance to return to normal.</p>
+<p>When all the memory on a system is exhausted (whether there is virtual memory or only main memory, such as on an embedded system) any attempt to allocate more memory will fail. This usually causes the program attempting to allocate the memory to terminate itself, or to generate a <a href="/wiki/Segmentation_fault" title="Segmentation fault">segmentation fault</a>. Some programs are designed to recover from this situation (possibly by falling back on pre-reserved memory). The first program to experience the out-of-memory may or may not be the program that has the memory leak.</p>
+<p>Some <a href="/wiki/Computer_multitasking" title="Computer multitasking">multi-tasking</a> operating systems have special mechanisms to deal with an out-of-memory condition, such as killing processes at random (which may affect "innocent" processes), or killing the largest process in memory (which presumably is the one causing the problem). Some operating systems have a per-process memory limit, to prevent any one program from hogging all of the memory on the system. The disadvantage to this arrangement is that the operating system sometimes must be re-configured to allow proper operation of programs that legitimately require large amounts of memory, such as those dealing with graphics, video, or scientific calculations.</p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a class="image" href="/wiki/File:Sample_sawtooth.jpg"><img alt="" class="thumbimage" data-file-height="364" data-file-width="546" height="147" src="//upload.wikimedia.org/wikipedia/en/thumb/4/4d/Sample_sawtooth.jpg/220px-Sample_sawtooth.jpg" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/4d/Sample_sawtooth.jpg/330px-Sample_sawtooth.jpg 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/4d/Sample_sawtooth.jpg/440px-Sample_sawtooth.jpg 2x" width="220"/></a>
+<div class="thumbcaption">
+<div class="magnify"><a class="internal" href="/wiki/File:Sample_sawtooth.jpg" title="Enlarge"></a></div>
+The "sawtooth" pattern of memory utilization: the sudden drop in used memory is a candidate symptom for a memory leak.</div>
+</div>
+</div>
+<p>If the memory leak is in the <a class="mw-redirect" href="/wiki/Kernel_(computer_science)" title="Kernel (computer science)">kernel</a>, the operating system itself will likely fail. Computers without sophisticated memory management, such as embedded systems, may also completely fail from a persistent memory leak.</p>
+<p>Publicly accessible systems such as <a href="/wiki/Web_server" title="Web server">web servers</a> or <a href="/wiki/Router_(computing)" title="Router (computing)">routers</a> are prone to <a href="/wiki/Denial-of-service_attack" title="Denial-of-service attack">denial-of-service attacks</a> if an attacker discovers a sequence of operations which can trigger a leak. Such a sequence is known as an <a href="/wiki/Exploit_(computer_security)" title="Exploit (computer security)">exploit</a>.</p>
+<p>A "sawtooth" pattern of memory utilization may be an indicator of a memory leak if the vertical drops coincide with reboots or application restarts. Care should be taken though because <a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">garbage collection</a> points could also cause such a pattern and would show a healthy usage of the heap.</p>
+<h2><span class="mw-headline" id="Other_memory_consumers">Other memory consumers</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=7" title="Edit section: Other memory consumers">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Note that constantly increasing memory usage is not necessarily evidence of a memory leak. Some applications will store ever increasing amounts of information in memory (e.g. as a <a href="/wiki/Cache_(computing)" title="Cache (computing)">cache</a>). If the cache can grow so large as to cause problems, this may be a programming or design error, but is not a memory leak as the information remains nominally in use. In other cases, programs may require an unreasonably large amount of memory because the programmer has assumed memory is always sufficient for a particular task; for example, a graphics file processor might start by reading the entire contents of an image file and storing it all into memory, something that is not viable where a very large image exceeds available memory.</p>
+<p>To put it another way, a memory leak arises from a particular kind of programming error, and without access to the program code, someone seeing symptoms can only guess that there <i>might</i> be a memory leak. It would be better to use terms such as "constantly increasing memory use" where no such inside knowledge exists.</p>
+<h2><span class="mw-headline" id="A_simple_example_in_C">A simple example in C</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=8" title="Edit section: A simple example in C">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The following <a href="/wiki/C_(programming_language)" title="C (programming language)">C</a> function deliberately leaks memory by losing the pointer to the allocated memory. The leak can be said to occur as soon as the pointer 'a' goes out of scope, i.e. when function_which_allocates() returns without freeing 'a'.</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="kt">void</span> <span class="nf">function_which_allocates</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* allocate an array of 45 floats */</span>
+    <span class="kt">float</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">*</span> <span class="mi">45</span><span class="p">);</span>
+
+    <span class="cm">/* additional code making use of 'a' */</span>
+
+    <span class="cm">/* return to main, having forgotten to free the memory we malloc'd */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">function_which_allocates</span><span class="p">();</span>
+
+    <span class="cm">/* the pointer 'a' no longer exists, and therefore cannot be freed,</span>
+<span class="cm">     but the memory is still allocated. a leak has occurred. */</span>
+<span class="p">}</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=9" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Buffer_overflow" title="Buffer overflow">Buffer overflow</a></li>
+<li><a href="/wiki/Memory_management" title="Memory management">Memory management</a></li>
+<li><a href="/wiki/Memory_debugger" title="Memory debugger">Memory debugger</a></li>
+<li><a href="/wiki/Plumbr" title="Plumbr">Plumbr</a> is a popular memory leak detection tool for applications running on <a class="mw-redirect" href="/wiki/Java_Virtual_Machine" title="Java Virtual Machine">Java Virtual Machine</a></li>
+<li><a href="/wiki/Nmon" title="Nmon">nmon</a> (short for Nigel's Monitor) is a popular system monitor tool for the AIX and Linux operating systems.</li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=10" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="plainlinks metadata ambox ambox-style ambox-More_footnotes" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><img alt="" data-file-height="48" data-file-width="48" height="40" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/40px-Text_document_with_red_question_mark.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/60px-Text_document_with_red_question_mark.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/80px-Text_document_with_red_question_mark.svg.png 2x" width="40"/></div>
+</td>
+<td class="mbox-text"><span class="mbox-text-span">This article includes a <a href="/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">list of references</a>, but <b>its sources remain unclear</b> because it has <b>insufficient <a href="/wiki/Wikipedia:Citing_sources#Inline_citations" title="Wikipedia:Citing sources">inline citations</a></b>. <span class="hide-when-compact">Please help to <a href="/wiki/Wikipedia:WikiProject_Fact_and_Reference_Check" title="Wikipedia:WikiProject Fact and Reference Check">improve</a> this article by <a href="/wiki/Wikipedia:When_to_cite" title="Wikipedia:When to cite">introducing</a> more precise citations.</span> <small><i>(September 2007)</i></small> <small class="hide-when-compact"><i>(<a href="/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this template message</a>)</i></small></span></td>
+</tr>
+</table>
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text"><cite class="citation web">Crockford, Douglas. <a class="external text" href="http://javascript.crockford.com/memory/leak.html" rel="nofollow">"JScript Memory Leaks"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">6 November</span> 2012</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+leak&amp;rft.aufirst=Douglas&amp;rft.aulast=Crockford&amp;rft.btitle=JScript+Memory+Leaks&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fjavascript.crockford.com%2Fmemory%2Fleak.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="https://stackoverflow.com/questions/6470651/creating-a-memory-leak-with-java" rel="nofollow">"Creating a memory leak with Java"</a>. Stack Overflow<span class="reference-accessdate">. Retrieved <span class="nowrap">2013-06-14</span></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMemory+leak&amp;rft.btitle=Creating+a+memory+leak+with+Java&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F6470651%2Fcreating-a-memory-leak-with-java&amp;rft.pub=Stack+Overflow&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+</ol>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Memory_leak&amp;action=edit&amp;section=11" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a class="external text" href="http://vld.codeplex.com/" rel="nofollow">Visual Leak Detector</a> for Visual Studio, open source</li>
+<li><a class="external text" href="http://msdn2.microsoft.com/en-us/library/Aa293901(VS.60).aspx" rel="nofollow">Detecting a Memory Leak</a> (Using MFC Debugging Support)</li>
+<li>Article "<a class="external text" href="http://linuxjournal.com/article.php?sid=6059" rel="nofollow">Memory Leak Detection in Embedded Systems</a>" by Cal Erickson</li>
+</ul>
+<div aria-labelledby="Memory_management" class="navbox" role="navigation" style="padding:3px">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th class="navbox-title" colspan="2" scope="col">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Memory_management" title="Template:Memory management"><abbr style=";;background:none transparent;border:none;" title="View this template">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Memory_management" title="Template talk:Memory management"><abbr style=";;background:none transparent;border:none;" title="Discuss this template">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Memory_management&amp;action=edit"><abbr style=";;background:none transparent;border:none;" title="Edit this template">e</abbr></a></li>
+</ul>
+</div>
+<div id="Memory_management" style="font-size:114%"><a href="/wiki/Memory_management" title="Memory management">Memory management</a></div>
+</th>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" colspan="2">
+<div>
+<ul>
+<li><a href="/wiki/Memory_management_(operating_systems)" title="Memory management (operating systems)">Memory management as a function of an operating system</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Manual_memory_management" title="Manual memory management">Manual memory management</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a class="mw-redirect" href="/wiki/Static_memory_allocation" title="Static memory allocation">Static memory allocation</a></li>
+<li><a href="/wiki/C_dynamic_memory_allocation" title="C dynamic memory allocation">C dynamic memory allocation</a></li>
+<li><a href="/wiki/New_and_delete_(C%2B%2B)" title="New and delete (C++)">new and delete (C++)</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Virtual_memory" title="Virtual memory">Virtual memory</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Demand_paging" title="Demand paging">Demand paging</a></li>
+<li><a href="/wiki/Page_table" title="Page table">Page table</a></li>
+<li><a href="/wiki/Paging" title="Paging">Paging</a></li>
+<li><a href="/wiki/Virtual_memory_compression" title="Virtual memory compression">Virtual memory compression</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row">Hardware</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Memory_management_unit" title="Memory management unit">Memory management unit</a></li>
+<li><a href="/wiki/Translation_lookaside_buffer" title="Translation lookaside buffer">Translation lookaside buffer</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">Garbage collection</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Boehm_garbage_collector" title="Boehm garbage collector">Boehm garbage collector</a></li>
+<li><a href="/wiki/Finalizer" title="Finalizer">Finalizer</a></li>
+<li><a href="/wiki/Garbage_(computer_science)" title="Garbage (computer science)">Garbage</a></li>
+<li><a href="/wiki/Mark-compact_algorithm" title="Mark-compact algorithm">Mark-compact algorithm</a></li>
+<li><a href="/wiki/Reference_counting" title="Reference counting">Reference counting</a></li>
+<li><a class="mw-redirect" href="/wiki/Strong_reference" title="Strong reference">Strong reference</a></li>
+<li><a href="/wiki/Weak_reference" title="Weak reference">Weak reference</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Memory_segmentation" title="Memory segmentation">Memory segmentation</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Protected_mode" title="Protected mode">Protected mode</a></li>
+<li><a href="/wiki/Real_mode" title="Real mode">Real mode</a></li>
+<li><a href="/wiki/Virtual_8086_mode" title="Virtual 8086 mode">Virtual 8086 mode</a></li>
+<li><a href="/wiki/X86_memory_segmentation" title="X86 memory segmentation">x86 memory segmentation</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Memory_safety" title="Memory safety">Memory safety</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Buffer_overflow" title="Buffer overflow">Buffer overflow</a></li>
+<li><a href="/wiki/Buffer_over-read" title="Buffer over-read">Buffer over-read</a></li>
+<li><a href="/wiki/Dangling_pointer" title="Dangling pointer">Dangling pointer</a></li>
+<li><a href="/wiki/Stack_overflow" title="Stack overflow">Stack overflow</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row">Issues</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Fragmentation_(computing)" title="Fragmentation (computing)">Fragmentation</a></li>
+<li><strong class="selflink">Memory leak</strong></li>
+<li><a href="/wiki/Unreachable_memory" title="Unreachable memory">Unreachable memory</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row">Other</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Automatic_variable" title="Automatic variable">Automatic variable</a></li>
+<li><a href="/wiki/International_Symposium_on_Memory_Management" title="International Symposium on Memory Management">International Symposium on Memory Management</a></li>
+<li><a href="/wiki/Region-based_memory_management" title="Region-based memory management">Region-based memory management</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<!-- 
+NewPP limit report
+Parsed by mw1200
+Cached time: 20170117133051
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.156 seconds
+Real time usage: 0.190 seconds
+Preprocessor visited node count: 406/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 19612/2097152 bytes
+Template argument size: 96/2097152 bytes
+Highest expansion depth: 7/40
+Expensive parser function count: 1/500
+Lua time usage: 0.060/10.000 seconds
+Lua memory usage: 2.15 MB/50 MB
+-->
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  130.047      1 - -total
+ 31.68%   41.204      2 - Template:Cite_web
+ 28.68%   37.302      1 - Template:More_footnotes
+ 20.14%   26.198      1 - Template:Main_article
+ 19.87%   25.842      1 - Template:Ambox
+ 13.67%   17.778      1 - Template:Memory_management_navbox
+ 10.93%   14.210      1 - Template:Navbox
+  1.62%    2.107      1 - Template:Main_other
+-->
+<!-- Saved in parser cache with key enwiki:pcache:idhash:19609-0!*!0!!en!4!* and timestamp 20170117133056 and revision id 760513557
+ -->
+<noscript><img alt="" height="1" src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Memory_leak&amp;oldid=760513557">https://en.wikipedia.org/w/index.php?title=Memory_leak&amp;oldid=760513557</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Software_bugs" title="Category:Software bugs">Software bugs</a></li><li><a href="/wiki/Category:Software_anomalies" title="Category:Software anomalies">Software anomalies</a></li></ul></div><div class="mw-hidden-catlinks mw-hidden-cats-hidden" id="mw-hidden-catlinks">Hidden categories: <ul><li><a href="/wiki/Category:Articles_lacking_in-text_citations_from_September_2007" title="Category:Articles lacking in-text citations from September 2007">Articles lacking in-text citations from September 2007</a></li><li><a href="/wiki/Category:All_articles_lacking_in-text_citations" title="Category:All articles lacking in-text citations">All articles lacking in-text citations</a></li><li><a href="/wiki/Category:Articles_with_example_pseudocode" title="Category:Articles with example pseudocode">Articles with example pseudocode</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>Navigation menu</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">Personal tools</h3>
+<ul>
+<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]">Talk</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Memory+leak" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=Special:UserLogin&amp;returnto=Memory+leak" title="You're encouraged to log in; however, it's not mandatory. [o]">Log in</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">Namespaces</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/Memory_leak" title="View the content page [c]">Article</a></span></li>
+<li id="ca-talk"><span><a accesskey="t" href="/wiki/Talk:Memory_leak" rel="discussion" title="Discussion about the content page [t]">Talk</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>Variants</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">Views</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/Memory_leak">Read</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=Memory_leak&amp;action=edit" title="Edit this page [e]">Edit</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=Memory_leak&amp;action=history" title="Past revisions of this page [h]">View history</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">Search</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" type="search"/><input name="title" type="hidden" value="Special:Search"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="Search Wikipedia for this text" type="submit" value="Search"/><input class="searchButton" id="searchButton" name="go" title="Go to a page with this exact name if it exists" type="submit" value="Go"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page" title="Visit the main page"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">Navigation</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/Main_Page" title="Visit the main page [z]">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/Special:Random" title="Load a random article [x]">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-interaction-label" class="portal" id="p-interaction" role="navigation">
+<h3 id="p-interaction-label">Interaction</h3>
+<div class="body">
+<ul>
+<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">Tools</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/Special:WhatLinksHere/Memory_leak" title="List of all English Wikipedia pages containing links to this page [j]">What links here</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/Special:RecentChangesLinked/Memory_leak" rel="nofollow" title="Recent changes in pages linked from this page [k]">Related changes</a></li><li id="t-upload"><a accesskey="u" href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]">Upload file</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/Special:SpecialPages" title="A list of all special pages [q]">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Memory_leak&amp;oldid=760513557" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Memory_leak&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q751740" title="Link to connected data repository item [g]">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Memory_leak&amp;id=760513557" title="Information on how to cite this page">Cite this page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">Print/export</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Memory+leak">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Memory+leak&amp;returnto=Memory+leak&amp;oldid=760513557&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=Memory_leak&amp;printable=yes" title="Printable version of this page [p]">Printable version</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">Languages</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-ar"><a class="interlanguage-link-target" href="https://ar.wikipedia.org/wiki/%D8%AA%D8%B3%D8%B1%D8%A8_%D8%A7%D9%84%D8%B0%D8%A7%D9%83%D8%B1%D8%A9" hreflang="ar" lang="ar" title="تسرب الذاكرة – Arabic">العربية</a></li><li class="interlanguage-link interwiki-cs"><a class="interlanguage-link-target" href="https://cs.wikipedia.org/wiki/%C3%9Anik_pam%C4%9Bti" hreflang="cs" lang="cs" title="Únik paměti – Czech">Čeština</a></li><li class="interlanguage-link interwiki-de"><a class="interlanguage-link-target" href="https://de.wikipedia.org/wiki/Speicherleck" hreflang="de" lang="de" title="Speicherleck – German">Deutsch</a></li><li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/wiki/Fuga_de_memoria" hreflang="es" lang="es" title="Fuga de memoria – Spanish">Español</a></li><li class="interlanguage-link interwiki-fa"><a class="interlanguage-link-target" href="https://fa.wikipedia.org/wiki/%DA%A9%D9%85%D8%A8%D9%88%D8%AF_%D8%AD%D8%A7%D9%81%D8%B8%D9%87" hreflang="fa" lang="fa" title="کمبود حافظه – Persian">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a class="interlanguage-link-target" href="https://fr.wikipedia.org/wiki/Fuite_de_m%C3%A9moire" hreflang="fr" lang="fr" title="Fuite de mémoire – French">Français</a></li><li class="interlanguage-link interwiki-ko"><a class="interlanguage-link-target" href="https://ko.wikipedia.org/wiki/%EB%A9%94%EB%AA%A8%EB%A6%AC_%EB%88%84%EC%88%98" hreflang="ko" lang="ko" title="메모리 누수 – Korean">한국어</a></li><li class="interlanguage-link interwiki-id"><a class="interlanguage-link-target" href="https://id.wikipedia.org/wiki/Kebocoran_Memori" hreflang="id" lang="id" title="Kebocoran Memori – Indonesian">Bahasa Indonesia</a></li><li class="interlanguage-link interwiki-it"><a class="interlanguage-link-target" href="https://it.wikipedia.org/wiki/Memory_leak" hreflang="it" lang="it" title="Memory leak – Italian">Italiano</a></li><li class="interlanguage-link interwiki-he"><a class="interlanguage-link-target" href="https://he.wikipedia.org/wiki/%D7%93%D7%9C%D7%99%D7%A4%D7%AA_%D7%96%D7%99%D7%9B%D7%A8%D7%95%D7%9F" hreflang="he" lang="he" title="דליפת זיכרון – Hebrew">עברית</a></li><li class="interlanguage-link interwiki-lt"><a class="interlanguage-link-target" href="https://lt.wikipedia.org/wiki/Atminties_nutek%C4%97jimas" hreflang="lt" lang="lt" title="Atminties nutekėjimas – Lithuanian">Lietuvių</a></li><li class="interlanguage-link interwiki-ms"><a class="interlanguage-link-target" href="https://ms.wikipedia.org/wiki/Bocor_ingatan" hreflang="ms" lang="ms" title="Bocor ingatan – Malay">Bahasa Melayu</a></li><li class="interlanguage-link interwiki-nl"><a class="interlanguage-link-target" href="https://nl.wikipedia.org/wiki/Geheugenlek" hreflang="nl" lang="nl" title="Geheugenlek – Dutch">Nederlands</a></li><li class="interlanguage-link interwiki-ja"><a class="interlanguage-link-target" href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%A2%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%AF" hreflang="ja" lang="ja" title="メモリリーク – Japanese">日本語</a></li><li class="interlanguage-link interwiki-pl"><a class="interlanguage-link-target" href="https://pl.wikipedia.org/wiki/Wyciek_pami%C4%99ci" hreflang="pl" lang="pl" title="Wyciek pamięci – Polish">Polski</a></li><li class="interlanguage-link interwiki-pt"><a class="interlanguage-link-target" href="https://pt.wikipedia.org/wiki/Vazamento_de_mem%C3%B3ria" hreflang="pt" lang="pt" title="Vazamento de memória – Portuguese">Português</a></li><li class="interlanguage-link interwiki-ru"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%A3%D1%82%D0%B5%D1%87%D0%BA%D0%B0_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8" hreflang="ru" lang="ru" title="Утечка памяти – Russian">Русский</a></li><li class="interlanguage-link interwiki-simple"><a class="interlanguage-link-target" href="https://simple.wikipedia.org/wiki/Memory_leak" hreflang="simple" lang="simple" title="Memory leak – Simple English">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a class="interlanguage-link-target" href="https://sk.wikipedia.org/wiki/Memory_leak" hreflang="sk" lang="sk" title="Memory leak – Slovak">Slovenčina</a></li><li class="interlanguage-link interwiki-fi"><a class="interlanguage-link-target" href="https://fi.wikipedia.org/wiki/Muistivuoto" hreflang="fi" lang="fi" title="Muistivuoto – Finnish">Suomi</a></li><li class="interlanguage-link interwiki-sv"><a class="interlanguage-link-target" href="https://sv.wikipedia.org/wiki/Minnesl%C3%A4ckage" hreflang="sv" lang="sv" title="Minnesläckage – Swedish">Svenska</a></li><li class="interlanguage-link interwiki-tr"><a class="interlanguage-link-target" href="https://tr.wikipedia.org/wiki/Bellek_s%C4%B1z%C4%B1nt%C4%B1s%C4%B1" hreflang="tr" lang="tr" title="Bellek sızıntısı – Turkish">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/%D0%92%D0%B8%D1%82%D1%96%D0%BA_%D0%BF%D0%B0%D0%BC%27%D1%8F%D1%82%D1%96" hreflang="uk" lang="uk" title="Витік пам'яті – Ukrainian">Українська</a></li><li class="interlanguage-link interwiki-zh-yue"><a class="interlanguage-link-target" href="https://zh-yue.wikipedia.org/wiki/%E6%BC%8F%E8%A8%98%E6%86%B6" hreflang="zh-yue" lang="zh-yue" title="漏記憶 – Cantonese">粵語</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F" hreflang="zh" lang="zh" title="内存泄漏 – Chinese">中文</a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q751740#sitelinks-wikipedia" title="Edit interlanguage links">Edit links</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> This page was last modified on 17 January 2017, at 13:30.</li>
+<li id="footer-info-copyright">Text is available under the <a href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" rel="license">Creative Commons Attribution-ShareAlike License</a><a href="//creativecommons.org/licenses/by-sa/3.0/" rel="license" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">Privacy policy</a></li>
+<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//en.m.wikipedia.org/w/index.php?title=Memory_leak&amp;mobileaction=toggle_view_mobile">Mobile view</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":66,"wgHostname":"mw1268"});});</script>
+</body>
+</html>

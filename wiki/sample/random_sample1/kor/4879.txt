@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>리눅스 커널 - 위키백과, 우리 모두의 백과사전</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"리눅스_커널","wgTitle":"리눅스 커널","wgCurRevisionId":17368596,"wgRevisionId":17368596,"wgArticleId":157589,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["모놀리식 커널","리눅스 커널","자유 소프트웨어","1991년 소프트웨어"],"wgBreakFrames":false,"wgPageContentLanguage":"ko","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"ko","wgMonthNames":["","1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"wgMonthNamesShort":["","1","2","3","4","5","6","7","8","9","10","11","12"],"wgRelevantPageName":"리눅스_커널","wgRelevantArticleId":157589,"wgRequestId":"WIlRoApAAEMAAhIVZ8AAAAAX","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"ko","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"ko","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"한국어","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q14579","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.timeline.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0tic6pn",function($,jQuery,require,module){mw.user.options.set({"variant":"ko"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.ReferenceTooltips","ext.gadget.directcommons","ext.gadget.refToolbar","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=ko&amp;modules=ext.cite.styles%7Cext.gadget.ReferenceTooltips%7Cext.timeline.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=ko&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=ko&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.8" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/ko.m.wikipedia.org/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" rel="alternate"/>
+<link href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit" rel="alternate" title="편집" type="application/x-wiki"/>
+<link href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit" rel="edit" title="편집"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="위키백과 (ko)" type="application/opensearchdescription+xml"/>
+<link href="//ko.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-리눅스_커널 rootpage-리눅스_커널 skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="ko">리눅스 커널</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">위키백과, 우리 모두의 백과사전.</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					이동:					<a href="#mw-head">둘러보기</a>, 					<a href="#p-search">검색</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="ko"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><table cellspacing="3" class="infobox" style="border-spacing: 3px; width:300px;">
+<caption class="" style="">리눅스 (Linux)</caption>
+<tr>
+<th class="" colspan="2" style="text-align:center; font-size:125%; font-weight:bold;"><a class="image" href="/wiki/%ED%8C%8C%EC%9D%BC:NewTux.svg" title="리눅스"><img alt="리눅스" data-file-height="750" data-file-width="625" height="60" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/50px-NewTux.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/75px-NewTux.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/100px-NewTux.svg.png 2x" width="50"/></a></th>
+</tr>
+<tr class="">
+<td class="" colspan="2" style="text-align:center;"><a class="image" href="/wiki/%ED%8C%8C%EC%9D%BC:Linux_kernel_ubiquity.svg" title="도스박스 0.65"><img alt="도스박스 0.65" data-file-height="720" data-file-width="1280" height="141" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linux_kernel_ubiquity.svg/250px-Linux_kernel_ubiquity.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linux_kernel_ubiquity.svg/375px-Linux_kernel_ubiquity.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linux_kernel_ubiquity.svg/500px-Linux_kernel_ubiquity.svg.png 2x" width="250"/></a><br/>
+<span style="">리눅스 커널 2.6.11 실행 중, <a href="/wiki/%ED%81%AC%EB%85%B8%ED%94%BD%EC%8A%A4" title="크노픽스">크노픽스</a> 3.8 시동</span></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;"><a class="mw-redirect" href="/wiki/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%ED%9A%8C%EC%82%AC" title="소프트웨어 회사">회사</a> / <a href="/wiki/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EA%B0%9C%EB%B0%9C%EC%9E%90" title="소프트웨어 개발자">개발자</a></th>
+<td class="" style=""><a href="/wiki/%EB%A6%AC%EB%88%84%EC%8A%A4_%ED%86%A0%EB%A5%B4%EB%B0%9C%EC%8A%A4" title="리누스 토르발스">리누스 토르발스</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;">OS 계열</th>
+<td class="" style=""><a href="/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EA%B3%84%EC%97%B4" title="유닉스 계열">유닉스 계열</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;">상태</th>
+<td class="" style="">계속 개발 중.</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;">마지막 버전</th>
+<td class="" style=""><span class="plainlinks"><a class="external text" href="//ko.wikipedia.org/wiki/%ED%8B%80:%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98_%EC%B5%9C%EC%8B%A0_%EB%B2%84%EC%A0%84_(%EC%95%88%EC%A0%95%ED%8C%90)/%EB%A6%AC%EB%88%85%EC%8A%A4?action=edit">커널 4.9.5</a></span><br/>
+(<span class="bday">2017년 01월 20일</span><span class="noprint">, 6일 경과</span>)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;">미리보기 버전</th>
+<td class="" style=""><span class="plainlinks"><a class="external text" href="//ko.wikipedia.org/wiki/%ED%8B%80:%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98_%EC%B5%9C%EC%8B%A0_%EB%B2%84%EC%A0%84_(%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0%ED%8C%90)/%EB%A6%AC%EB%88%85%EC%8A%A4?action=edit">커널 4.10-rc5</a></span><br/>
+(<span class="bday">2017년 01월 22일</span><span class="noprint">, 4일 경과</span>)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;">커널형태</th>
+<td class="" style=""><a class="mw-redirect" href="/wiki/%EB%AA%A8%EB%85%B8%EB%A6%AC%EB%94%95_%EC%BB%A4%EB%84%90" title="모노리딕 커널">모노리딕 커널</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;"><a class="mw-redirect" href="/wiki/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4" title="소프트웨어 라이선스">라이선스</a></th>
+<td class="" style=""><a href="/wiki/GNU_%EC%9D%BC%EB%B0%98_%EA%B3%B5%EC%A4%91_%EC%82%AC%EC%9A%A9_%ED%97%88%EA%B0%80%EC%84%9C" title="GNU 일반 공중 사용 허가서">GPL</a> 버전 2 (전용)<sup class="reference" id="cite_ref-1"><a href="#cite_note-1">[1]</a></sup> + 펌웨어를 위한 다양한 클로즈드 소스 바이너리 포함<sup class="reference" id="cite_ref-firmware_2-0"><a href="#cite_note-firmware-2">[2]</a></sup></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align:left;"><a href="/wiki/%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8" title="웹사이트">웹사이트</a></th>
+<td class="" style=""><a class="external free" href="http://kernel.org/" rel="nofollow">http://kernel.org/</a></td>
+</tr>
+</table>
+<p><b>리눅스 커널</b>(Linux kernel)은 <a href="/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EA%B3%84%EC%97%B4" title="유닉스 계열">유닉스 계열</a> 운영 체제의 <a href="/wiki/%EC%BB%A4%EB%84%90_(%EC%BB%B4%ED%93%A8%ED%8C%85)" title="커널 (컴퓨팅)">커널</a>이다. <a href="/wiki/GNU_%EC%9D%BC%EB%B0%98_%EA%B3%B5%EC%A4%91_%EC%82%AC%EC%9A%A9_%ED%97%88%EA%B0%80%EC%84%9C" title="GNU 일반 공중 사용 허가서">GNU 일반 공중 사용 허가서</a> 버전 2 (GPLv2) 아래에서 공개되었으며 전 세계적으로 배포자들이 개발한 리눅스는 가장 두드러진 <a href="/wiki/%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4" title="자유 소프트웨어">자유 소프트웨어</a> / <a href="/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4" title="오픈 소스">오픈 소스</a>의 본보기들 가운데 하나이다.</p>
+<p>리눅스 커널은 1991년에 <a href="/wiki/%EB%A6%AC%EB%88%84%EC%8A%A4_%ED%86%A0%EB%A5%B4%EB%B0%9C%EC%8A%A4" title="리누스 토르발스">리누스 토르발스</a>에 의해 생긴 말이다. 일찍이 <a href="/wiki/%EB%AF%B8%EB%8B%89%EC%8A%A4" title="미닉스">미닉스</a> 커뮤니티가 리눅스 커널에 코드와 개념을 제공하였다. 그 당시 <a href="/wiki/GNU_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" title="GNU 프로젝트">GNU 프로젝트</a>는 <a href="/wiki/%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4" title="자유 소프트웨어">자유 소프트웨어</a> 운영 체제에 필요한 요소를 많이 만들어 냈지만 자체 커널 <a href="/wiki/GNU_%ED%97%88%EB%93%9C" title="GNU 허드">GNU 허드</a>는 완전하지 않았고 이용성이 없었다. <a href="/wiki/BSD" title="BSD">BSD</a> 운영 체제는 법적 문제로부터 헤어나오지 못했다. 이는 초기 버전의 제한된 기능에도 불구하고 <a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4" title="리눅스">리눅스</a>가 새로운 운영 체제를 사용하기 위한 프로젝트로부터 코드를 채용한 개발자들과 사용자들을 빠른 속도로 모았다는 것을 말해 준다. 오늘날 리눅스 커널은 수많은 프로그래머로부터 기여를 받고 있다.</p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>목차</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#.EA.B5.AC.EC.A1.B0"><span class="tocnumber">1</span> <span class="toctext">구조</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#.ED.94.84.EB.A1.9C.EA.B7.B8.EB.9E.98.EB.B0.8D_.EC.96.B8.EC.96.B4"><span class="tocnumber">1.1</span> <span class="toctext">프로그래밍 언어</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#.EB.B2.84.EC.A0.84_.EC.97.AD.EC.82.AC"><span class="tocnumber">1.2</span> <span class="toctext">버전 역사</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#.EA.B0.99.EC.9D.B4_.EB.B3.B4.EA.B8.B0"><span class="tocnumber">2</span> <span class="toctext">같이 보기</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#.EA.B0.81.EC.A3.BC"><span class="tocnumber">3</span> <span class="toctext">각주</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#.EB.B0.94.EA.B9.A5_.EA.B3.A0.EB.A6.AC"><span class="tocnumber">4</span> <span class="toctext">바깥 고리</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id=".EA.B5.AC.EC.A1.B0">구조</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=1" title="부분 편집: 구조">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="rellink relarticle mainarticle"><img alt="" data-file-height="128" data-file-width="128" height="16" src="//upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Crystal_Clear_app_xmag.svg/16px-Crystal_Clear_app_xmag.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Crystal_Clear_app_xmag.svg/24px-Crystal_Clear_app_xmag.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Crystal_Clear_app_xmag.svg/32px-Crystal_Clear_app_xmag.svg.png 2x" width="16"/> 이 부분의 본문은 <a class="new" href="/w/index.php?title=Vmlinux&amp;action=edit&amp;redlink=1" title="Vmlinux (없는 문서)">vmlinux</a>입니다.</div>
+<p>리눅스 커널은 진정한 <a href="/wiki/%EC%84%A0%EC%A0%90_%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81" title="선점 스케줄링">선점형 멀티태스킹</a> (<a class="mw-redirect" href="/wiki/%EC%82%AC%EC%9A%A9%EC%9E%90_%EB%AA%A8%EB%93%9C" title="사용자 모드">사용자 모드</a> 및, 2.6 시리즈 이후의 경우 <a class="mw-redirect" href="/wiki/%EC%BB%A4%EB%84%90_%EB%AA%A8%EB%93%9C" title="커널 모드">커널 모드</a><sup class="reference" id="cite_ref-3"><a href="#cite_note-3">[3]</a></sup><sup class="reference" id="cite_ref-lwn-22912_4-0"><a href="#cite_note-lwn-22912-4">[4]</a></sup>까지), <a href="/wiki/%EA%B0%80%EC%83%81_%EB%A9%94%EB%AA%A8%EB%A6%AC" title="가상 메모리">가상 메모리</a>, <a class="mw-redirect" href="/wiki/%EA%B3%B5%EC%9C%A0_%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC" title="공유 라이브러리">공유 라이브러리</a>, <a class="new" href="/w/index.php?title=%EB%94%94%EB%A7%A8%EB%93%9C_%ED%8E%98%EC%9D%B4%EC%A7%95&amp;action=edit&amp;redlink=1" title="디맨드 페이징 (없는 문서)">디맨드 로딩</a>, 공유 <a class="new" href="/w/index.php?title=%EC%B9%B4%ED%94%BC_%EC%98%A8_%EB%9D%BC%EC%9D%B4%ED%8A%B8&amp;action=edit&amp;redlink=1" title="카피 온 라이트 (없는 문서)">카피 온 라이트</a> 실행 파일(<a class="new" href="/w/index.php?title=KSM&amp;action=edit&amp;redlink=1" title="KSM (없는 문서)">KSM</a> 공유), <a href="/wiki/%EB%A9%94%EB%AA%A8%EB%A6%AC_%EA%B4%80%EB%A6%AC" title="메모리 관리">메모리 관리</a>, <a href="/wiki/%EC%9D%B8%ED%84%B0%EB%84%B7_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C_%EC%8A%A4%EC%9C%84%ED%8A%B8" title="인터넷 프로토콜 스위트">인터넷 프로토콜 스위트</a>, <a href="/wiki/%EC%8A%A4%EB%A0%88%EB%93%9C" title="스레드">스레딩</a>을 지원하는 <a class="mw-redirect" href="/wiki/%EB%AA%A8%EB%86%80%EB%A6%AC%EB%94%95_%EC%BB%A4%EB%84%90" title="모놀리딕 커널">모놀리딕 커널</a>이다.</p>
+<h3><span class="mw-headline" id=".ED.94.84.EB.A1.9C.EA.B7.B8.EB.9E.98.EB.B0.8D_.EC.96.B8.EC.96.B4">프로그래밍 언어</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=2" title="부분 편집: 프로그래밍 언어">편집</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>리눅스 커널은 <a href="/wiki/%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC%EC%96%B4" title="어셈블리어">어셈블리어</a>(GCC의 AT&amp;T 스타일 문법)로 작성된 수많은 짧은 코드와 더불어 <a href="/wiki/GNU_%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC_%EB%AA%A8%EC%9D%8C" title="GNU 컴파일러 모음">GCC</a>(수많은 확장과 변경 사항을 표준 C에 도입)에 의해 지원되는 <a href="/wiki/C_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4)" title="C (프로그래밍 언어)">C 프로그래밍 언어</a> 버전으로 작성되어 있다.</p>
+<h3><span class="mw-headline" id=".EB.B2.84.EC.A0.84_.EC.97.AD.EC.82.AC">버전 역사</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=3" title="부분 편집: 버전 역사">편집</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="timeline-wrapper"><map id="timeline_7366853ffa81544b4929754aed4cddb5" name="timeline_7366853ffa81544b4929754aed4cddb5"></map><img src="//upload.wikimedia.org/wikipedia/ko/timeline/7366853ffa81544b4929754aed4cddb5.png" usemap="#timeline_7366853ffa81544b4929754aed4cddb5"/></div>
+<h2><span class="mw-headline" id=".EA.B0.99.EC.9D.B4_.EB.B3.B4.EA.B8.B0">같이 보기</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=4" title="부분 편집: 같이 보기">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D_%EC%BB%A4%EB%84%90" title="모놀리식 커널">모놀리식 커널</a></li>
+<li><a href="/wiki/%EC%BB%A4%EB%84%90_(%EC%BB%B4%ED%93%A8%ED%8C%85)" title="커널 (컴퓨팅)">커널 (컴퓨팅)</a></li>
+<li><a href="/wiki/%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C" title="운영 체제">운영 체제</a></li>
+<li><a href="/wiki/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C_%EC%8B%9C%EC%8A%A4%ED%85%9C" title="임베디드 시스템">임베디드 시스템</a></li>
+</ul>
+<h2><span class="mw-headline" id=".EA.B0.81.EC.A3.BC">각주</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=5" title="부분 편집: 각주">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><a href="#cite_ref-1">↑</a></span> <span class="reference-text"><cite class="citation web">InfoWorld. <a class="external text" href="http://www.infoworld.com/article/06/07/28/HNtorvaldsnofan_1.html" rel="nofollow">“Linux creator Torvalds still no fan of GPLv3”</a><span class="reference-accessdate">. 2008년 10월 11일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;rft.au=InfoWorld&amp;rft.btitle=Linux+creator+Torvalds+still+no+fan+of+GPLv3&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.infoworld.com%2Farticle%2F06%2F07%2F28%2FHNtorvaldsnofan_1.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-firmware-2"><span class="mw-cite-backlink"><a href="#cite_ref-firmware_2-0">↑</a></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://git.kernel.org/?p=linux/kernel/git/stable/linux-stable.git;a=blob;f=firmware/WHENCE;hb=HEAD" rel="nofollow">“linux/kernel/git/stable/linux-stable.git/blob - firmware/WHENCE”</a>. git.kernel.org. 2002년 10월 16일<span class="reference-accessdate">. 2012년 8월 21일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;rft.btitle=linux%2Fkernel%2Fgit%2Fstable%2Flinux-stable.git%2Fblob+-+firmware%2FWHENCE&amp;rft.date=2002-10-16&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fgit.kernel.org%2F%3Fp%3Dlinux%2Fkernel%2Fgit%2Fstable%2Flinux-stable.git%3Ba%3Dblob%3Bf%3Dfirmware%2FWHENCE%3Bhb%3DHEAD&amp;rft.pub=git.kernel.org&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3">↑</a></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://kernelnewbies.org/FAQ/Preemption" rel="nofollow">“FAQ: Preemption”</a>. 《kernelnewbies.org》. 2009년 8월 22일<span class="reference-accessdate">. 2015년 5월 7일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;rft.atitle=FAQ%3A+Preemption&amp;rft.date=2009-08-22&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fkernelnewbies.org%2FFAQ%2FPreemption&amp;rft.jtitle=kernelnewbies.org&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-lwn-22912-4"><span class="mw-cite-backlink"><a href="#cite_ref-lwn-22912_4-0">↑</a></span> <span class="reference-text"><cite class="citation web">Jonathan Corbet (2003년 2월 24일). <a class="external text" href="https://lwn.net/Articles/22912/" rel="nofollow">“Driver porting: the preemptible kernel”</a>. <a href="/wiki/LWN.net" title="LWN.net">LWN.net</a><span class="reference-accessdate">. 2015년 5월 7일에 확인함</span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fko.wikipedia.org%3A%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;rft.au=Jonathan+Corbet&amp;rft.btitle=Driver+porting%3A+the+preemptible+kernel&amp;rft.date=2003-02-24&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Flwn.net%2FArticles%2F22912%2F&amp;rft.pub=LWN.net&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id=".EB.B0.94.EA.B9.A5_.EA.B3.A0.EB.A6.AC">바깥 고리</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;section=6" title="부분 편집: 바깥 고리">편집</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="metadata mbox-small plainlinks" style="border:1px solid #aaa; background-color:#f9f9f9;">
+<tr>
+<td class="mbox-image"><img alt="" data-file-height="1376" data-file-width="1024" height="40" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/45px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/59px-Commons-logo.svg.png 2x" width="30"/></td>
+<td class="mbox-text plainlist" style=""><b><a href="/wiki/%EC%9C%84%ED%82%A4%EB%AF%B8%EB%94%94%EC%96%B4_%EA%B3%B5%EC%9A%A9" title="위키미디어 공용">위키미디어 공용</a></b>에 관련 미디어 자료가 있습니다.
+<div style="padding-left:1em;"><b><a class="external text" href="https://commons.wikimedia.org/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90?uselang=ko">리눅스 커널</a></b></div>
+</td>
+</tr>
+</table>
+<ul>
+<li><b><span style="color: #555; font-size: smaller;" title="언어: 영어">(영어)</span></b><a class="external text" href="http://www.kernel.org/" rel="nofollow">The Linux Kernel Archives</a> - 리눅스 공식 커널 저장소</li>
+<li><b><span style="color: #555; font-size: smaller;" title="언어: 영어">(영어)</span></b><a class="external text" href="http://www.makelinux.net/kernel_map_intro" rel="nofollow">Interactive map of Linux kernel</a> - 리눅스 커널의 그림지도</li>
+<li><b><span style="color: #555; font-size: smaller;" title="언어: 영어">(영어)</span></b><a class="external text" href="http://www.tuxradar.com/content/how-linux-kernel-works" rel="nofollow">How the Linux kernel works</a> - 리눅스 커널에 대한 간단한 길잡이</li>
+<li><b><span style="color: #555; font-size: smaller;" title="언어: 영어">(영어)</span></b><a class="external text" href="http://www.ibm.com/developerworks/linux/library/l-linux-kernel/?S_TACT=105AGX59&amp;S_CMP=GR&amp;ca=dgr-lnxw01LKernalAnatomy" rel="nofollow">Anatomy of the Linux kernel</a> (<a href="/wiki/IBM" title="IBM">IBM</a>의 기술 블로그) - 리눅스 커널의 역사를 간단하게 소개, 리눅스 커널의 내부를 상세히 소개</li>
+</ul>
+<table class="navbox collapsible autocollapse nowraplinks" style="background:white;background:white;">
+<tr>
+<th colspan="2" style="text-align:center;width:100%;">
+<div style="float:left; width:6em; text-align:left;"><span class="noprint plainlinks plainlinksneverexpand" style="white-space:nowrap; font-weight:normal; font-size:smaller; ;"><a href="/wiki/%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" title="틀:리눅스 커널"><span style=";" title="이 틀을 보기">v</span></a> <span style="font-size:smaller;">•</span> <a class="new" href="/w/index.php?title=%ED%8B%80%ED%86%A0%EB%A1%A0:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit&amp;redlink=1" title="틀토론:리눅스 커널 (없는 문서)"><span style=";" title="이 틀에 대한 토론">d</span></a> <span style="font-size:smaller;">•</span> <a class="external text" href="//ko.wikipedia.org/w/index.php?title=%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit"><span style=";" title="이 틀을 편집할 수 있습니다. 단, 저장하기 전에 미리 보기로 결과를 확인하여 주십시오.">e</span></a> <span style="font-size:smaller;">•</span> <a class="external text" href="//ko.wikipedia.org/w/index.php?title=%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=history"><span style=";" title="이 틀의 역사를 볼 수 있습니다.">h</span></a></span></div>
+<strong class="selflink">리눅스 커널</strong></th>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">조직</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">리눅스 커널</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%9E%AC%EB%8B%A8" title="리눅스 재단">리눅스 재단</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%84%EC%8A%A4%EC%9D%98_%EB%B2%95%EC%B9%99" title="리누스의 법칙">리누스의 법칙</a></li>
+<li><a class="new" href="/w/index.php?title=%ED%83%80%EB%84%A8%EB%B0%94%EC%9B%80_%ED%86%A0%EB%B0%9C%EC%A6%88_%EB%85%BC%EC%9F%81&amp;action=edit&amp;redlink=1" title="타넨바움 토발즈 논쟁 (없는 문서)">타넨바움 토발즈 논쟁</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%A6%AC%EB%B8%8C%EB%A0%88" title="리눅스 리브레">리눅스 리브레</a></li>
+<li><a href="/wiki/%ED%84%B1%EC%8A%A4" title="턱스">턱스</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%82%98%EB%A1%9C" title="리나로">리나로</a></li>
+<li><a href="/wiki/GNU_%EC%9D%BC%EB%B0%98_%EA%B3%B5%EC%A4%91_%EC%82%AC%EC%9A%A9_%ED%97%88%EA%B0%80%EC%84%9C" title="GNU 일반 공중 사용 허가서">GNU GPL v2</a></li>
+<li><a class="new" href="/w/index.php?title=Menuconfig&amp;action=edit&amp;redlink=1" title="Menuconfig (없는 문서)">menuconfig</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9D%B4%EB%A6%84_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스 커널 이름 목록 (없는 문서)">커널 이름</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B9%84%ED%8C%90&amp;action=edit&amp;redlink=1" title="리눅스 비판 (없는 문서)">리눅스 비판</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">지원</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li>개발자들
+<ul>
+<li><i><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4&amp;action=edit&amp;redlink=1" title="리눅스 프로그래밍 인터페이스 (없는 문서)">리눅스 프로그래밍 인터페이스</a></i></li>
+<li><a class="new" href="/w/index.php?title=Kernel.org&amp;action=edit&amp;redlink=1" title="Kernel.org (없는 문서)">kernel.org</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EB%A9%94%EC%9D%BC%EB%A7%81_%EB%A6%AC%EC%8A%A4%ED%8A%B8&amp;action=edit&amp;redlink=1" title="리눅스 커널 메일링 리스트 (없는 문서)">LKML</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A8%ED%8D%BC%EB%9F%B0%EC%8A%A4&amp;action=edit&amp;redlink=1" title="리눅스 컨퍼런스 (없는 문서)">리눅스 컨퍼런스</a></li>
+</ul>
+</li>
+<li>사용자들
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%82%AC%EC%9A%A9%EC%9E%90_%EA%B7%B8%EB%A3%B9&amp;action=edit&amp;redlink=1" title="리눅스 사용자 그룹 (없는 문서)">리눅스 사용자 그룹 (LUG)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">기술</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;background:#f7f7f7;">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">디버깅</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=CRIU&amp;action=edit&amp;redlink=1" title="CRIU (없는 문서)">CRIU</a></li>
+<li><a class="new" href="/w/index.php?title=Ftrace&amp;action=edit&amp;redlink=1" title="Ftrace (없는 문서)">ftrace</a></li>
+<li><a href="/wiki/Kdump" title="Kdump">kdump</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9B%81%EC%8A%A4" title="리눅스 커널 웁스">리눅스 커널 웁스</a></li>
+<li><a href="/wiki/SystemTap" title="SystemTap">SystemTap</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%8B%9C%EC%9E%91_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4" title="리눅스 시작 프로세스">시작 프로세스</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=Vmlinux&amp;action=edit&amp;redlink=1" title="Vmlinux (없는 문서)">vmlinux</a></li>
+<li><a class="new" href="/w/index.php?title=System.map&amp;action=edit&amp;redlink=1" title="System.map (없는 문서)">System.map</a></li>
+<li><a class="new" href="/w/index.php?title=Dracut_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4)&amp;action=edit&amp;redlink=1" title="Dracut (소프트웨어) (없는 문서)">dracut</a></li>
+<li><a class="new" href="/w/index.php?title=Initrd&amp;action=edit&amp;redlink=1" title="Initrd (없는 문서)">initrd</a></li>
+<li><a href="/wiki/Initramfs" title="Initramfs">initramfs</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4" title="리눅스 커널 인터페이스">ABIs</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EA%B8%B0%EB%B3%B8_%EA%B7%9C%EA%B2%A9" title="리눅스 기본 규격">리눅스 기본 규격</a></li>
+<li><a class="new" href="/w/index.php?title=X32_ABI&amp;action=edit&amp;redlink=1" title="X32 ABI (없는 문서)">x32 ABI</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4" title="리눅스 커널 인터페이스">APIs</a></th>
+<td colspan="1" style="">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">사용자 공간</th>
+<td colspan="1" style="">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EA%B0%80%EC%83%81_%ED%8C%8C%EC%9D%BC_%EC%8B%9C%EC%8A%A4%ED%85%9C" title="가상 파일 시스템">FS</a>, <a href="/wiki/%EB%8D%B0%EB%AA%AC_(%EC%BB%B4%ED%93%A8%ED%8C%85)" title="데몬 (컴퓨팅)">데몬</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EC%9E%A5%EC%B9%98_%ED%8C%8C%EC%9D%BC" title="장치 파일">devfs</a></li>
+<li><a href="/wiki/Kernfs" title="Kernfs">kernfs</a></li>
+<li><a href="/wiki/Debugfs" title="Debugfs">debugfs</a></li>
+<li><a href="/wiki/Procfs" title="Procfs">procfs</a></li>
+<li><a href="/wiki/Sysfs" title="Sysfs">sysfs</a></li>
+<li><a href="/wiki/Systemd" title="Systemd">systemd</a>
+<ul>
+<li><a href="/wiki/Udev" title="Udev">udev</a></li>
+</ul>
+</li>
+<li><a class="new" href="/w/index.php?title=Kmscon&amp;action=edit&amp;redlink=1" title="Kmscon (없는 문서)">Kmscon</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">래퍼 라이브러리</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/C_%ED%91%9C%EC%A4%80_%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC" title="C 표준 라이브러리">C 표준 라이브러리</a>
+<ul>
+<li><a href="/wiki/GNU_C_%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC" title="GNU C 라이브러리">glibc</a></li>
+<li><a href="/wiki/UClibc" title="UClibc">uClibc</a></li>
+<li><a class="new" href="/w/index.php?title=Bionic&amp;action=edit&amp;redlink=1" title="Bionic (없는 문서)">Bionic</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=Hybris&amp;action=edit&amp;redlink=1" title="Hybris (없는 문서)">libhybris</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Dietlibc" title="Dietlibc">dietlibc</a></li>
+<li><a href="/wiki/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C_GNU_C_%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC" title="임베디드 GNU C 라이브러리">EGLIBC</a></li>
+<li><a href="/wiki/Klibc" title="Klibc">klibc</a></li>
+<li><a class="new" href="/w/index.php?title=Musl&amp;action=edit&amp;redlink=1" title="Musl (없는 문서)">musl</a></li>
+<li><a class="new" href="/w/index.php?title=Newlib&amp;action=edit&amp;redlink=1" title="Newlib (없는 문서)">Newlib</a></li>
+</ul>
+</li>
+<li><a class="new" href="/w/index.php?title=Cgroups&amp;action=edit&amp;redlink=1" title="Cgroups (없는 문서)">libcgroup</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%A7%81%EC%A0%91_%EB%A0%8C%EB%8D%94%EB%A7%81_%EA%B4%80%EB%A6%AC%EC%9E%90&amp;action=edit&amp;redlink=1" title="직접 렌더링 관리자 (없는 문서)">libdrm</a></li>
+<li><a href="/wiki/%EA%B3%A0%EA%B8%89_%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%82%AC%EC%9A%B4%EB%93%9C_%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98" title="고급 리눅스 사운드 아키텍처">libalsa</a></li>
+<li><a class="new" href="/w/index.php?title=Evdev&amp;action=edit&amp;redlink=1" title="Evdev (없는 문서)">libevdev</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">커널 부분</th>
+<td colspan="1" style="">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4" title="리눅스 커널 인터페이스">시스템 호출 인터페이스</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/POSIX" title="POSIX">POSIX</a>
+<ul>
+<li><a href="/wiki/Ioctl" title="Ioctl">ioctl</a></li>
+<li><a class="new" href="/w/index.php?title=Select_(%EC%9C%A0%EB%8B%89%EC%8A%A4)&amp;action=edit&amp;redlink=1" title="Select (유닉스) (없는 문서)">select</a></li>
+<li><a class="new" href="/w/index.php?title=Open_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&amp;action=edit&amp;redlink=1" title="Open (시스템 호출) (없는 문서)">open</a></li>
+<li><a class="new" href="/w/index.php?title=Read_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&amp;action=edit&amp;redlink=1" title="Read (시스템 호출) (없는 문서)">read</a></li>
+<li><a class="new" href="/w/index.php?title=Close_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&amp;action=edit&amp;redlink=1" title="Close (시스템 호출) (없는 문서)">close</a></li>
+<li><a class="new" href="/w/index.php?title=Sync_(%EC%9C%A0%EB%8B%89%EC%8A%A4)&amp;action=edit&amp;redlink=1" title="Sync (유닉스) (없는 문서)">sync</a></li>
+<li>...</li>
+</ul>
+</li>
+<li>유닉스만
+<ul>
+<li><a href="/wiki/Futex" title="Futex">futex</a></li>
+<li><a class="new" href="/w/index.php?title=Epoll&amp;action=edit&amp;redlink=1" title="Epoll (없는 문서)">epoll</a></li>
+<li><a class="new" href="/w/index.php?title=Splice_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&amp;action=edit&amp;redlink=1" title="Splice (시스템 호출) (없는 문서)">splice</a></li>
+<li><a href="/wiki/Dnotify" title="Dnotify">dnotify</a></li>
+<li><a href="/wiki/Inotify" title="Inotify">inotify</a></li>
+<li><a class="new" href="/w/index.php?title=Readahead&amp;action=edit&amp;redlink=1" title="Readahead (없는 문서)">readahead</a></li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4" title="리눅스 커널 인터페이스">커널 내부</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EA%B3%A0%EA%B8%89_%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%82%AC%EC%9A%B4%EB%93%9C_%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98" title="고급 리눅스 사운드 아키텍처">ALSA</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%A7%81%EC%A0%91_%EB%A0%8C%EB%8D%94%EB%A7%81_%EC%9D%B8%ED%94%84%EB%9D%BC%EC%8A%A4%ED%8A%B8%EB%9F%AD%EC%B2%98&amp;action=edit&amp;redlink=1" title="직접 렌더링 인프라스트럭처 (없는 문서)">DRI</a></li>
+<li><a class="new" href="/w/index.php?title=Video4Linux&amp;action=edit&amp;redlink=1" title="Video4Linux (없는 문서)">Video4Linux</a></li>
+<li><a class="new" href="/w/index.php?title=New_API&amp;action=edit&amp;redlink=1" title="New API (없는 문서)">New API</a></li>
+<li><a href="/wiki/%ED%81%AC%EB%A6%BD%ED%86%A0API_(%EB%A6%AC%EB%88%85%EC%8A%A4)" title="크립토API (리눅스)">크립토API</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><strong class="selflink">리눅스 커널</strong><br/>
+구성요소</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EC%A0%81%EC%9E%AC_%EA%B0%80%EB%8A%A5_%EC%BB%A4%EB%84%90_%EB%AA%A8%EB%93%88" title="적재 가능 커널 모듈">커널 모듈</a></li>
+<li><a class="new" href="/w/index.php?title=BlueZ&amp;action=edit&amp;redlink=1" title="BlueZ (없는 문서)">BlueZ</a></li>
+<li><a class="new" href="/w/index.php?title=Cgroups&amp;action=edit&amp;redlink=1" title="Cgroups (없는 문서)">cgroups</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BD%98%EC%86%94" title="리눅스 콘솔">콘솔</a></li>
+<li><a class="new" href="/w/index.php?title=Bcache&amp;action=edit&amp;redlink=1" title="Bcache (없는 문서)">bcache</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%9E%A5%EC%B9%98_%EB%A7%A4%ED%8D%BC&amp;action=edit&amp;redlink=1" title="장치 매퍼 (없는 문서)">장치 매퍼</a></li>
+<li><a class="new" href="/w/index.php?title=Dm-cache&amp;action=edit&amp;redlink=1" title="Dm-cache (없는 문서)">dm-cache</a></li>
+<li><a class="new" href="/w/index.php?title=Dm-crypt&amp;action=edit&amp;redlink=1" title="Dm-crypt (없는 문서)">dm-crypt</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%A7%81%EC%A0%91_%EB%A0%8C%EB%8D%94%EB%A7%81_%EA%B4%80%EB%A6%AC%EC%9E%90&amp;action=edit&amp;redlink=1" title="직접 렌더링 관리자 (없는 문서)">DRM</a></li>
+<li><a href="/wiki/%EC%98%A4%EB%A5%98_%EA%B2%80%EC%B6%9C_%EC%A0%95%EC%A0%95" title="오류 검출 정정">EDAC</a></li>
+<li><a class="new" href="/w/index.php?title=Evdev&amp;action=edit&amp;redlink=1" title="Evdev (없는 문서)">evdev</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%BB%A4%EB%84%90_%EB%8F%99%EC%9D%BC_%ED%8E%98%EC%9D%B4%EC%A7%80_%EB%B3%91%ED%95%A9&amp;action=edit&amp;redlink=1" title="커널 동일 페이지 병합 (없는 문서)">커널 동일 페이지 병합</a> (KSM)</li>
+<li><a class="new" href="/w/index.php?title=LIO_(SCSI_%EB%8C%80%EC%83%81)&amp;action=edit&amp;redlink=1" title="LIO (SCSI 대상) (없는 문서)">LIO</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%ED%94%84%EB%A0%88%EC%9E%84%EB%B2%84%ED%8D%BC&amp;action=edit&amp;redlink=1" title="리눅스 프레임버퍼 (없는 문서)">프레임버퍼</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%85%BC%EB%A6%AC_%EB%B3%BC%EB%A5%A8_%EA%B4%80%EB%A6%AC%EC%9E%90_(%EB%A6%AC%EB%88%85%EC%8A%A4)&amp;action=edit&amp;redlink=1" title="논리 볼륨 관리자 (리눅스) (없는 문서)">LVM</a></li>
+<li><a class="new" href="/w/index.php?title=KMS_%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84&amp;action=edit&amp;redlink=1" title="KMS 드라이버 (없는 문서)">KMS 드라이버</a></li>
+<li><a href="/wiki/%EB%84%B7%ED%95%84%ED%84%B0" title="넷필터">넷필터</a></li>
+<li><a class="new" href="/w/index.php?title=Netlink&amp;action=edit&amp;redlink=1" title="Netlink (없는 문서)">Netlink</a></li>
+<li><a class="new" href="/w/index.php?title=Nftables&amp;action=edit&amp;redlink=1" title="Nftables (없는 문서)">nftables</a></li>
+<li><a class="new" href="/w/index.php?title=Network_scheduler&amp;action=edit&amp;redlink=1" title="Network scheduler (없는 문서)">Network scheduler</a></li>
+<li><a class="new" href="/w/index.php?title=Perf_(%EB%A6%AC%EB%88%85%EC%8A%A4)&amp;action=edit&amp;redlink=1" title="Perf (리눅스) (없는 문서)">perf</a></li>
+<li><a class="new" href="/w/index.php?title=SLUB_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4)&amp;action=edit&amp;redlink=1" title="SLUB (소프트웨어) (없는 문서)">SLUB</a></li>
+<li><a class="new" href="/w/index.php?title=Zram&amp;action=edit&amp;redlink=1" title="Zram (없는 문서)">zram</a></li>
+<li><a class="new" href="/w/index.php?title=Zswap&amp;action=edit&amp;redlink=1" title="Zswap (없는 문서)">zswap</a></li>
+</ul>
+<ul>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B3%B4%EC%95%88_%EB%AA%A8%EB%93%88" title="리눅스 보안 모듈">보안 모듈</a>: <a href="/wiki/AppArmor" title="AppArmor">AppArmor</a></li>
+<li><a href="/wiki/Exec_Shield" title="Exec Shield">Exec Shield</a></li>
+<li><a href="/wiki/Grsecurity" title="Grsecurity">grsecurity</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=PaX&amp;action=edit&amp;redlink=1" title="PaX (없는 문서)">PaX</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Seccomp" title="Seccomp">seccomp</a></li>
+<li><a href="/wiki/%EB%B3%B4%EC%95%88_%EA%B0%95%ED%99%94_%EB%A6%AC%EB%88%85%EC%8A%A4" title="보안 강화 리눅스">SELinux</a></li>
+<li><a href="/wiki/Smack_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4)" title="Smack (소프트웨어)">Smack</a></li>
+<li><a href="/wiki/TOMOYO_%EB%A6%AC%EB%88%85%EC%8A%A4" title="TOMOYO 리눅스">TOMOYO 리눅스</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_PAM" title="리눅스 PAM">리눅스 PAM</a></li>
+</ul>
+<ul>
+<li><a href="/wiki/%EC%9E%A5%EC%B9%98_%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84" title="장치 드라이버">장치 드라이버</a></li>
+</ul>
+<ul>
+<li><a href="/wiki/Initramfs" title="Initramfs">initramfs</a></li>
+<li><a href="/wiki/Kexec" title="Kexec">kexec</a></li>
+<li><a class="new" href="/w/index.php?title=KGraft&amp;action=edit&amp;redlink=1" title="KGraft (없는 문서)">kGraft</a></li>
+<li><a class="new" href="/w/index.php?title=Kpatch&amp;action=edit&amp;redlink=1" title="Kpatch (없는 문서)">kpatch</a></li>
+<li><a class="new" href="/w/index.php?title=Ksplice&amp;action=edit&amp;redlink=1" title="Ksplice (없는 문서)">Ksplice</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">변종들</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%EC%8A%88%ED%8D%BC%EC%BB%B4%ED%93%A8%ED%84%B0" title="슈퍼컴퓨터">슈퍼컴퓨터</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=INK_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)&amp;action=edit&amp;redlink=1" title="INK (운영 체제) (없는 문서)">INK</a></li>
+</ul>
+</li>
+<li><a href="/wiki/%EC%8B%A4%EC%8B%9C%EA%B0%84_%EC%8B%9C%EC%8A%A4%ED%85%9C" title="실시간 시스템">실시간 시스템</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=RTLinux&amp;action=edit&amp;redlink=1" title="RTLinux (없는 문서)">RTLinux</a></li>
+<li><a href="/wiki/RTAI" title="RTAI">RTAI</a></li>
+<li><a class="new" href="/w/index.php?title=Xenomai&amp;action=edit&amp;redlink=1" title="Xenomai (없는 문서)">Xenomai</a></li>
+</ul>
+</li>
+<li><a href="/wiki/%EB%A9%94%EB%AA%A8%EB%A6%AC_%EA%B4%80%EB%A6%AC_%EC%9E%A5%EC%B9%98" title="메모리 관리 장치">MMU</a>-less
+<ul>
+<li><a class="new" href="/w/index.php?title=%CE%9CClinux&amp;action=edit&amp;redlink=1" title="ΜClinux (없는 문서)">μClinux</a></li>
+<li><a class="new" href="/w/index.php?title=PSXLinux&amp;action=edit&amp;redlink=1" title="PSXLinux (없는 문서)">PSXLinux</a></li>
+<li><a class="new" href="/w/index.php?title=DSLinux&amp;action=edit&amp;redlink=1" title="DSLinux (없는 문서)">DSLinux</a></li>
+</ul>
+</li>
+</ul>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a href="/wiki/%EA%B0%80%EC%83%81%ED%99%94" title="가상화">가상화</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a href="/wiki/%ED%95%98%EC%9D%B4%ED%8D%BC%EB%B0%94%EC%9D%B4%EC%A0%80" title="하이퍼바이저">하이퍼바이저</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EC%BB%A4%EB%84%90_%EA%B8%B0%EB%B0%98_%EA%B0%80%EC%83%81_%EB%A8%B8%EC%8B%A0&amp;action=edit&amp;redlink=1" title="커널 기반 가상 머신 (없는 문서)">KVM</a></li>
+<li><a href="/wiki/%EC%A0%A0" title="젠">젠</a></li>
+</ul>
+</li>
+<li><a class="new" href="/w/index.php?title=%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C_%EC%88%98%EC%A4%80_%EA%B0%80%EC%83%81%ED%99%94&amp;action=edit&amp;redlink=1" title="운영 체제 수준 가상화 (없는 문서)">OS-수준 가상화</a>
+<ul>
+<li><a class="new" href="/w/index.php?title=Linux-VServer&amp;action=edit&amp;redlink=1" title="Linux-VServer (없는 문서)">Linux-VServer</a></li>
+<li><a class="new" href="/w/index.php?title=Lguest&amp;action=edit&amp;redlink=1" title="Lguest (없는 문서)">Lguest</a></li>
+<li><a href="/wiki/LXC" title="LXC">LXC</a></li>
+<li><a href="/wiki/OpenVZ" title="OpenVZ">OpenVZ</a></li>
+</ul>
+</li>
+<li>다른
+<ul>
+<li><a class="new" href="/w/index.php?title=L4Linux&amp;action=edit&amp;redlink=1" title="L4Linux (없는 문서)">L4Linux</a></li>
+<li><a class="new" href="/w/index.php?title=ELinOS&amp;action=edit&amp;redlink=1" title="ELinOS (없는 문서)">ELinOS</a></li>
+<li><a href="/wiki/MkLinux" title="MkLinux">MkLinux</a></li>
+<li><a class="new" href="/w/index.php?title=%ED%98%91%EB%A0%A5_%EB%A6%AC%EB%88%85%EC%8A%A4&amp;action=edit&amp;redlink=1" title="협력 리눅스 (없는 문서)">coLinux</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%B1%84%ED%83%9D" title="리눅스 채택">리눅스 채택</a></th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<table class="navbox nowraplinks" style="background:transparent; font-size:100%; padding:0; border:none; margin:-3px; text-align:left;">
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;"><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9D%98_%EC%82%AC%EC%9A%A9_%EB%B2%94%EC%9C%84&amp;action=edit&amp;redlink=1" title="리눅스의 사용 범위 (없는 문서)">리눅스의 사용 범위</a></th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1_%ED%99%98%EA%B2%BD&amp;action=edit&amp;redlink=1" title="리눅스 데스크톱 환경 (없는 문서)">데스크톱</a></li>
+<li><a href="/wiki/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C_%EB%A6%AC%EB%88%85%EC%8A%A4" title="임베디드 리눅스">임베디드</a></li>
+<li>클라이언트:
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%ED%84%B0%EB%AF%B8%EB%84%90_%EC%84%9C%EB%B2%84_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8&amp;action=edit&amp;redlink=1" title="리눅스 터미널 서버 프로젝트 (없는 문서)">LTSP</a></li>
+<li><a class="new" href="/w/index.php?title=Thinstation&amp;action=edit&amp;redlink=1" title="Thinstation (없는 문서)">Thinstation</a></li>
+</ul>
+</li>
+<li>서버:
+<ul>
+<li><a href="/wiki/LAMP" title="LAMP">LAMP</a></li>
+<li><a class="new" href="/w/index.php?title=LYME&amp;action=edit&amp;redlink=1" title="LYME (없는 문서)">LYME/LYCE</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="background:#e6e6ff;white-space:nowrap;text-align:right;">채택자</th>
+<td colspan="1" style="">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%B1%84%ED%83%9D%EC%9E%90%EB%93%A4_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스 채택자들 목록 (없는 문서)">리눅스 채택자들 목록</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9D%98_%EC%83%81%EC%9A%A9_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스의 상용 소프트웨어 목록 (없는 문서)">리눅스의 상용 소프트웨어</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<table class="navbox collapsible autocollapse nowraplinks" style="background:white;background:white;">
+<tr>
+<th colspan="2" style="text-align:center;width:100%;">
+<div style="float:left; width:6em; text-align:left;"><span class="noprint plainlinks plainlinksneverexpand" style="white-space:nowrap; font-weight:normal; font-size:smaller; ;"><a href="/wiki/%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4" title="틀:리눅스"><span style=";" title="이 틀을 보기">v</span></a> <span style="font-size:smaller;">•</span> <a class="new" href="/w/index.php?title=%ED%8B%80%ED%86%A0%EB%A1%A0:%EB%A6%AC%EB%88%85%EC%8A%A4&amp;action=edit&amp;redlink=1" title="틀토론:리눅스 (없는 문서)"><span style=";" title="이 틀에 대한 토론">d</span></a> <span style="font-size:smaller;">•</span> <a class="external text" href="//ko.wikipedia.org/w/index.php?title=%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4&amp;action=edit"><span style=";" title="이 틀을 편집할 수 있습니다. 단, 저장하기 전에 미리 보기로 결과를 확인하여 주십시오.">e</span></a> <span style="font-size:smaller;">•</span> <a class="external text" href="//ko.wikipedia.org/w/index.php?title=%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4&amp;action=history"><span style=";" title="이 틀의 역사를 볼 수 있습니다.">h</span></a></span></div>
+<a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4" title="리눅스">리눅스</a></th>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;"><strong class="selflink">리눅스 커널</strong></th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9D%98_%EC%97%AD%EC%82%AC&amp;action=edit&amp;redlink=1" title="리눅스의 역사 (없는 문서)">역사</a></li>
+<li><strong class="selflink">커널</strong></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%84%EC%8A%A4%EC%9D%98_%EB%B2%95%EC%B9%99" title="리누스의 법칙">리누스의 법칙</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%A6%AC%EB%B8%8C%EB%A0%88" title="리눅스 리브레">리눅스 리브레</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%8B%9C%EC%9E%91_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4" title="리눅스 시작 프로세스">리눅스 시작 프로세스</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90_%EC%9B%81%EC%8A%A4" title="리눅스 커널 웁스">리눅스 커널 웁스</a></li>
+<li><a href="/wiki/%ED%84%B1%EC%8A%A4" title="턱스">턱스</a></li>
+<li><i><a href="/wiki/%ED%8B%80:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" title="틀:리눅스 커널">더보기…</a></i></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">논란</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;background:#f7f7f7;">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B9%84%ED%8C%90&amp;action=edit&amp;redlink=1" title="리눅스 비판 (없는 문서)">리눅스 비판</a></li>
+<li><a class="new" href="/w/index.php?title=GNU/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%9D%B4%EB%A6%84_%EB%85%BC%EB%9E%80&amp;action=edit&amp;redlink=1" title="GNU/리눅스 이름 논란 (없는 문서)">GNU/리눅스 이름 논란</a></li>
+<li><a class="new" href="/w/index.php?title=%ED%83%80%EB%84%A8%EB%B0%94%EC%9B%80_%ED%86%A0%EB%B0%9C%EC%A6%88_%EB%85%BC%EC%9F%81&amp;action=edit&amp;redlink=1" title="타넨바움 토발즈 논쟁 (없는 문서)">타넨바움 토발즈 논쟁</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B0%B0%ED%8F%AC%ED%8C%90" title="리눅스 배포판">리눅스 배포판</a></th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B0%B0%ED%8F%AC%ED%8C%90%EB%93%A4%EC%9D%98_%EB%B9%84%EA%B5%90&amp;action=edit&amp;redlink=1" title="리눅스 배포판들의 비교 (없는 문서)">일반 비교</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%B0%B0%ED%8F%AC%ED%8C%90%EC%9D%98_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스 배포판의 목록 (없는 문서)">배포판 목록</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9D%98_%EC%83%81%EC%9A%A9_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스의 상용 소프트웨어 목록 (없는 문서)">리눅스의 상용 소프트웨어</a></li>
+<li><a class="new" href="/w/index.php?title=%ED%8C%A8%ED%82%A4%EC%A7%80_%EB%A7%A4%EB%8B%88%EC%A0%80&amp;action=edit&amp;redlink=1" title="패키지 매니저 (없는 문서)">패키지 매니저</a>
+<ul>
+<li><a href="/wiki/%ED%8C%A8%ED%82%A4%EC%A7%80_%ED%8F%AC%EB%A7%B7" title="패키지 포맷">패키지 포맷</a></li>
+<li><a class="new" href="/w/index.php?title=%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%ED%8C%A8%ED%82%A4%EC%A7%80_%EA%B4%80%EB%A6%AC_%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="소프트웨어 패키지 관리 시스템의 목록 (없는 문서)">소프트웨어 패키지 매니저의 목록</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">조직</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;background:#f7f7f7;">
+<div>
+<ul>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%9D%B4%EB%B2%A4%ED%8A%B8%EB%93%A4%EC%9D%98_%EB%AA%A9%EB%A1%9D&amp;action=edit&amp;redlink=1" title="리눅스 이벤트들의 목록 (없는 문서)">리눅스 이벤트들의 목록</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%9E%AC%EB%8B%A8" title="리눅스 재단">리눅스 재단</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%82%AC%EC%9A%A9%EC%9E%90_%EA%B7%B8%EB%A3%B9&amp;action=edit&amp;redlink=1" title="리눅스 사용자 그룹 (없는 문서)">리눅스 사용자 그룹 (LUG)</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%AC%B8%EC%84%9C%ED%99%94_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8" title="리눅스 문서화 프로젝트">리눅스 문서화 프로젝트</a></li>
+<li><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%B9%B4%EC%9A%B4%ED%84%B0&amp;action=edit&amp;redlink=1" title="리눅스 카운터 (없는 문서)">리눅스 카운터</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;"><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%B1%84%ED%83%9D" title="리눅스 채택">채택</a></th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<ul>
+<li><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4" title="리눅스">데스크톱</a></li>
+<li><a href="/wiki/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C_%EB%A6%AC%EB%88%85%EC%8A%A4" title="임베디드 리눅스">임베디드</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">미디어</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;background:#f7f7f7;">
+<div>
+<ul>
+<li><i><a class="new" href="/w/index.php?title=%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EB%A7%A4%EA%B1%B0%EC%A7%84&amp;action=edit&amp;redlink=1" title="자유 소프트웨어 매거진 (없는 문서)">자유 소프트웨어 매거진</a></i></li>
+<li><a class="new" href="/w/index.php?title=Linux.com&amp;action=edit&amp;redlink=1" title="Linux.com (없는 문서)">Linux.com</a></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Linux_Format" title="en:Linux Format">en:Linux Format</a></i></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Open_Source_For_You" title="en:Open Source For You">en:Open Source For You</a></i></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Linux_Gazette" title="en:Linux Gazette">en:Linux Gazette</a></i></li>
+<li><i><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%A0%80%EB%84%90" title="리눅스 저널">리눅스 저널</a></i></li>
+<li><i><a class="new" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%A7%A4%EA%B1%B0%EC%A7%84&amp;action=edit&amp;redlink=1" title="리눅스 매거진 (없는 문서)">리눅스 매거진</a></i></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/LinuxUser" title="en:LinuxUser">en:LinuxUser</a></i>
+<ul>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Ubuntu_User" title="en:Ubuntu User">en:Ubuntu User</a></i></li>
+</ul>
+</li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Linux_Outlaws" title="en:Linux Outlaws">en:Linux Outlaws</a></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Linux_Voice" title="en:Linux Voice">en:Linux Voice</a></i></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/LugRadio" title="en:LugRadio">en:LugRadio</a></li>
+<li><a href="/wiki/LWN.net" title="LWN.net">LWN.net</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Phoronix" title="en:Phoronix">en:Phoronix</a></li>
+<li><i><a class="extiw" href="https://en.wikipedia.org/wiki/Revolution_OS" title="en:Revolution OS">en:Revolution OS</a></i></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/The_Code_(2001_film)" title="en:The Code (2001 film)"><i>The Code</i></a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th style="white-space:nowrap;background:#ddddff;text-align:right;">인물</th>
+<td class="navbox-list hlist" colspan="1" style="text-align:left;width:100%;">
+<div>
+<ul>
+<li><a href="/wiki/%EC%95%A8%EB%9F%B0_%EC%BD%95%EC%8A%A4" title="앨런 콕스">앨런 콕스</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Allison_Randal" title="en:Allison Randal">en:Allison Randal</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Andrew_Morton_(computer_programmer)" title="en:Andrew Morton (computer programmer)">Andrew Morton</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Benjamin_Mako_Hill" title="en:Benjamin Mako Hill">en:Benjamin Mako Hill</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Bradley_M._Kuhn" title="en:Bradley M. Kuhn">Bradley Kuhn</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Bruce_Perens" title="en:Bruce Perens">en:Bruce Perens</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Daniel_Robbins_(computer_programmer)" title="en:Daniel Robbins (computer programmer)">Daniel Robbins</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/David_S._Miller" title="en:David S. Miller">en:David S. Miller</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman" title="en:Greg Kroah-Hartman">en:Greg Kroah-Hartman</a></li>
+<li><a href="/wiki/%EC%9D%B4%EC%95%88_%EB%A8%B8%EB%8F%85" title="이안 머독">이안 머독</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Jon_Hall_(programmer)" title="en:Jon Hall (programmer)">Jon "maddog" Hall</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Jono_Bacon" title="en:Jono Bacon">en:Jono Bacon</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Karen_Sandler" title="en:Karen Sandler">en:Karen Sandler</a></li>
+<li><a href="/wiki/%EB%A6%AC%EB%88%84%EC%8A%A4_%ED%86%A0%EB%A5%B4%EB%B0%9C%EC%8A%A4" title="리누스 토르발스">리누스 토르발스</a></li>
+<li><a href="/wiki/%EC%97%90%EB%A6%AD_%EB%A0%88%EC%9D%B4%EB%A8%BC%EB%93%9C" title="에릭 레이먼드">에릭 레이먼드</a></li>
+<li><a href="/wiki/%EB%A7%88%ED%81%AC_%EC%85%94%ED%8B%80%EC%9B%8C%EC%8A%A4" title="마크 셔틀워스">마크 셔틀워스</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Pamela_Jones" title="en:Pamela Jones">en:Pamela Jones</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Patrick_Volkerding" title="en:Patrick Volkerding">en:Patrick Volkerding</a></li>
+<li><a href="/wiki/%EB%A6%AC%EC%B2%98%EB%93%9C_%EC%8A%A4%ED%86%A8%EB%A8%BC" title="리처드 스톨먼">리처드 스톨먼</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/Theodore_Ts%27o" title="en:Theodore Ts'o">en:Theodore Ts'o</a></li>
+<li><a class="extiw" href="https://en.wikipedia.org/wiki/William_John_Sullivan" title="en:William John Sullivan">en:William John Sullivan</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<td class="navbox-list" colspan="2" style="text-align:center;background:#ddddff;">
+<div><img alt="분류" data-file-height="31" data-file-width="36" height="14" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/48/Folder_Hexagonal_Icon.svg/16px-Folder_Hexagonal_Icon.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/48/Folder_Hexagonal_Icon.svg/24px-Folder_Hexagonal_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/4/48/Folder_Hexagonal_Icon.svg/32px-Folder_Hexagonal_Icon.svg.png 2x" title="분류" width="16"/> <b><a href="/wiki/%EB%B6%84%EB%A5%98:%EB%A6%AC%EB%88%85%EC%8A%A4" title="분류:리눅스">분류</a></b></div>
+</td>
+</tr>
+</table>
+<!-- 
+NewPP limit report
+Parsed by mw1162
+Cached time: 20170126012608
+Cache expiry: 3600
+Dynamic content: true
+CPU time usage: 0.368 seconds
+Real time usage: 0.541 seconds
+Preprocessor visited node count: 7504/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 109509/2097152 bytes
+Template argument size: 63193/2097152 bytes
+Highest expansion depth: 19/40
+Expensive parser function count: 0/500
+Lua time usage: 0.032/10.000 seconds
+Lua memory usage: 1.99 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  469.433      1 -total
+ 27.03%  126.884      1 틀:리눅스_커널_연표
+ 24.84%  116.616      1 틀:운영_체제_정보
+ 24.27%  113.913      1 틀:정보상자
+ 23.04%  108.166      2 틀:둘러보기_상자
+ 18.69%   87.720      1 틀:리눅스_커널
+ 18.28%   85.791      2 틀:둘러보기_상자/핵심
+ 14.47%   67.910      1 틀:각주
+ 12.87%   60.410      4 틀:웹_인용
+  9.46%   44.421      7 틀:둘러보기_상자/중첩
+-->
+<!-- Saved in parser cache with key kowiki:pcache:idhash:157589-0!*!0!!ko!4!* and timestamp 20170126012608 and revision id 17368596
+ -->
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.log.warn("Gadget \"ReferenceTooltips\" styles loaded twice. Migrate to type=general. See \u003Chttps://phabricator.wikimedia.org/T42284\u003E.");});</script><noscript><img alt="" height="1" src="//ko.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						원본 주소 "<a dir="ltr" href="https://ko.wikipedia.org/w/index.php?title=리눅스_커널&amp;oldid=17368596">https://ko.wikipedia.org/w/index.php?title=리눅스_커널&amp;oldid=17368596</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/%ED%8A%B9%EC%88%98:%EB%B6%84%EB%A5%98" title="특수:분류">분류</a>: <ul><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D_%EC%BB%A4%EB%84%90" title="분류:모놀리식 커널">모놀리식 커널</a></li><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" title="분류:리눅스 커널">리눅스 커널</a></li><li><a href="/wiki/%EB%B6%84%EB%A5%98:%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4" title="분류:자유 소프트웨어">자유 소프트웨어</a></li><li><a href="/wiki/%EB%B6%84%EB%A5%98:1991%EB%85%84_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4" title="분류:1991년 소프트웨어">1991년 소프트웨어</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>둘러보기 메뉴</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">개인 도구</h3>
+<ul>
+<li id="pt-anonuserpage">로그인하지 않음</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/%ED%8A%B9%EC%88%98:%EB%82%B4%EC%82%AC%EC%9A%A9%EC%9E%90%ED%86%A0%EB%A1%A0" title="현재 사용하는 IP 주소에 대한 토론 문서 [n]">토론</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/%ED%8A%B9%EC%88%98:%EB%82%B4%EA%B8%B0%EC%97%AC" title="이 IP 주소의 편집 목록 [y]">기여</a></li><li id="pt-createaccount"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EA%B3%84%EC%A0%95%EB%A7%8C%EB%93%A4%EA%B8%B0&amp;returnto=%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90" title="계정을 만들고 로그인하는 것이 좋습니다; 하지만, 필수는 아닙니다">계정 만들기</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EB%A1%9C%EA%B7%B8%EC%9D%B8&amp;returnto=%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90" title="위키백과에 로그인하면 여러가지 편리한 기능을 사용할 수 있습니다. [o]">로그인</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">이름공간</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" title="본문 보기 [c]">문서</a></span></li>
+<li id="ca-talk"><span><a accesskey="t" href="/wiki/%ED%86%A0%EB%A1%A0:%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" rel="discussion" title="문서의 내용에 대한 토론 문서 [t]">토론</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>변수</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">보기</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90">읽기</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=edit" title="이 문서 편집하기 [e]">편집</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=history" title="이 문서의 과거 편집 내역입니다. [h]">역사 보기</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>더 보기</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">검색</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="위키백과 검색" title="위키백과 검색 [f]" type="search"/><input name="title" type="hidden" value="특수:검색"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="이 문자열이 포함된 문서 검색" type="submit" value="검색"/><input class="searchButton" id="searchButton" name="go" title="이 이름의 문서가 존재하면 그 문서로 바로 가기" type="submit" value="보기"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8C%80%EB%AC%B8" title="대문으로 가기"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">둘러보기</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8C%80%EB%AC%B8" title="대문으로 가기 [z]">대문</a></li><li id="n-portal"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EC%82%AC%EC%9A%A9%EC%9E%90_%EB%AA%A8%EC%9E%84" title="위키백과 참여자를 위한 토론/대화 공간입니다.">사용자 모임</a></li><li id="n-currentevents"><a href="/wiki/%ED%8F%AC%ED%84%B8:%EC%9A%94%EC%A6%98_%ED%99%94%EC%A0%9C" title="최근의 소식 알아 보기">요즘 화제</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/%ED%8A%B9%EC%88%98:%EC%B5%9C%EA%B7%BC%EB%B0%94%EB%80%9C" title="위키의 최근 바뀐 목록 [r]">최근 바뀜</a></li><li id="n-index"><a href="/wiki/%ED%8A%B9%EC%88%98:%EB%AA%A8%EB%93%A0%EB%AC%B8%EC%84%9C">모든 문서 보기</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/%ED%8A%B9%EC%88%98:%EC%9E%84%EC%9D%98%EB%AC%B8%EC%84%9C" title="임의 문서 불러오기 [x]">임의 문서로</a></li><li id="n-help"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%8F%84%EC%9B%80%EB%A7%90" title="도움말">도움말</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_ko.wikipedia.org&amp;uselang=ko" title="지원을 기다립니다">기부</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">도구</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/%ED%8A%B9%EC%88%98:%EA%B0%80%EB%A6%AC%ED%82%A4%EB%8A%94%EB%AC%B8%EC%84%9C/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" title="여기를 가리키는 모든 위키 문서의 목록 [j]">여기를 가리키는 문서</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/%ED%8A%B9%EC%88%98:%EB%A7%81%ED%81%AC%EC%B5%9C%EA%B7%BC%EB%B0%94%EB%80%9C/%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90" rel="nofollow" title="이 문서에서 링크한 문서의 최근 바뀜 [k]">가리키는 글의 바뀜</a></li><li id="t-upload"><a accesskey="u" href="/wiki/위키백과:파일_올리기" title="파일 올리기 [u]">파일 올리기</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/%ED%8A%B9%EC%88%98:%ED%8A%B9%EC%88%98%EB%AC%B8%EC%84%9C" title="모든 특수 문서의 목록 [q]">특수 문서 목록</a></li><li id="t-permalink"><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;oldid=17368596" title="문서의 이 판에 대한 고유링크">고유 링크</a></li><li id="t-info"><a href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;action=info" title="이 문서에 대한 자세한 정보">문서 정보</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q14579" title="데이터 저장소에 연결된 항목을 가리키는 링크 [g]">위키데이터 항목</a></li><li id="t-cite"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%9D%B4%EB%AC%B8%EC%84%9C%EC%9D%B8%EC%9A%A9&amp;page=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;id=17368596" title="이 문서를 인용하는 방법에 대한 정보">이 문서 인용하기</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">인쇄/내보내기</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%B1%85&amp;bookcmd=book_creator&amp;referer=%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90">책 만들기</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=%ED%8A%B9%EC%88%98:%EC%B1%85&amp;bookcmd=render_article&amp;arttitle=%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;returnto=%EB%A6%AC%EB%88%85%EC%8A%A4+%EC%BB%A4%EB%84%90&amp;oldid=17368596&amp;writer=rdf2latex">PDF로 다운로드</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;printable=yes" title="이 문서의 인쇄용 판 [p]">인쇄용 판</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-wikibase-otherprojects-label" class="portal" id="p-wikibase-otherprojects" role="navigation">
+<h3 id="p-wikibase-otherprojects-label">다른 프로젝트</h3>
+<div class="body">
+<ul>
+<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:Linux_kernel" hreflang="en">위키미디어 공용</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">다른 언어</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-ang"><a class="interlanguage-link-target" href="https://ang.wikipedia.org/wiki/Linux_(cyrnel)" hreflang="ang" lang="ang" title="Linux (cyrnel) – 고대 영어">Ænglisc</a></li><li class="interlanguage-link interwiki-ar"><a class="interlanguage-link-target" href="https://ar.wikipedia.org/wiki/%D9%86%D9%88%D8%A7%D8%A9_%D9%84%D9%8A%D9%86%D9%83%D8%B3" hreflang="ar" lang="ar" title="نواة لينكس – 아랍어">العربية</a></li><li class="interlanguage-link interwiki-az"><a class="interlanguage-link-target" href="https://az.wikipedia.org/wiki/Linux_n%C3%BCv%C9%99si" hreflang="az" lang="az" title="Linux nüvəsi – 아제르바이잔어">Azərbaycanca</a></li><li class="interlanguage-link interwiki-bg"><a class="interlanguage-link-target" href="https://bg.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D1%83%D0%BA%D1%81_(%D1%8F%D0%B4%D1%80%D0%BE)" hreflang="bg" lang="bg" title="Линукс (ядро) – 불가리아어">Български</a></li><li class="interlanguage-link interwiki-bn"><a class="interlanguage-link-target" href="https://bn.wikipedia.org/wiki/%E0%A6%B2%E0%A6%BF%E0%A6%A8%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%B8_%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A8%E0%A7%87%E0%A6%B2" hreflang="bn" lang="bn" title="লিনাক্স কার্নেল – 벵골어">বাংলা</a></li><li class="interlanguage-link interwiki-ca"><a class="interlanguage-link-target" href="https://ca.wikipedia.org/wiki/Linux_(nucli)" hreflang="ca" lang="ca" title="Linux (nucli) – 카탈로니아어">Català</a></li><li class="interlanguage-link interwiki-ckb"><a class="interlanguage-link-target" href="https://ckb.wikipedia.org/wiki/%D9%86%D8%A7%D9%88%DA%A9%DB%8C_%D9%84%DB%8C%D9%86%D9%88%DA%A9%D8%B3" hreflang="ckb" lang="ckb" title="ناوکی لینوکس – 소라니 쿠르드어">کوردیی ناوەندی</a></li><li class="interlanguage-link interwiki-cs"><a class="interlanguage-link-target" href="https://cs.wikipedia.org/wiki/Linux_(j%C3%A1dro)" hreflang="cs" lang="cs" title="Linux (jádro) – 체코어">Čeština</a></li><li class="interlanguage-link interwiki-csb"><a class="interlanguage-link-target" href="https://csb.wikipedia.org/wiki/Linux_(j%C4%85dro)" hreflang="csb" lang="csb" title="Linux (jądro) – 카슈비아어">Kaszëbsczi</a></li><li class="interlanguage-link interwiki-de badge-Q17437798 badge-goodarticle" title="좋은 글"><a class="interlanguage-link-target" href="https://de.wikipedia.org/wiki/Linux_(Kernel)" hreflang="de" lang="de" title="Linux (Kernel) – 독일어">Deutsch</a></li><li class="interlanguage-link interwiki-el"><a class="interlanguage-link-target" href="https://el.wikipedia.org/wiki/%CE%A0%CF%85%CF%81%CE%AE%CE%BD%CE%B1%CF%82_Linux" hreflang="el" lang="el" title="Πυρήνας Linux – 그리스어">Ελληνικά</a></li><li class="interlanguage-link interwiki-en"><a class="interlanguage-link-target" href="https://en.wikipedia.org/wiki/Linux_kernel" hreflang="en" lang="en" title="Linux kernel – 영어">English</a></li><li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux" hreflang="es" lang="es" title="Núcleo Linux – 스페인어">Español</a></li><li class="interlanguage-link interwiki-et"><a class="interlanguage-link-target" href="https://et.wikipedia.org/wiki/Linux_(tuum)" hreflang="et" lang="et" title="Linux (tuum) – 에스토니아어">Eesti</a></li><li class="interlanguage-link interwiki-fa"><a class="interlanguage-link-target" href="https://fa.wikipedia.org/wiki/%D9%87%D8%B3%D8%AA%D9%87_%D9%84%DB%8C%D9%86%D9%88%DA%A9%D8%B3" hreflang="fa" lang="fa" title="هسته لینوکس – 페르시아어">فارسی</a></li><li class="interlanguage-link interwiki-fi"><a class="interlanguage-link-target" href="https://fi.wikipedia.org/wiki/Linux_(ydin)" hreflang="fi" lang="fi" title="Linux (ydin) – 핀란드어">Suomi</a></li><li class="interlanguage-link interwiki-fr"><a class="interlanguage-link-target" href="https://fr.wikipedia.org/wiki/Noyau_Linux" hreflang="fr" lang="fr" title="Noyau Linux – 프랑스어">Français</a></li><li class="interlanguage-link interwiki-gl"><a class="interlanguage-link-target" href="https://gl.wikipedia.org/wiki/N%C3%BAcleo_Linux" hreflang="gl" lang="gl" title="Núcleo Linux – 갈리시아어">Galego</a></li><li class="interlanguage-link interwiki-he"><a class="interlanguage-link-target" href="https://he.wikipedia.org/wiki/%D7%9C%D7%99%D7%A0%D7%95%D7%A7%D7%A1_(%D7%9C%D7%99%D7%91%D7%94)" hreflang="he" lang="he" title="לינוקס (ליבה) – 히브리어">עברית</a></li><li class="interlanguage-link interwiki-hu"><a class="interlanguage-link-target" href="https://hu.wikipedia.org/wiki/Linux_(rendszermag)" hreflang="hu" lang="hu" title="Linux (rendszermag) – 헝가리어">Magyar</a></li><li class="interlanguage-link interwiki-id"><a class="interlanguage-link-target" href="https://id.wikipedia.org/wiki/Linux_(kernel)" hreflang="id" lang="id" title="Linux (kernel) – 인도네시아어">Bahasa Indonesia</a></li><li class="interlanguage-link interwiki-ilo"><a class="interlanguage-link-target" href="https://ilo.wikipedia.org/wiki/Linux_(kernel)" hreflang="ilo" lang="ilo" title="Linux (kernel) – 이로코어">Ilokano</a></li><li class="interlanguage-link interwiki-is"><a class="interlanguage-link-target" href="https://is.wikipedia.org/wiki/Linuxkjarninn" hreflang="is" lang="is" title="Linuxkjarninn – 아이슬란드어">Íslenska</a></li><li class="interlanguage-link interwiki-it"><a class="interlanguage-link-target" href="https://it.wikipedia.org/wiki/Linux_(kernel)" hreflang="it" lang="it" title="Linux (kernel) – 이탈리아어">Italiano</a></li><li class="interlanguage-link interwiki-ja"><a class="interlanguage-link-target" href="https://ja.wikipedia.org/wiki/Linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB" hreflang="ja" lang="ja" title="Linuxカーネル – 일본어">日本語</a></li><li class="interlanguage-link interwiki-li"><a class="interlanguage-link-target" href="https://li.wikipedia.org/wiki/Linux" hreflang="li" lang="li" title="Linux – 림버거어">Limburgs</a></li><li class="interlanguage-link interwiki-lt"><a class="interlanguage-link-target" href="https://lt.wikipedia.org/wiki/Linux_(branduolys)" hreflang="lt" lang="lt" title="Linux (branduolys) – 리투아니아어">Lietuvių</a></li><li class="interlanguage-link interwiki-lv"><a class="interlanguage-link-target" href="https://lv.wikipedia.org/wiki/Linux" hreflang="lv" lang="lv" title="Linux – 라트비아어">Latviešu</a></li><li class="interlanguage-link interwiki-ml"><a class="interlanguage-link-target" href="https://ml.wikipedia.org/wiki/%E0%B4%B2%E0%B4%BF%E0%B4%A8%E0%B4%95%E0%B5%8D%E0%B4%B8%E0%B5%8D_%E0%B4%95%E0%B5%86%E0%B5%BC%E0%B4%A3%E0%B5%BD" hreflang="ml" lang="ml" title="ലിനക്സ് കെർണൽ – 말라얄람어">മലയാളം</a></li><li class="interlanguage-link interwiki-ms"><a class="interlanguage-link-target" href="https://ms.wikipedia.org/wiki/Linux_(inti)" hreflang="ms" lang="ms" title="Linux (inti) – 말레이어">Bahasa Melayu</a></li><li class="interlanguage-link interwiki-nl"><a class="interlanguage-link-target" href="https://nl.wikipedia.org/wiki/Linuxkernel" hreflang="nl" lang="nl" title="Linuxkernel – 네덜란드어">Nederlands</a></li><li class="interlanguage-link interwiki-nn"><a class="interlanguage-link-target" href="https://nn.wikipedia.org/wiki/Linux-kjernen" hreflang="nn" lang="nn" title="Linux-kjernen – 노르웨이어(니노르스크)">Norsk nynorsk</a></li><li class="interlanguage-link interwiki-no"><a class="interlanguage-link-target" href="https://no.wikipedia.org/wiki/Linuxkjernen" hreflang="no" lang="no" title="Linuxkjernen – 노르웨이어">Norsk bokmål</a></li><li class="interlanguage-link interwiki-oc"><a class="interlanguage-link-target" href="https://oc.wikipedia.org/wiki/Nucl%C3%A8u_Linux" hreflang="oc" lang="oc" title="Nuclèu Linux – 오크어">Occitan</a></li><li class="interlanguage-link interwiki-or"><a class="interlanguage-link-target" href="https://or.wikipedia.org/wiki/%E0%AC%B2%E0%AC%BF%E0%AC%A8%E0%AC%95%E0%AD%8D%E0%AC%B8_%E0%AC%95%E0%AC%B0%E0%AD%8D%E0%AC%A8%E0%AD%87%E0%AC%B2" hreflang="or" lang="or" title="ଲିନକ୍ସ କର୍ନେଲ – 오리야어">ଓଡ଼ିଆ</a></li><li class="interlanguage-link interwiki-pa"><a class="interlanguage-link-target" href="https://pa.wikipedia.org/wiki/%E0%A8%B2%E0%A9%80%E0%A8%A8%E0%A8%95%E0%A8%B8_%E0%A8%95%E0%A8%B0%E0%A8%A8%E0%A8%B2" hreflang="pa" lang="pa" title="ਲੀਨਕਸ ਕਰਨਲ – 펀잡어">ਪੰਜਾਬੀ</a></li><li class="interlanguage-link interwiki-pfl"><a class="interlanguage-link-target" href="https://pfl.wikipedia.org/wiki/Linux_(Kernel)" hreflang="pfl" lang="pfl" title="Linux (Kernel) – Palatine German">Pälzisch</a></li><li class="interlanguage-link interwiki-pl"><a class="interlanguage-link-target" href="https://pl.wikipedia.org/wiki/Linux_(j%C4%85dro)" hreflang="pl" lang="pl" title="Linux (jądro) – 폴란드어">Polski</a></li><li class="interlanguage-link interwiki-pt"><a class="interlanguage-link-target" href="https://pt.wikipedia.org/wiki/Linux_(n%C3%BAcleo)" hreflang="pt" lang="pt" title="Linux (núcleo) – 포르투갈어">Português</a></li><li class="interlanguage-link interwiki-ro"><a class="interlanguage-link-target" href="https://ro.wikipedia.org/wiki/Linux_(nucleul)" hreflang="ro" lang="ro" title="Linux (nucleul) – 루마니아어">Română</a></li><li class="interlanguage-link interwiki-ru"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%AF%D0%B4%D1%80%D0%BE_Linux" hreflang="ru" lang="ru" title="Ядро Linux – 러시아어">Русский</a></li><li class="interlanguage-link interwiki-scn"><a class="interlanguage-link-target" href="https://scn.wikipedia.org/wiki/Linux_(n%C3%B9cliu)" hreflang="scn" lang="scn" title="Linux (nùcliu) – 시칠리아어">Sicilianu</a></li><li class="interlanguage-link interwiki-sco"><a class="interlanguage-link-target" href="https://sco.wikipedia.org/wiki/Linux_kernel" hreflang="sco" lang="sco" title="Linux kernel – 스코틀랜드어">Scots</a></li><li class="interlanguage-link interwiki-si"><a class="interlanguage-link-target" href="https://si.wikipedia.org/wiki/%E0%B6%BD%E0%B7%92%E0%B6%B1%E0%B6%9A%E0%B7%8A%E0%B7%83%E0%B7%8A_%E0%B6%9A%27%E0%B6%B1%E0%B6%BD%E0%B6%BA" hreflang="si" lang="si" title="ලිනක්ස් ක'නලය – 스리랑카어">සිංහල</a></li><li class="interlanguage-link interwiki-simple"><a class="interlanguage-link-target" href="https://simple.wikipedia.org/wiki/Linux_kernel" hreflang="simple" lang="simple" title="Linux kernel – Simple English">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a class="interlanguage-link-target" href="https://sk.wikipedia.org/wiki/Linux_(jadro)" hreflang="sk" lang="sk" title="Linux (jadro) – 슬로바키아어">Slovenčina</a></li><li class="interlanguage-link interwiki-sq"><a class="interlanguage-link-target" href="https://sq.wikipedia.org/wiki/Linux_kernel" hreflang="sq" lang="sq" title="Linux kernel – 알바니아어">Shqip</a></li><li class="interlanguage-link interwiki-sr"><a class="interlanguage-link-target" href="https://sr.wikipedia.org/wiki/%D0%88%D0%B5%D0%B7%D0%B3%D1%80%D0%BE_%D0%9B%D0%B8%D0%BD%D1%83%D0%BA%D1%81%D0%B0" hreflang="sr" lang="sr" title="Језгро Линукса – 세르비아어">Српски / srpski</a></li><li class="interlanguage-link interwiki-sv"><a class="interlanguage-link-target" href="https://sv.wikipedia.org/wiki/Linux_(k%C3%A4rna)" hreflang="sv" lang="sv" title="Linux (kärna) – 스웨덴어">Svenska</a></li><li class="interlanguage-link interwiki-szl"><a class="interlanguage-link-target" href="https://szl.wikipedia.org/wiki/Linux_(kernel)" hreflang="szl" lang="szl" title="Linux (kernel) – Silesian">Ślůnski</a></li><li class="interlanguage-link interwiki-ta"><a class="interlanguage-link-target" href="https://ta.wikipedia.org/wiki/%E0%AE%B2%E0%AE%BF%E0%AE%A9%E0%AE%95%E0%AF%8D%E0%AE%9A%E0%AF%81_%E0%AE%95%E0%AE%B0%E0%AF%81%E0%AE%A9%E0%AE%BF" hreflang="ta" lang="ta" title="லினக்சு கருனி – 타밀어">தமிழ்</a></li><li class="interlanguage-link interwiki-te"><a class="interlanguage-link-target" href="https://te.wikipedia.org/wiki/%E0%B0%B2%E0%B0%BF%E0%B0%A8%E0%B0%95%E0%B1%8D%E0%B0%B8%E0%B1%8D_%E0%B0%95%E0%B1%86%E0%B0%B0%E0%B1%8D%E0%B0%A8%E0%B0%B2%E0%B1%8D" hreflang="te" lang="te" title="లినక్స్ కెర్నల్ – 텔루구어">తెలుగు</a></li><li class="interlanguage-link interwiki-th"><a class="interlanguage-link-target" href="https://th.wikipedia.org/wiki/%E0%B8%A5%E0%B8%B4%E0%B8%99%E0%B8%B8%E0%B8%81%E0%B8%8B%E0%B9%8C_%E0%B9%80%E0%B8%84%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%99%E0%B8%A5" hreflang="th" lang="th" title="ลินุกซ์ เคอร์เนล – 태국어">ไทย</a></li><li class="interlanguage-link interwiki-tr"><a class="interlanguage-link-target" href="https://tr.wikipedia.org/wiki/Linux_%C3%A7ekirde%C4%9Fi" hreflang="tr" lang="tr" title="Linux çekirdeği – 터키어">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/%D0%AF%D0%B4%D1%80%D0%BE_Linux" hreflang="uk" lang="uk" title="Ядро Linux – 우크라이나어">Українська</a></li><li class="interlanguage-link interwiki-vi"><a class="interlanguage-link-target" href="https://vi.wikipedia.org/wiki/H%E1%BA%A1t_nh%C3%A2n_Linux" hreflang="vi" lang="vi" title="Hạt nhân Linux – 베트남어">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/Linux%E5%86%85%E6%A0%B8" hreflang="zh" lang="zh" title="Linux内核 – 중국어">中文</a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q14579#sitelinks-wikipedia" title="언어 인터위키 링크 편집">링크 편집</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> 이 문서는 2016년 10월 6일 (목) 21:07에 마지막으로 바뀌었습니다.</li>
+<li id="footer-info-copyright">모든 문서는 <a href="//ko.wikipedia.org/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0</a>에 따라 사용할 수 있으며, 추가적인 조건이 적용될 수 있습니다. 자세한 내용은 <a href="//wikimediafoundation.org/wiki/Terms_of_Use/ko">이용 약관</a>을 참고하십시오.<br/>Wikipedia®는 미국 및 다른 국가에 등록되어 있는 <a class="internal" href="http://www.wikimediafoundation.org">Wikimedia Foundation, Inc.</a> 소유의 등록 상표입니다.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">개인정보 정책</a></li>
+<li id="footer-places-about"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EC%86%8C%EA%B0%9C" title="위키백과:소개">위키백과 소개</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:%EB%A9%B4%EC%B1%85_%EC%A1%B0%ED%95%AD" title="위키백과:면책 조항">면책 조항</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">개발자</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">쿠키 정책</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//ko.m.wikipedia.org/w/index.php?title=%EB%A6%AC%EB%88%85%EC%8A%A4_%EC%BB%A4%EB%84%90&amp;mobileaction=toggle_view_mobile">모바일 보기</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.368","walltime":"0.541","ppvisitednodes":{"value":7504,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":109509,"limit":2097152},"templateargumentsize":{"value":63193,"limit":2097152},"expansiondepth":{"value":19,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":0,"limit":400},"timingprofile":["100.00%  469.433      1 -total"," 27.03%  126.884      1 틀:리눅스_커널_연표"," 24.84%  116.616      1 틀:운영_체제_정보"," 24.27%  113.913      1 틀:정보상자"," 23.04%  108.166      2 틀:둘러보기_상자"," 18.69%   87.720      1 틀:리눅스_커널"," 18.28%   85.791      2 틀:둘러보기_상자/핵심"," 14.47%   67.910      1 틀:각주"," 12.87%   60.410      4 틀:웹_인용","  9.46%   44.421      7 틀:둘러보기_상자/중첩"]},"scribunto":{"limitreport-timeusage":{"value":"0.032","limit":"10.000"},"limitreport-memusage":{"value":2083860,"limit":52428800}},"cachereport":{"origin":"mw1162","timestamp":"20170126012608","ttl":3600,"transientcontent":true}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":61,"wgHostname":"mw1272"});});</script>
+</body>
+</html>

@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+<html class="client-nojs" dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Miller–Rabin primality test - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Miller–Rabin_primality_test","wgTitle":"Miller–Rabin primality test","wgCurRevisionId":756360689,"wgRevisionId":756360689,"wgArticleId":188999,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Primality tests","Finite fields"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Miller–Rabin_primality_test","wgRelevantArticleId":188999,"wgRequestId":"WIV3hwpAMFAAAEKOPTwAAABY","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q980224","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.math.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","ext.math.scripts","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta content="" name="ResourceLoaderDynamicStyles"/>
+<link href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector" rel="stylesheet"/>
+<meta content="MediaWiki 1.29.0-wmf.8" name="generator"/>
+<meta content="origin-when-cross-origin" name="referrer"/>
+<link href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test" rel="alternate"/>
+<link href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit" rel="alternate" title="Edit this page" type="application/x-wiki"/>
+<link href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit" rel="edit" title="Edit this page"/>
+<link href="/static/apple-touch/wikipedia.png" rel="apple-touch-icon"/>
+<link href="/static/favicon/wikipedia.ico" rel="shortcut icon"/>
+<link href="/w/opensearch_desc.php" rel="search" title="Wikipedia (en)" type="application/opensearchdescription+xml"/>
+<link href="//en.wikipedia.org/w/api.php?action=rsd" rel="EditURI" type="application/rsd+xml"/>
+<link href="//creativecommons.org/licenses/by-sa/3.0/" rel="copyright"/>
+<link href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test" rel="canonical"/>
+<link href="//login.wikimedia.org" rel="dns-prefetch"/>
+<link href="//meta.wikimedia.org" rel="dns-prefetch"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Miller–Rabin_primality_test rootpage-Miller–Rabin_primality_test skin-vector action-view"> <div class="noprint" id="mw-page-base"></div>
+<div class="noprint" id="mw-head-base"></div>
+<div class="mw-body" id="content" role="main">
+<a id="top"></a>
+<div id="siteNotice"><!-- CentralNotice --></div>
+<div class="mw-indicators">
+</div>
+<h1 class="firstHeading" id="firstHeading" lang="en">Miller–Rabin primality test</h1>
+<div class="mw-body-content" id="bodyContent">
+<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+<div id="contentSub"></div>
+<div class="mw-jump" id="jump-to-nav">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+</div>
+<div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><p>The <b>Miller–Rabin primality test</b> or <b>Rabin–Miller primality test</b> is a <a href="/wiki/Primality_test" title="Primality test">primality test</a>: an <a href="/wiki/Algorithm" title="Algorithm">algorithm</a> which determines whether a given number is <a href="/wiki/Prime_number" title="Prime number">prime</a>, similar to the <a href="/wiki/Fermat_primality_test" title="Fermat primality test">Fermat primality test</a> and the <a href="/wiki/Solovay%E2%80%93Strassen_primality_test" title="Solovay–Strassen primality test">Solovay–Strassen primality test</a>. Its original version, due to <a class="mw-redirect" href="/wiki/Gary_Miller_(professor)" title="Gary Miller (professor)">Gary L. Miller</a>, is <a href="/wiki/Deterministic_algorithm" title="Deterministic algorithm">deterministic</a>, but the determinism relies on the unproven <a class="mw-redirect" href="/wiki/Extended_Riemann_hypothesis" title="Extended Riemann hypothesis">Extended Riemann hypothesis</a>;<sup class="reference" id="cite_ref-miller_1-0"><a href="#cite_note-miller-1">[1]</a></sup> <a href="/wiki/Michael_O._Rabin" title="Michael O. Rabin">Michael O. Rabin</a> modified it to obtain an unconditional <a href="/wiki/Randomized_algorithm" title="Randomized algorithm">probabilistic algorithm</a>.<sup class="reference" id="cite_ref-rabin_2-0"><a href="#cite_note-rabin-2">[2]</a></sup></p>
+<p></p>
+<div class="toc" id="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Concepts"><span class="tocnumber">1</span> <span class="toctext">Concepts</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Example"><span class="tocnumber">2</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Computational_complexity"><span class="tocnumber">3</span> <span class="toctext">Computational complexity</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Accuracy"><span class="tocnumber">4</span> <span class="toctext">Accuracy</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Deterministic_variants"><span class="tocnumber">5</span> <span class="toctext">Deterministic variants</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Notes"><span class="tocnumber">6</span> <span class="toctext">Notes</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#External_links"><span class="tocnumber">7</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Concepts">Concepts</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=1" title="Edit section: Concepts">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Just like the Fermat and Solovay–Strassen tests, the Miller–Rabin test relies on an equality or set of equalities that hold true for prime values, then checks whether or not they hold for a number that we want to test for primality.</p>
+<p>First, a <a href="/wiki/Lemma_(mathematics)" title="Lemma (mathematics)">lemma</a> about square <a href="/wiki/Root_of_unity" title="Root of unity">roots of unity</a> in the <a href="/wiki/Finite_field" title="Finite field">finite field</a> <b>Z</b>/<i>p</i><b>Z</b>, where <i>p</i> is prime and <i>p</i> &gt; 2. Certainly 1 and −1 always yield 1 when squared modulo <i>p</i>; call these <a class="mw-redirect" href="/wiki/Trivial_(mathematics)" title="Trivial (mathematics)">trivial</a> <a href="/wiki/Square_root" title="Square root">square roots</a> of 1. There are no <i>nontrivial</i> square roots of 1 modulo <i>p</i> (a special case of the result that, in a field, a <a href="/wiki/Polynomial" title="Polynomial">polynomial</a> has no more zeroes than its degree). To show this, suppose that <i>x</i> is a square root of 1 modulo <i>p</i>. Then:</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>x</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mn>2</mn>
+</mrow>
+</msup>
+<mo>≡<!-- ≡ --></mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>p</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle x^{2}\equiv 1{\pmod {p}}}</annotation>
+</semantics>
+</math></span><img alt="x^{2}\equiv 1{\pmod {p}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f2404e3c31b0cfd08dda220c8baa8219babc5f97" style="vertical-align: -0.838ex; width:17.6ex; height:3.176ex;"/></span></dd>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mo stretchy="false">(</mo>
+<mi>x</mi>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+<mo stretchy="false">)</mo>
+<mo stretchy="false">(</mo>
+<mi>x</mi>
+<mo>+</mo>
+<mn>1</mn>
+<mo stretchy="false">)</mo>
+<mo>≡<!-- ≡ --></mo>
+<mn>0</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>p</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+<mo>.</mo>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle (x-1)(x+1)\equiv 0{\pmod {p}}.}</annotation>
+</semantics>
+</math></span><img alt="(x-1)(x+1)\equiv 0{\pmod {p}}." aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b663c54c2aeac6efaa41665f90eb504268a0cbb7" style="vertical-align: -0.838ex; width:30.243ex; height:2.843ex;"/></span></dd>
+</dl>
+<p>In other words, prime <i>p</i> divides the product <span class="nowrap">(<i>x</i> − 1)(<i>x</i> + 1).</span> By <a href="/wiki/Euclid%27s_lemma" title="Euclid's lemma">Euclid's lemma</a> it divides one of the factors <span class="nowrap"><i>x</i> − 1</span> or <span class="nowrap"><i>x</i> + 1,</span> implying that <i>x</i> is congruent to either 1 or −1 modulo <i>p</i>.</p>
+<p>Now, let <i>n</i> be prime with <i>n</i> &gt; 2. It follows that <span class="nowrap"><i>n</i> − 1</span> is even and we can write it as 2<sup><i>s</i></sup>·<i>d</i>, where <i>s</i> and <i>d</i> are positive integers and <i>d</i> is odd. For each <i>a</i> in (<b>Z</b>/<i>n</i><b>Z</b>)*, either</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>d</mi>
+</mrow>
+</msup>
+<mo>≡<!-- ≡ --></mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{d}\equiv 1{\pmod {n}}}</annotation>
+</semantics>
+</math></span><img alt="a^{d}\equiv 1{\pmod {n}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2fbd85b469a4bd1028f98a9ba2a0a9e170006f21" style="vertical-align: -0.838ex; width:17.763ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>or</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>r</mi>
+</mrow>
+</msup>
+<mo>⋅<!-- ⋅ --></mo>
+<mi>d</mi>
+</mrow>
+</msup>
+<mo>≡<!-- ≡ --></mo>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{2^{r}\cdot d}\equiv -1{\pmod {n}}}</annotation>
+</semantics>
+</math></span><img alt="a^{2^{r}\cdot d}\equiv -1{\pmod {n}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/358e96898dfe43d19e90b9f02d26993c0d8aa275" style="vertical-align: -0.838ex; width:21.648ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>for some 0 ≤ r ≤ <i>s</i> − 1.</p>
+<p>To show that one of these must be true, recall <a href="/wiki/Fermat%27s_little_theorem" title="Fermat's little theorem">Fermat's little theorem</a>, that for a prime number n:</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>n</mi>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>≡<!-- ≡ --></mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+<mo>.</mo>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{n-1}\equiv 1{\pmod {n}}.}</annotation>
+</semantics>
+</math></span><img alt="a^{n-1}\equiv 1{\pmod {n}}." aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0998a7a99eaf4fa30b098d51e3e80b890eb0f95d" style="vertical-align: -0.838ex; width:20.662ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>By the lemma above, if we keep taking square roots of <i>a</i><sup><i>n</i>−1</sup>, we will get either 1 or −1. If we get −1 then the second equality holds and it is done. If we never get −1, then when we have taken out every power of 2, we are left with the first equality.</p>
+<p>The Miller–Rabin primality test is based on the <a class="mw-redirect" href="/wiki/Contrapositive" title="Contrapositive">contrapositive</a> of the above claim. That is, if we can find an <i>a</i> such that</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>d</mi>
+</mrow>
+</msup>
+<mo>≢</mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{d}\not \equiv 1{\pmod {n}}}</annotation>
+</semantics>
+</math></span><img alt="a^{d}\not \equiv 1{\pmod {n}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0867bd3e86262241fae38a021ed361001e28f66a" style="vertical-align: -0.838ex; width:17.775ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>and</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>r</mi>
+</mrow>
+</msup>
+<mi>d</mi>
+</mrow>
+</msup>
+<mo>≢</mo>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{2^{r}d}\not \equiv -1{\pmod {n}}}</annotation>
+</semantics>
+</math></span><img alt="a^{2^{r}d}\not \equiv -1{\pmod {n}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e20bbbf10f3ef34c4e8d4e398dd978250331af54" style="vertical-align: -0.838ex; width:21.195ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>for all 0 ≤ r ≤ <i>s</i> − 1, then <i>n</i> is not prime. We call <i>a</i> a <a href="/wiki/Witness_(mathematics)" title="Witness (mathematics)">witness</a> for the compositeness of <i>n</i> (sometimes misleadingly called a <i>strong witness</i>, although it is a certain proof of this fact). Otherwise <i>a</i> is called a <i>strong liar</i>, and <i>n</i> is a <a href="/wiki/Probable_prime" title="Probable prime">strong probable prime</a> to base <i>a</i>. The term "strong liar" refers to the case where <i>n</i> is composite but nevertheless the equations hold as they would for a prime.</p>
+<p>Every odd composite <i>n</i> has many witnesses <i>a</i>, however, no simple way of generating such an <i>a</i> is known. The solution is to make the test <a href="/wiki/Primality_test#Probabilistic_tests" title="Primality test">probabilistic</a>: we choose a non-zero <i>a</i> in <b>Z</b>/<i>n</i><b>Z</b> randomly, and check whether or not it is a witness for the compositeness of <i>n</i>. If <i>n</i> is composite, most of the choices for <i>a</i> will be witnesses, and the test will detect <i>n</i> as composite with high probability. There is, nevertheless, a small chance that we are unlucky and hit an <i>a</i> which is a strong liar for <i>n</i>. We may reduce the probability of such error by repeating the test for several independently chosen <i>a</i>.</p>
+<p>For testing large numbers, it is common to choose random bases <i>a</i>, as, a priori, we don't know the distribution of witnesses and liars among the numbers 1, 2, ..., <i>n</i> − 1. In particular, Arnault <sup class="reference" id="cite_ref-Arnault397Digit_3-0"><a href="#cite_note-Arnault397Digit-3">[3]</a></sup> gave a 397-digit composite number for which all bases <i>a</i> less than 307 are strong liars. As expected this number was reported to be prime by the <a href="/wiki/Maple_(software)" title="Maple (software)">Maple</a> <code>isprime()</code> function, which implemented the Miller–Rabin test by checking the specific bases 2,3,5,7, and 11. However, selection of a few specific small bases can guarantee identification of composites for <i>n</i> less than some maximum determined by said bases. This maximum is generally quite large compared to the bases. As random bases lack such determinism for small <i>n</i>, specific bases are better in some circumstances.</p>
+<h2><span class="mw-headline" id="Example">Example</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=2" title="Edit section: Example">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Suppose we wish to determine if <i>n</i> = 221 is prime. We write <span class="nowrap"><i>n</i> − 1 = 220</span> as 2<sup>2</sup>·55, so that we have <i>s</i> = 2 and <i>d</i> = 55. We randomly select a number <i>a</i> such that 1 &lt; <i>a</i> &lt; <i>n</i> - 1, say <i>a</i> = 174. We proceed to compute:</p>
+<ul>
+<li><i>a</i><sup>2<sup>0</sup>·<i>d</i></sup> mod <i>n</i> = 174<sup>55</sup> mod 221 = 47 ≠ 1, <i>n</i> − 1</li>
+<li><i>a</i><sup>2<sup>1</sup>·<i>d</i></sup> mod <i>n</i> = 174<sup>110</sup> mod 221 = 220 = <i>n</i> − 1.</li>
+</ul>
+<p>Since 220 ≡ −1 mod <i>n</i>, either 221 is prime, or 174 is a strong liar for 221. We try another random <i>a</i>, this time choosing <i>a</i> = 137:</p>
+<ul>
+<li><i>a</i><sup>2<sup>0</sup>·<i>d</i></sup> mod <i>n</i> = 137<sup>55</sup> mod 221 = 188 ≠ 1, <i>n</i> − 1</li>
+<li><i>a</i><sup>2<sup>1</sup>·<i>d</i></sup> mod <i>n</i> = 137<sup>110</sup> mod 221 = 205 ≠ <i>n</i> − 1.</li>
+</ul>
+<p>Hence 137 is a witness for the compositeness of 221, and 174 was in fact a strong liar. Note that this tells us nothing about the factors of 221 (which are 13 and 17). However, the example with 341 in the next section shows how these calculations can sometimes produce a factor of <i>n</i>.</p>
+<h2><span class="mw-headline" id="Computational_complexity">Computational complexity</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=3" title="Edit section: Computational complexity">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The algorithm can be written in <a href="/wiki/Pseudocode" title="Pseudocode">pseudocode</a> as follows:</p>
+<pre>
+<b>Input #1</b>: <i>n</i> &gt; 3, an odd integer to be tested for primality;
+<b>Input #2</b>: <i>k</i>, a parameter that determines the accuracy of the test
+<b>Output</b>: <i>composite</i> if <i>n</i> is composite, otherwise <i>probably prime</i>
+</pre>
+<pre>
+write <i>n</i> − 1 as 2<sup><i>r</i></sup>·<i>d</i> with <i>d</i> odd by factoring powers of 2 from <i>n</i> − 1
+WitnessLoop: <b>repeat</b> <i>k</i> times:
+   pick a random integer <i>a</i> in the range [2, <i>n</i> − 2]
+   <i>x</i> ← <i>a</i><sup><i>d</i></sup> mod <i>n</i>
+   <b>if</b> <i>x</i> = 1 or <i>x</i> = <i>n</i> − 1 <b>then</b>
+      <b>continue</b> WitnessLoop
+   <b>repeat</b> <i>r</i> − 1 times:
+      <i>x</i> ← <i>x</i><sup>2</sup> mod <i>n</i>
+      <b>if</b> <i>x</i> = 1 <b>then</b>
+         <b>return</b> <i>composite</i>
+      <b>if</b> <i>x</i> = <i>n</i> − 1 <b>then</b>
+         <b>continue</b> WitnessLoop
+   <b>return</b> <i>composite</i>
+<b>return</b> <i>probably prime</i>
+</pre>
+<p>Using <a href="/wiki/Modular_exponentiation" title="Modular exponentiation">modular exponentiation</a> by <a href="/wiki/Exponentiation_by_squaring" title="Exponentiation by squaring">repeated squaring</a>, the running time of this algorithm is <span class="texhtml"><a href="/wiki/Big_O_notation" title="Big O notation">O</a>(<i>k</i> log<sup>3</sup><i>n</i>)</span>, where <i>k</i> is the number of different values of <i>a</i> that we test; thus this is an efficient, polynomial-time algorithm. <a href="/wiki/Fast_Fourier_transform" title="Fast Fourier transform">FFT</a>-based multiplication can push the running time down to <span class="texhtml">O(<i>k</i> log<sup>2</sup><i>n</i> log log <i>n</i> log log log <i>n</i>) = <a href="/wiki/Big_O_notation#Extensions_to_the_Bachmann.E2.80.93Landau_notations" title="Big O notation">Õ</a>(<i>k</i> log<sup>2</sup><i>n</i>)</span>.</p>
+<p>If we insert <a href="/wiki/Greatest_common_divisor" title="Greatest common divisor">Greatest common divisor</a> calculations into the above algorithm, we can sometimes obtain a factor of <i>n</i> instead of merely determining that <i>n</i> is composite. In particular, if <i>n</i> is a probable prime base <i>a</i> but not a strong probable prime base <i>a</i>, then either <span class="texhtml">GCD((<i>a</i><sup><i>d</i></sup> mod <i>n</i>) − 1, <i>n</i>)</span> or (for some <i>r</i> in the above range) <span class="texhtml">GCD((<i>a</i><sup>2<sup><i>r</i></sup>·<i>d</i></sup> mod <i>n</i>) − 1, <i>n</i>)</span> will produce a (not necessarily prime) factor of <i>n</i>.<sup class="reference" id="cite_ref-baillie_4-0"><a href="#cite_note-baillie-4">[4]</a></sup><sup class="reference" style="white-space:nowrap;">:1402</sup> If factoring is a goal, these GCDs can be inserted into the above algorithm at little additional computational cost.</p>
+<p>For example, consider <i>n</i> = 341. We have <span class="texhtml"><i>n</i> − 1 = 85·4.</span> Then <span class="texhtml">2<sup>85</sup> mod 341 = 32.</span> This tells us that <i>n</i> is not a strong probable prime base 2, so we know <i>n</i> is composite. If we take a GCD at this stage, we can get a factor of 341: <span class="texhtml">GCD((2<sup>85</sup> mod 341) − 1, 341) = 31.</span> This works because 341 is a pseudoprime base 2, but is not a <a href="/wiki/Strong_pseudoprime" title="Strong pseudoprime">strong pseudoprime</a> base 2.</p>
+<p>In the case that the algorithm returns "composite" because <i>x</i> = 1, it has also discovered that <i>d</i>2<sup><i>r</i></sup> is (an odd multiple of) the <a href="/wiki/Order_(group_theory)" title="Order (group theory)">order</a> of <i>a</i>—a fact which can (as in <a href="/wiki/Shor%27s_algorithm" title="Shor's algorithm">Shor's algorithm</a>) be used to factorize <i>n</i>, since <i>n</i> then divides</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>d</mi>
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>r</mi>
+</mrow>
+</msup>
+</mrow>
+</msup>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+<mo>=</mo>
+<mo stretchy="false">(</mo>
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>d</mi>
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>r</mi>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+</msup>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+<mo stretchy="false">)</mo>
+<mo stretchy="false">(</mo>
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>d</mi>
+<msup>
+<mn>2</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>r</mi>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+</mrow>
+</msup>
+</mrow>
+</msup>
+<mo>+</mo>
+<mn>1</mn>
+<mo stretchy="false">)</mo>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{d2^{r}}-1=(a^{d2^{r-1}}-1)(a^{d2^{r-1}}+1)}</annotation>
+</semantics>
+</math></span><img alt="a^{d2^{r}}-1=(a^{d2^{r-1}}-1)(a^{d2^{r-1}}+1)" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ace1c5cf3ca0b3e73edfca9ecc8eeead91520c13" style="vertical-align: -0.838ex; width:34.099ex; height:3.509ex;"/></span></dd>
+</dl>
+<p>but not either factor by itself. The reason Miller–Rabin does <i>not</i> yield a probabilistic <a href="/wiki/Integer_factorization" title="Integer factorization">factorization</a> algorithm is that if</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<msup>
+<mi>a</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>n</mi>
+<mo>−<!-- − --></mo>
+<mn>1</mn>
+</mrow>
+</msup>
+<mo>≢</mo>
+<mn>1</mn>
+<mrow class="MJX-TeXAtom-ORD">
+<mspace width="1em"></mspace>
+<mo stretchy="false">(</mo>
+<mi>mod</mi>
+<mspace width="0.333em"></mspace>
+<mi>n</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle a^{n-1}\not \equiv 1{\pmod {n}}}</annotation>
+</semantics>
+</math></span><img alt="a^{n-1}\not \equiv 1{\pmod {n}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/815e1cde47b2d07520bc906454239520561c96b5" style="vertical-align: -0.838ex; width:20.016ex; height:3.176ex;"/></span></dd>
+</dl>
+<p>(i.e., <i>n</i> is not a <a href="/wiki/Pseudoprime" title="Pseudoprime">pseudoprime</a> to base <i>a</i>) then no such information is obtained about the period of <i>a</i>, and the second "return composite" is taken.</p>
+<h2><span class="mw-headline" id="Accuracy">Accuracy</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=4" title="Edit section: Accuracy">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The more bases <i>a</i> we test, the better the accuracy of the test. It can be shown that for any odd composite <i>n</i>, at least 3/4 of the bases <i>a</i> are witnesses for the compositeness of <i>n</i>.<sup class="reference" id="cite_ref-rabin_2-1"><a href="#cite_note-rabin-2">[2]</a></sup><sup class="reference" id="cite_ref-schoof_5-0"><a href="#cite_note-schoof-5">[5]</a></sup> The Miller–Rabin test is strictly stronger than the Solovay–Strassen primality test in the sense that for every composite <i>n</i>, the set of strong liars for <i>n</i> is a subset of the set of <a class="mw-redirect" href="/wiki/Euler_liar" title="Euler liar">Euler liars</a> for <i>n</i>, and for many <i>n</i>, the subset is proper. If <i>n</i> is composite then the Miller–Rabin primality test declares <i>n</i> probably prime with a probability at most 4<sup>−<i>k</i></sup>. On the other hand, the Solovay–Strassen primality test declares <i>n</i> probably prime with a probability at most 2<sup>−<i>k</i></sup>.</p>
+<p>It is important to note that in many common applications of this algorithm, we are not interested in the error bound described above. The above error bound is the probability of a composite number being declared as a probable prime after <i>k</i> rounds of testing. We are often instead interested in the probability that, after passing <i>k</i> rounds of testing, the number being tested is actually a composite number. Formally, if we call the event of declaring <i>n</i> a probable prime after <i>k</i> rounds of Miller–Rabin <i>Y<sub>k</sub></i>, and we call the event that <i>n</i> is composite <i>X</i> (and denote the event that <i>n</i> is prime <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mrow class="MJX-TeXAtom-ORD">
+<mover>
+<mi>X</mi>
+<mo accent="false">¯<!-- ¯ --></mo>
+</mover>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle {\overline {X}}}</annotation>
+</semantics>
+</math></span><img alt="{\overline {X}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/08fd87d3502c4f9e1b02ac74644474258aeea176" style="vertical-align: -0.338ex; width:2.142ex; height:3.009ex;"/></span>), then the above bound gives us <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<mi>X</mi>
+<mo stretchy="false">)</mo>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P(Y_{k}|X)}</annotation>
+</semantics>
+</math></span><img alt="P(Y_{k}|X)" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/86a283537992f787783a1ec9a7e9d18c040674b6" style="vertical-align: -0.838ex; width:8.691ex; height:2.843ex;"/></span>, whereas we are interested in <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<mi>X</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mo stretchy="false">)</mo>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P(X|Y_{k})}</annotation>
+</semantics>
+</math></span><img alt="P(X|Y_{k})" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e5e41ae96cf65a01e26bd26de5ff18bd2869eb9c" style="vertical-align: -0.838ex; width:8.691ex; height:2.843ex;"/></span>. <a href="/wiki/Bayes%27_theorem" title="Bayes' theorem">Bayes' theorem</a> gives us a way to relate these two conditional probabilities, namely</p>
+<dl>
+<dd><span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics>
+<mrow class="MJX-TeXAtom-ORD">
+<mstyle displaystyle="true" scriptlevel="0">
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<mi>X</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mo stretchy="false">)</mo>
+<mo>=</mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mfrac>
+<mrow>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<mi>X</mi>
+<mo stretchy="false">)</mo>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<mi>X</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+<mrow>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<mi>X</mi>
+<mo stretchy="false">)</mo>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<mi>X</mi>
+<mo stretchy="false">)</mo>
+<mo>+</mo>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<msub>
+<mi>Y</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>k</mi>
+</mrow>
+</msub>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">|</mo>
+</mrow>
+<mrow class="MJX-TeXAtom-ORD">
+<mover>
+<mi>X</mi>
+<mo accent="false">¯<!-- ¯ --></mo>
+</mover>
+</mrow>
+<mo stretchy="false">)</mo>
+<mi>P</mi>
+<mo stretchy="false">(</mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mover>
+<mi>X</mi>
+<mo accent="false">¯<!-- ¯ --></mo>
+</mover>
+</mrow>
+<mo stretchy="false">)</mo>
+</mrow>
+</mfrac>
+</mrow>
+</mstyle>
+</mrow>
+<annotation encoding="application/x-tex">{\displaystyle P(X|Y_{k})={\frac {P(Y_{k}|X)P(X)}{P(Y_{k}|X)P(X)+P(Y_{k}|{\overline {X}})P({\overline {X}})}}}</annotation>
+</semantics>
+</math></span><img alt="P(X|Y_{k})={\frac {P(Y_{k}|X)P(X)}{P(Y_{k}|X)P(X)+P(Y_{k}|{\overline {X}})P({\overline {X}})}}" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e43f8f6a57f84deb93c7e900f75fca0424cc8d42" style="vertical-align: -3.338ex; width:44.324ex; height:7.176ex;"/></span>.</dd>
+</dl>
+<p>This tells us that the probability that we are often interested in is related not just to the 4<sup>−<i>k</i></sup> bound above, but also probabilities related to the density of prime numbers in the region near <i>n</i>.</p>
+<p>In addition, for large values of <i>n</i>, on average the probability that a composite number is declared <i>probably prime</i> is significantly smaller than 4<sup>−<i>k</i></sup>. <a href="/wiki/Ivan_Damg%C3%A5rd" title="Ivan Damgård">Damgård</a>, Landrock and <a href="/wiki/Carl_Pomerance" title="Carl Pomerance">Pomerance</a><sup class="reference" id="cite_ref-6"><a href="#cite_note-6">[6]</a></sup> compute some explicit bounds and provide a method to make a reasonable selection for <i>k</i> for a desired error bound. Such bounds can, for example, be used to <i>generate</i> probable primes; however, they should not be used to <i>verify</i> primes with unknown origin, since in <a href="/wiki/Cryptography" title="Cryptography">cryptographic</a> applications an adversary might try to send you a <a href="/wiki/Pseudoprime" title="Pseudoprime">pseudoprime</a> in a place where a prime number is required. In such cases, only the error bound of 4<sup>−<i>k</i></sup> can be relied upon.</p>
+<h2><span class="mw-headline" id="Deterministic_variants">Deterministic variants</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=5" title="Edit section: Deterministic variants">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The Miller–Rabin algorithm can be made deterministic by trying all possible <i>a</i> below a certain limit. The problem in general is to set the limit so that the test is still reliable.</p>
+<p>If the tested number <i>n</i> is composite, the strong liars <i>a</i> coprime to <i>n</i> are contained in a proper <a href="/wiki/Subgroup" title="Subgroup">subgroup</a> of the group (<b>Z</b>/<i>n</i><b>Z</b>)*, which means that if we test all <i>a</i> from a set which <a href="/wiki/Generating_set_of_a_group" title="Generating set of a group">generates</a> (<b>Z</b>/<i>n</i><b>Z</b>)*, one of them must be a witness for the compositeness of <i>n</i>. Assuming the truth of the <a href="/wiki/Generalized_Riemann_hypothesis" title="Generalized Riemann hypothesis">generalized Riemann hypothesis</a> (GRH), it is known that the group is generated by its elements smaller than <span class="texhtml">O((log <i>n</i>)<sup>2</sup>)</span>, which was already noted by Miller.<sup class="reference" id="cite_ref-miller_1-1"><a href="#cite_note-miller-1">[1]</a></sup> The constant involved in the <a href="/wiki/Big_O_notation" title="Big O notation">Big O notation</a> was reduced to 2 by <a href="/wiki/Eric_Bach" title="Eric Bach">Eric Bach</a>.<sup class="reference" id="cite_ref-7"><a href="#cite_note-7">[7]</a></sup> This leads to the following conditional primality testing algorithm:</p>
+<pre>
+<b>Input</b>: <i>n</i> &gt; 1, an odd integer to test for primality.
+<b>Output</b>: <i>composite</i> if <i>n</i> is composite, otherwise <i>prime</i>
+write <i>n</i>−1 as 2<sup>s</sup>·<i>d</i> by factoring powers of 2 from <i>n</i>−1
+<span class="nowrap"><b>repeat for</b> all <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>a</mi>
+        <mo>∈<!-- ∈ --></mo>
+        <mo stretchy="false">[</mo>
+        <mn>2</mn>
+        <mo>,</mo>
+        <mo form="prefix" movablelimits="true">min</mo>
+        <mo stretchy="false">(</mo>
+        <mi>n</mi>
+        <mo>−<!-- − --></mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mo fence="false" stretchy="false">⌊<!-- ⌊ --></mo>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mi>ln</mi>
+        <mo>⁡<!-- ⁡ --></mo>
+        <mi>n</mi>
+        <msup>
+          <mo stretchy="false">)</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msup>
+        <mo fence="false" stretchy="false">⌋<!-- ⌋ --></mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">]</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle a\in [2,\min(n-1,\lfloor 2(\ln n)^{2}\rfloor )]}</annotation>
+  </semantics>
+</math></span><img alt="a\in [2,\min(n-1,\lfloor 2(\ln n)^{2}\rfloor )]" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4937470e56258fb90f7074ee24b4c2c5c9366fd7" style="vertical-align: -0.838ex; width:29.736ex; height:3.176ex;"/></span>:</span>
+    <span class="nowrap"><b>if</b> <span><span class="mwe-math-mathml-inline mwe-math-mathml-a11y mw-math-element" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>d</mi>
+          </mrow>
+        </msup>
+        <mo>≢</mo>
+        <mn>1</mn>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mspace width="1em"></mspace>
+          <mo stretchy="false">(</mo>
+          <mi>mod</mi>
+          <mspace width="0.333em"></mspace>
+          <mi>n</mi>
+          <mo stretchy="false">)</mo>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtext> and </mtext>
+        </mrow>
+        <msup>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msup>
+              <mn>2</mn>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>r</mi>
+              </mrow>
+            </msup>
+            <mo>⋅<!-- ⋅ --></mo>
+            <mi>d</mi>
+          </mrow>
+        </msup>
+        <mo>≢</mo>
+        <mo>−<!-- − --></mo>
+        <mn>1</mn>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mspace width="1em"></mspace>
+          <mo stretchy="false">(</mo>
+          <mi>mod</mi>
+          <mspace width="0.333em"></mspace>
+          <mi>n</mi>
+          <mo stretchy="false">)</mo>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtext> for all </mtext>
+        </mrow>
+        <mi>r</mi>
+        <mo>∈<!-- ∈ --></mo>
+        <mo stretchy="false">[</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mi>s</mi>
+        <mo>−<!-- − --></mo>
+        <mn>1</mn>
+        <mo stretchy="false">]</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle a^{d}\not \equiv 1{\pmod {n}}{\text{ and }}a^{2^{r}\cdot d}\not \equiv -1{\pmod {n}}{\text{ for all }}r\in [0,s-1]}</annotation>
+  </semantics>
+</math></span><img alt="a^{d}\not \equiv 1{\pmod {n}}{\text{ and }}a^{2^{r}\cdot d}\not \equiv -1{\pmod {n}}{\text{ for all }}r\in [0,s-1]" aria-hidden="true" class="mwe-math-fallback-image-inline mw-math-element" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ca8a378a8faa73069501d16047aca2101c1248c" style="vertical-align: -0.838ex; width:63.988ex; height:3.176ex;"/></span> <b>then</b></span>
+        <b>return</b> <i>composite</i>
+<b>return</b> <i>prime</i>
+</pre>
+<p>The running time of the algorithm is, in the <a href="/wiki/Big_O_notation#Extensions_to_the_Bachmann.E2.80.93Landau_notations" title="Big O notation">soft-O</a> notation, <span class="texhtml">Õ((log <i>n</i>)<sup>4</sup>)</span> (with FFT-based multiplication). The full power of the generalized Riemann hypothesis is not needed to ensure the correctness of the test: as we deal with subgroups of even <a href="/wiki/Index_of_a_subgroup" title="Index of a subgroup">index</a>, it suffices to assume the validity of GRH for <a href="/wiki/Legendre_symbol" title="Legendre symbol">quadratic</a> <a href="/wiki/Dirichlet_character" title="Dirichlet character">Dirichlet characters</a>.<sup class="reference" id="cite_ref-schoof_5-1"><a href="#cite_note-schoof-5">[5]</a></sup></p>
+<p>The Miller test (the algorithm above) is not used in practice. For most purposes, proper use of the probabilistic Miller-Rabin test or the <a class="mw-redirect" href="/wiki/Baillie-PSW_primality_test" title="Baillie-PSW primality test">Baillie-PSW primality test</a> gives sufficient confidence while running much faster. It is also slower in practice than commonly used proof methods such as <a href="/wiki/Adleman%E2%80%93Pomerance%E2%80%93Rumely_primality_test" title="Adleman–Pomerance–Rumely primality test">APR-CL</a> and <a class="mw-redirect" href="/wiki/Elliptic_curve_primality_proving" title="Elliptic curve primality proving">ECPP</a> which give results that do not rely on unproven assumptions. For theoretical purposes requiring a deterministic polynomial time algorithm, it was superseded by the <a href="/wiki/AKS_primality_test" title="AKS primality test">AKS primality test</a>, which also does not rely on unproven assumptions.</p>
+<p>Note that Miller-Rabin pseudoprimes are called <a href="/wiki/Strong_pseudoprime" title="Strong pseudoprime">strong pseudoprimes</a>.</p>
+<p>When the number <i>n</i> to be tested is small, trying all <span class="texhtml"><i>a</i> &lt; 2(ln <i>n</i>)<sup>2</sup></span> is not necessary, as much smaller sets of potential witnesses are known to suffice. For example, Pomerance, Selfridge and Wagstaff<sup class="reference" id="cite_ref-PSW_8-0"><a href="#cite_note-PSW-8">[8]</a></sup> and Jaeschke<sup class="reference" id="cite_ref-9"><a href="#cite_note-9">[9]</a></sup> have verified that</p>
+<ul>
+<li>if <i>n</i> &lt; 2,047, it is enough to test <i>a</i> = 2;</li>
+<li>if <i>n</i> &lt; 1,373,653, it is enough to test <i>a</i> = 2 and 3;</li>
+<li>if <i>n</i> &lt; 9,080,191, it is enough to test <i>a</i> = 31 and 73;</li>
+<li>if <i>n</i> &lt; 25,326,001, it is enough to test <i>a</i> = 2, 3, and 5;</li>
+<li>if <i>n</i> &lt; 3,215,031,751, it is enough to test <i>a</i> = 2, 3, 5, and 7;</li>
+<li>if <i>n</i> &lt; 4,759,123,141, it is enough to test <i>a</i> = 2, 7, and 61;</li>
+<li>if <i>n</i> &lt; 1,122,004,669,633, it is enough to test <i>a</i> = 2, 13, 23, and 1662803;</li>
+<li>if <i>n</i> &lt; 2,152,302,898,747, it is enough to test <i>a</i> = 2, 3, 5, 7, and 11;</li>
+<li>if <i>n</i> &lt; 3,474,749,660,383, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, and 13;</li>
+<li>if <i>n</i> &lt; 341,550,071,728,321, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, 13, and 17.</li>
+</ul>
+<p>Using the work of Feitsma and Galway enumerating all base 2 pseudoprimes in 2010, this was extended (see <span class="nowrap"><a href="/wiki/On-Line_Encyclopedia_of_Integer_Sequences" title="OEIS"><img alt="OEIS" data-file-height="556" data-file-width="409" height="15" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/11px-OEISicon_light.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/17px-OEISicon_light.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/22px-OEISicon_light.svg.png 2x" width="11"/></a> <a class="extiw" href="//oeis.org/A014233" title="oeis:A014233">A014233</a></span>), with the first result later shown using different methods in Jiang and Deng:<sup class="reference" id="cite_ref-10"><a href="#cite_note-10">[10]</a></sup></p>
+<ul>
+<li>if <i>n</i> &lt; 3,825,123,056,546,413,051, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, 13, 17, 19, and 23.</li>
+<li>if <i>n</i> &lt; 18,446,744,073,709,551,616 = 2<sup>64</sup>, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, and 37.</li>
+</ul>
+<p>Sorenson and Webster<sup class="reference" id="cite_ref-11"><a href="#cite_note-11">[11]</a></sup> verify the above and calculate precise results for these larger than 64-bit results:</p>
+<ul>
+<li>if <i>n</i> &lt; 318,665,857,834,031,151,167,461, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, and 37.</li>
+<li>if <i>n</i> &lt; 3,317,044,064,679,887,385,961,981, it is enough to test <i>a</i> = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, and 41.</li>
+</ul>
+<p>Other criteria of this sort, often more efficient (fewer bases required) than those shown above, exist<sup class="reference" id="cite_ref-12"><a href="#cite_note-12">[12]</a></sup><sup class="reference" id="cite_ref-13"><a href="#cite_note-13">[13]</a></sup><sup class="reference" id="cite_ref-14"><a href="#cite_note-14">[14]</a></sup><sup class="reference" id="cite_ref-15"><a href="#cite_note-15">[15]</a></sup> and these results give very fast deterministic primality tests for numbers in the appropriate range without any assumptions.</p>
+<p>There is a small list of potential witnesses for every possible input size (at most <i>n</i> values for <i>n</i>-bit numbers). However, no finite set of bases is sufficient for all composite numbers. Alford, Granville, and Pomerance have shown that there exist infinitely many composite numbers <i>n</i> whose smallest compositeness witness is at least <span class="texhtml">(ln <i>n</i>)<sup>1/(3ln ln ln <i>n</i>)</sup></span>.<sup class="reference" id="cite_ref-16"><a href="#cite_note-16">[16]</a></sup> They also argue heuristically that the smallest number <i>w</i> such that every composite number below <i>n</i> has a compositeness witness less than <i>w</i> should be of order <span class="texhtml"><a class="mw-redirect" href="/wiki/Big_o_notation#Family_of_Bachmann.E2.80.93Landau_notations" title="Big o notation">Θ</a>(log <i>n</i> log log <i>n</i>).</span></p>
+<h2><span class="mw-headline" id="Notes">Notes</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=6" title="Edit section: Notes">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist columns references-column-count references-column-count-2" style="-moz-column-count: 2; -webkit-column-count: 2; column-count: 2; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-miller-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-miller_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-miller_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation" id="CITEREFMiller1976"><a href="/wiki/Gary_Miller_(computer_scientist)" title="Gary Miller (computer scientist)">Miller, Gary L.</a> (1976), "Riemann's Hypothesis and Tests for Primality", <i>Journal of Computer and System Sciences</i>, <b>13</b> (3): 300–317, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1145%2F800116.803773" rel="nofollow">10.1145/800116.803773</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Riemann%27s+Hypothesis+and+Tests+for+Primality&amp;rft.aufirst=Gary+L.&amp;rft.aulast=Miller&amp;rft.date=1976&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.1145%2F800116.803773&amp;rft.issue=3&amp;rft.jtitle=Journal+of+Computer+and+System+Sciences&amp;rft.pages=300-317&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=13"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-rabin-2"><span class="mw-cite-backlink">^ <a href="#cite_ref-rabin_2-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-rabin_2-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation" id="CITEREFRabin1980"><a href="/wiki/Michael_O._Rabin" title="Michael O. Rabin">Rabin, Michael O.</a> (1980), "Probabilistic algorithm for testing primality", <i>Journal of Number Theory</i>, <b>12</b> (1): 128–138, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1016%2F0022-314X%2880%2990084-0" rel="nofollow">10.1016/0022-314X(80)90084-0</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Probabilistic+algorithm+for+testing+primality&amp;rft.aufirst=Michael+O.&amp;rft.aulast=Rabin&amp;rft.date=1980&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.1016%2F0022-314X%2880%2990084-0&amp;rft.issue=1&amp;rft.jtitle=Journal+of+Number+Theory&amp;rft.pages=128-138&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=12"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-Arnault397Digit-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-Arnault397Digit_3-0">^</a></b></span> <span class="reference-text"><cite class="citation journal">F. Arnault (August 1995). <a class="external text" href="http://www.sciencedirect.com/science/article/pii/S0747717185710425" rel="nofollow">"Constructing Carmichael Numbers Which Are Strong Pseudoprimes to Several Bases"</a>. <i>Journal of Symbolic Computation</i>. <b>20</b> (2): 151–161. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1006%2Fjsco.1995.1042" rel="nofollow">10.1006/jsco.1995.1042</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Constructing+Carmichael+Numbers+Which+Are+Strong+Pseudoprimes+to+Several+Bases&amp;rft.au=F.+Arnault&amp;rft.date=1995-08&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.sciencedirect.com%2Fscience%2Farticle%2Fpii%2FS0747717185710425&amp;rft_id=info%3Adoi%2F10.1006%2Fjsco.1995.1042&amp;rft.issue=2&amp;rft.jtitle=Journal+of+Symbolic+Computation&amp;rft.pages=151-161&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=20"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-baillie-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-baillie_4-0">^</a></b></span> <span class="reference-text"><cite class="citation journal">Robert Baillie; <a class="mw-redirect" href="/wiki/Samuel_S._Wagstaff,_Jr." title="Samuel S. Wagstaff, Jr.">Samuel S. Wagstaff, Jr.</a> (October 1980). <a class="external text" href="http://mpqs.free.fr/LucasPseudoprimes.pdf" rel="nofollow">"Lucas Pseudoprimes"</a> <span style="font-size:85%;">(PDF)</span>. <i>Mathematics of Computation</i>. <b>35</b> (152): 1391–1417. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1090%2FS0025-5718-1980-0583518-6" rel="nofollow">10.1090/S0025-5718-1980-0583518-6</a>. <a href="/wiki/Mathematical_Reviews" title="Mathematical Reviews">MR</a> <a class="external text" href="//www.ams.org/mathscinet-getitem?mr=583518" rel="nofollow">583518</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Lucas+Pseudoprimes&amp;rft.au=Robert+Baillie&amp;rft.au=Samuel+S.+Wagstaff%2C+Jr.&amp;rft.date=1980-10&amp;rft.genre=article&amp;rft_id=%2F%2Fwww.ams.org%2Fmathscinet-getitem%3Fmr%3D583518&amp;rft_id=http%3A%2F%2Fmpqs.free.fr%2FLucasPseudoprimes.pdf&amp;rft_id=info%3Adoi%2F10.1090%2FS0025-5718-1980-0583518-6&amp;rft.issue=152&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=1391-1417&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=35"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-schoof-5"><span class="mw-cite-backlink">^ <a href="#cite_ref-schoof_5-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-schoof_5-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation" id="CITEREFSchoof2004"><a href="/wiki/Ren%C3%A9_Schoof" title="René Schoof">Schoof, René</a> (2004), "Four primality testing algorithms", <a class="external text" href="http://www.mat.uniroma2.it/~schoof/millerrabinpom.pdf" rel="nofollow"><i>Algorithmic Number Theory: Lattices, Number Fields, Curves and Cryptography</i></a> <span style="font-size:85%;">(PDF)</span>, Cambridge University Press, <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a> <a href="/wiki/Special:BookSources/0-521-80854-5" title="Special:BookSources/0-521-80854-5">0-521-80854-5</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Four+primality+testing+algorithms&amp;rft.aufirst=Ren%C3%A9&amp;rft.aulast=Schoof&amp;rft.btitle=Algorithmic+Number+Theory%3A+Lattices%2C+Number+Fields%2C+Curves+and+Cryptography&amp;rft.date=2004&amp;rft.genre=bookitem&amp;rft_id=http%3A%2F%2Fwww.mat.uniroma2.it%2F~schoof%2Fmillerrabinpom.pdf&amp;rft.isbn=0-521-80854-5&amp;rft.pub=Cambridge+University+Press&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-6">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFDamg.C3.A5rdLandrockPomerance1993"><a href="/wiki/Ivan_Damg%C3%A5rd" title="Ivan Damgård">Damgård, I.</a>; <a href="/wiki/Peter_Landrock" title="Peter Landrock">Landrock, P.</a> &amp; <a href="/wiki/Carl_Pomerance" title="Carl Pomerance">Pomerance, C.</a> (1993), <a class="external text" href="http://www.math.dartmouth.edu/~carlp/PDF/paper88.pdf" rel="nofollow">"Average case error estimates for the strong probable prime test"</a> <span style="font-size:85%;">(PDF)</span>, <i>Mathematics of Computation</i>, <b>61</b> (203): 177–194, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.2307%2F2152945" rel="nofollow">10.2307/2152945</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Average+case+error+estimates+for+the+strong+probable+prime+test&amp;rft.aufirst=I.&amp;rft.au=Landrock%2C+P.&amp;rft.aulast=Damg%C3%A5rd&amp;rft.au=Pomerance%2C+C.&amp;rft.date=1993&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.math.dartmouth.edu%2F~carlp%2FPDF%2Fpaper88.pdf&amp;rft_id=info%3Adoi%2F10.2307%2F2152945&amp;rft.issue=203&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=177-194&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=61"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-7">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFBach1990"><a href="/wiki/Eric_Bach" title="Eric Bach">Bach, Eric</a> (1990), "Explicit bounds for primality testing and related problems", <i>Mathematics of Computation</i>, <b>55</b> (191): 355–380, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.2307%2F2008811" rel="nofollow">10.2307/2008811</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Explicit+bounds+for+primality+testing+and+related+problems&amp;rft.aufirst=Eric&amp;rft.aulast=Bach&amp;rft.date=1990&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.2307%2F2008811&amp;rft.issue=191&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=355-380&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=55"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-PSW-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-PSW_8-0">^</a></b></span> <span class="reference-text"><cite class="citation journal"><a href="/wiki/Carl_Pomerance" title="Carl Pomerance">Carl Pomerance</a>; <a class="mw-redirect" href="/wiki/John_L._Selfridge" title="John L. Selfridge">John L. Selfridge</a>; <a class="mw-redirect" href="/wiki/Samuel_S._Wagstaff,_Jr." title="Samuel S. Wagstaff, Jr.">Samuel S. Wagstaff, Jr.</a> (July 1980). <a class="external text" href="http://www.math.dartmouth.edu/~carlp/PDF/paper25.pdf" rel="nofollow">"The pseudoprimes to 25·10<sup>9</sup>"</a> <span style="font-size:85%;">(PDF)</span>. <i>Mathematics of Computation</i>. <b>35</b> (151): 1003–1026. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1090%2FS0025-5718-1980-0572872-7" rel="nofollow">10.1090/S0025-5718-1980-0572872-7</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=The+pseudoprimes+to+25%B710%3Csup%3E9%3C%2Fsup%3E&amp;rft.au=Carl+Pomerance&amp;rft.au=John+L.+Selfridge&amp;rft.au=Samuel+S.+Wagstaff%2C+Jr.&amp;rft.date=1980-07&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.math.dartmouth.edu%2F~carlp%2FPDF%2Fpaper25.pdf&amp;rft_id=info%3Adoi%2F10.1090%2FS0025-5718-1980-0572872-7&amp;rft.issue=151&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=1003-1026&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=35"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-9"><span class="mw-cite-backlink"><b><a href="#cite_ref-9">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFJaeschke1993">Jaeschke, Gerhard (1993), "On strong pseudoprimes to several bases", <i>Mathematics of Computation</i>, <b>61</b> (204): 915–926, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.2307%2F2153262" rel="nofollow">10.2307/2153262</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=On+strong+pseudoprimes+to+several+bases&amp;rft.aufirst=Gerhard&amp;rft.aulast=Jaeschke&amp;rft.date=1993&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.2307%2F2153262&amp;rft.issue=204&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=915-926&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=61"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-10"><span class="mw-cite-backlink"><b><a href="#cite_ref-10">^</a></b></span> <span class="reference-text"><cite class="citation journal">Jiang, Yupeng; Deng, Yingpu (2014). "Strong pseudoprimes to the first eight prime bases". <i>Mathematics of Computation</i>. <b>83</b> (290): 2915–2924. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1090%2FS0025-5718-2014-02830-5" rel="nofollow">10.1090/S0025-5718-2014-02830-5</a>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Strong+pseudoprimes+to+the+first+eight+prime+bases&amp;rft.au=Deng%2C+Yingpu&amp;rft.aufirst=Yupeng&amp;rft.aulast=Jiang&amp;rft.date=2014&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.1090%2FS0025-5718-2014-02830-5&amp;rft.issue=290&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=2915-2924&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=83"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-11"><span class="mw-cite-backlink"><b><a href="#cite_ref-11">^</a></b></span> <span class="reference-text"><cite class="citation arxiv"><a href="/wiki/Jon_Sorenson" title="Jon Sorenson">Sorenson, Jonathan</a>; Webster, Jonathan (2015). "Strong Pseudoprimes to Twelve Prime Bases". <a href="/wiki/ArXiv" title="ArXiv">arXiv</a>:<span class="plainlinks"><a class="external text" href="//arxiv.org/abs/1509.00864" rel="nofollow">1509.00864</a><span style="margin-left:0.1em"><img alt="Freely accessible" data-file-height="813" data-file-width="512" height="14" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/9px-Lock-green.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/14px-Lock-green.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/18px-Lock-green.svg.png 2x" title="Freely accessible" width="9"/></span></span> [<a class="external text" href="//arxiv.org/archive/math.NT" rel="nofollow">math.NT</a>].</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Strong+Pseudoprimes+to+Twelve+Prime+Bases&amp;rft.aufirst=Jonathan&amp;rft.aulast=Sorenson&amp;rft.au=Webster%2C+Jonathan&amp;rft.date=2015&amp;rft.genre=preprint&amp;rft_id=info%3Aarxiv%2F1509.00864&amp;rft.jtitle=arXiv&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-12">^</a></b></span> <span class="reference-text"><cite class="citation"><a class="external text" href="http://primes.utm.edu/prove/prove2_3.html" rel="nofollow"><i>The Prime Pages</i></a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.btitle=The+Prime+Pages&amp;rft.genre=book&amp;rft_id=http%3A%2F%2Fprimes.utm.edu%2Fprove%2Fprove2_3.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-13"><span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFZhangTang2003">Zhang, Zhenxiang &amp; Tang, Min (2003), "Finding strong pseudoprimes to several bases. II", <i>Mathematics of Computation</i>, <b>72</b> (44): 2085–2097, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1090%2FS0025-5718-03-01545-X" rel="nofollow">10.1090/S0025-5718-03-01545-X</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Finding+strong+pseudoprimes+to+several+bases.+II&amp;rft.aufirst=Zhenxiang&amp;rft.aulast=Zhang&amp;rft.au=Tang%2C+Min&amp;rft.date=2003&amp;rft.genre=article&amp;rft_id=info%3Adoi%2F10.1090%2FS0025-5718-03-01545-X&amp;rft.issue=44&amp;rft.jtitle=Mathematics+of+Computation&amp;rft.pages=2085-2097&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=72"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-14"><span class="mw-cite-backlink"><b><a href="#cite_ref-14">^</a></b></span> <span class="reference-text"><cite class="citation web"><a class="external text" href="http://oeis.org/A014233" rel="nofollow">"Sloane's A014233 : Smallest odd number for which Miller-Rabin primality test on bases &lt;= n-th prime does not reveal compositeness"</a>. <i>The <a href="/wiki/On-Line_Encyclopedia_of_Integer_Sequences" title="On-Line Encyclopedia of Integer Sequences">On-Line Encyclopedia of Integer Sequences</a></i>. OEIS Foundation.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Sloane%27s+A014233+%26%2358%3B+Smallest+odd+number+for+which+Miller-Rabin+primality+test+on+bases+%3C%3D+n-th+prime+does+not+reveal+compositeness&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Foeis.org%2FA014233&amp;rft.jtitle=The+On-Line+Encyclopedia+of+Integer+Sequences&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-15"><span class="mw-cite-backlink"><b><a href="#cite_ref-15">^</a></b></span> <span class="reference-text"><cite class="citation"><a class="external text" href="//miller-rabin.appspot.com" rel="nofollow"><i>SPRP Records</i></a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.btitle=SPRP+Records&amp;rft.genre=book&amp;rft_id=%2F%2Fmiller-rabin.appspot.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"><span style="display:none;"> </span></span></span></li>
+<li id="cite_note-16"><span class="mw-cite-backlink"><b><a href="#cite_ref-16">^</a></b></span> <span class="reference-text"><cite class="citation" id="CITEREFAlfordGranvillePomerance1994"><a href="/wiki/W._R._(Red)_Alford" title="W. R. (Red) Alford">Alford, W. R.</a>; <a href="/wiki/Andrew_Granville" title="Andrew Granville">Granville, A.</a>; <a href="/wiki/Carl_Pomerance" title="Carl Pomerance">Pomerance, C.</a> (1994), <a class="external text" href="http://www.math.dartmouth.edu/~carlp/PDF/reliable.pdf" rel="nofollow">"On the difficulty of finding reliable witnesses"</a> <span style="font-size:85%;">(PDF)</span>, <i><a href="/wiki/Lecture_Notes_in_Computer_Science" title="Lecture Notes in Computer Science">Lecture Notes in Computer Science</a></i>, Springer-Verlag, <b>877</b>: 1–16, <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a class="external text" href="//dx.doi.org/10.1007%2F3-540-58691-1_36" rel="nofollow">10.1007/3-540-58691-1_36</a></cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=On+the+difficulty+of+finding+reliable+witnesses&amp;rft.aufirst=W.+R.&amp;rft.au=Granville%2C+A.&amp;rft.aulast=Alford&amp;rft.au=Pomerance%2C+C.&amp;rft.date=1994&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.math.dartmouth.edu%2F~carlp%2FPDF%2Freliable.pdf&amp;rft_id=info%3Adoi%2F10.1007%2F3-540-58691-1_36&amp;rft.jtitle=Lecture+Notes+in+Computer+Science&amp;rft.pages=1-16&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.volume=877"><span style="display:none;"> </span></span></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit&amp;section=7" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="mbox-small plainlinks sistersitebox" role="presentation" style="border:1px solid #aaa;background-color:#f9f9f9">
+<tr>
+<td class="mbox-image"><a class="image" href="/wiki/File:Wikibooks-logo-en-noslogan.svg"><img alt="" class="noviewer" data-file-height="400" data-file-width="400" height="40" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/60px-Wikibooks-logo-en-noslogan.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/80px-Wikibooks-logo-en-noslogan.svg.png 2x" width="40"/></a></td>
+<td class="mbox-text plainlist">The Wikibook <i><a class="extiw" href="//en.wikibooks.org/wiki/Algorithm_Implementation" title="wikibooks:Algorithm Implementation">Algorithm Implementation</a></i> has a page on the topic of: <i><b><a class="extiw" href="//en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Primality_Testing" title="wikibooks:Algorithm Implementation/Mathematics/Primality Testing">Primality testing</a></b></i></td>
+</tr>
+</table>
+<ul>
+<li><span class="citation mathworld" id="Reference-Mathworld-Rabin-Miller_Strong_Pseudoprime_Test"><cite class="citation web"><a href="/wiki/Eric_W._Weisstein" title="Eric W. Weisstein">Weisstein, Eric W.</a> <a class="external text" href="http://mathworld.wolfram.com/Rabin-MillerStrongPseudoprimeTest.html" rel="nofollow">"Rabin-Miller Strong Pseudoprime Test"</a>. <i><a href="/wiki/MathWorld" title="MathWorld">MathWorld</a></i>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AMiller%93Rabin+primality+test&amp;rft.atitle=Rabin-Miller+Strong+Pseudoprime+Test&amp;rft.au=Weisstein%2C+Eric+W.&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fmathworld.wolfram.com%2FRabin-MillerStrongPseudoprimeTest.html&amp;rft.jtitle=MathWorld&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"><span style="display:none;"> </span></span></span></li>
+</ul>
+<ul>
+<li><a class="external text" href="http://gandraxa.com/miller_rabin_primality_test.xml" rel="nofollow">Interactive Online Implementation of the Deterministic Variant</a> (stepping through the algorithm step-by-step)</li>
+<li><a class="external text" href="http://www.informationsuebertragung.ch/indexAlgorithmenRabinMiller.html" rel="nofollow">Applet (German)</a></li>
+<li><a class="external text" href="https://stackoverflow.com/questions/4236673/sample-code-for-fast-primality-testing-in-c-sharp/4236870#4236870" rel="nofollow">Miller-Rabin primality test in C#</a></li>
+<li><a class="external text" href="http://www.javascripter.net/math/primes/millerrabinprimalitytest.htm" rel="nofollow">Miller-Rabin primality test in JavaScript using arbitrary precision arithmetic</a></li>
+</ul>
+<div aria-labelledby="Number-theoretic_algorithms" class="navbox" role="navigation" style="padding:3px">
+<table class="nowraplinks collapsible uncollapsed navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th class="navbox-title" colspan="2" scope="col">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Number-theoretic_algorithms" title="Template:Number-theoretic algorithms"><abbr style=";;background:none transparent;border:none;" title="View this template">v</abbr></a></li>
+<li class="nv-talk"><a class="new" href="/w/index.php?title=Template_talk:Number-theoretic_algorithms&amp;action=edit&amp;redlink=1" title="Template talk:Number-theoretic algorithms (page does not exist)"><abbr style=";;background:none transparent;border:none;" title="Discuss this template">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Number-theoretic_algorithms&amp;action=edit"><abbr style=";;background:none transparent;border:none;" title="Edit this template">e</abbr></a></li>
+</ul>
+</div>
+<div id="Number-theoretic_algorithms" style="font-size:114%"><a href="/wiki/Number_theory" title="Number theory">Number-theoretic</a> <a href="/wiki/Algorithm" title="Algorithm">algorithms</a></div>
+</th>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Primality_test" title="Primality test">Primality tests</a></th>
+<td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><span class="smallcaps" style="font-variant:small-caps;"><a href="/wiki/AKS_primality_test" title="AKS primality test">AKS test</a></span></li>
+<li><span class="smallcaps" style="font-variant:small-caps;"><a href="/wiki/Adleman%E2%80%93Pomerance%E2%80%93Rumely_primality_test" title="Adleman–Pomerance–Rumely primality test">APR test</a></span></li>
+<li><a href="/wiki/Baillie%E2%80%93PSW_primality_test" title="Baillie–PSW primality test">Baillie–PSW</a></li>
+<li><a href="/wiki/Elliptic_curve_primality" title="Elliptic curve primality">Elliptic curve</a></li>
+<li><a href="/wiki/Pocklington_primality_test" title="Pocklington primality test">Pocklington</a></li>
+<li><a href="/wiki/Fermat_primality_test" title="Fermat primality test">Fermat</a></li>
+<li><a href="/wiki/Lucas_primality_test" title="Lucas primality test">Lucas</a></li>
+<li><span class="smallcaps" style="font-variant:small-caps;"><i><a href="/wiki/Lucas%E2%80%93Lehmer_primality_test" title="Lucas–Lehmer primality test">Lucas–Lehmer</a></i></span></li>
+<li><span class="smallcaps" style="font-variant:small-caps;"><i><a href="/wiki/Lucas%E2%80%93Lehmer%E2%80%93Riesel_test" title="Lucas–Lehmer–Riesel test">Lucas–Lehmer–Riesel</a></i></span></li>
+<li><span class="smallcaps" style="font-variant:small-caps;"><i><a href="/wiki/Proth%27s_theorem" title="Proth's theorem">Proth's theorem</a></i></span></li>
+<li><span class="smallcaps" style="font-variant:small-caps;"><i><a href="/wiki/P%C3%A9pin%27s_test" title="Pépin's test">Pépin's</a></i></span></li>
+<li><a href="/wiki/Quadratic_Frobenius_test" title="Quadratic Frobenius test">Quadratic Frobenius test</a></li>
+<li><a href="/wiki/Solovay%E2%80%93Strassen_primality_test" title="Solovay–Strassen primality test">Solovay–Strassen</a></li>
+<li><strong class="selflink">Miller–Rabin</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Generating_primes" title="Generating primes">Prime-generating</a></th>
+<td class="navbox-list navbox-even hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Sieve_of_Atkin" title="Sieve of Atkin">Sieve of Atkin</a></li>
+<li><a href="/wiki/Sieve_of_Eratosthenes" title="Sieve of Eratosthenes">Sieve of Eratosthenes</a></li>
+<li><a href="/wiki/Sieve_of_Sundaram" title="Sieve of Sundaram">Sieve of Sundaram</a></li>
+<li><a href="/wiki/Wheel_factorization" title="Wheel factorization">Wheel factorization</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Integer_factorization" title="Integer factorization">Integer factorization</a></th>
+<td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Continued_fraction_factorization" title="Continued fraction factorization">Continued fraction (CFRAC)</a></li>
+<li><a href="/wiki/Dixon%27s_factorization_method" title="Dixon's factorization method">Dixon's</a></li>
+<li><a href="/wiki/Lenstra_elliptic_curve_factorization" title="Lenstra elliptic curve factorization">Lenstra elliptic curve (ECM)</a></li>
+<li><a href="/wiki/Euler%27s_factorization_method" title="Euler's factorization method">Euler's</a></li>
+<li><a href="/wiki/Pollard%27s_rho_algorithm" title="Pollard's rho algorithm">Pollard's rho</a></li>
+<li><a href="/wiki/Pollard%27s_p_%E2%88%92_1_algorithm" title="Pollard's p − 1 algorithm"><i>p</i> − 1</a></li>
+<li><a href="/wiki/Williams%27_p_%2B_1_algorithm" title="Williams' p + 1 algorithm"><i>p</i> + 1</a></li>
+<li><a href="/wiki/Quadratic_sieve" title="Quadratic sieve">Quadratic sieve (QS)</a></li>
+<li><a href="/wiki/General_number_field_sieve" title="General number field sieve">General number field sieve (GNFS)</a></li>
+<li><i><a href="/wiki/Special_number_field_sieve" title="Special number field sieve">Special number field sieve (SNFS)</a></i></li>
+<li><a href="/wiki/Rational_sieve" title="Rational sieve">Rational sieve</a></li>
+<li><a href="/wiki/Fermat%27s_factorization_method" title="Fermat's factorization method">Fermat's</a></li>
+<li><a href="/wiki/Shanks%27_square_forms_factorization" title="Shanks' square forms factorization">Shanks' square forms</a></li>
+<li><a href="/wiki/Trial_division" title="Trial division">Trial division</a></li>
+<li><a href="/wiki/Shor%27s_algorithm" title="Shor's algorithm">Shor's</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Multiplication_algorithm" title="Multiplication algorithm">Multiplication</a></th>
+<td class="navbox-list navbox-even hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Ancient_Egyptian_multiplication" title="Ancient Egyptian multiplication">Ancient Egyptian</a></li>
+<li><a class="mw-redirect" href="/wiki/Long_multiplication" title="Long multiplication">Long</a></li>
+<li><a href="/wiki/Karatsuba_algorithm" title="Karatsuba algorithm">Karatsuba</a></li>
+<li><a href="/wiki/Toom%E2%80%93Cook_multiplication" title="Toom–Cook multiplication">Toom–Cook</a></li>
+<li><a href="/wiki/Sch%C3%B6nhage%E2%80%93Strassen_algorithm" title="Schönhage–Strassen algorithm">Schönhage–Strassen</a></li>
+<li><a href="/wiki/F%C3%BCrer%27s_algorithm" title="Fürer's algorithm">Fürer's</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Discrete_logarithm" title="Discrete logarithm">Discrete logarithm</a></th>
+<td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Baby-step_giant-step" title="Baby-step giant-step">Baby-step giant-step</a></li>
+<li><a href="/wiki/Pollard%27s_rho_algorithm_for_logarithms" title="Pollard's rho algorithm for logarithms">Pollard rho</a></li>
+<li><a href="/wiki/Pollard%27s_kangaroo_algorithm" title="Pollard's kangaroo algorithm">Pollard kangaroo</a></li>
+<li><a href="/wiki/Pohlig%E2%80%93Hellman_algorithm" title="Pohlig–Hellman algorithm">Pohlig–Hellman</a></li>
+<li><a href="/wiki/Index_calculus_algorithm" title="Index calculus algorithm">Index calculus</a></li>
+<li><a href="/wiki/Function_field_sieve" title="Function field sieve">Function field sieve</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Greatest_common_divisor" title="Greatest common divisor">Greatest common divisor</a></th>
+<td class="navbox-list navbox-even hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Binary_GCD_algorithm" title="Binary GCD algorithm">Binary</a></li>
+<li><a href="/wiki/Euclidean_algorithm" title="Euclidean algorithm">Euclidean</a></li>
+<li><a href="/wiki/Extended_Euclidean_algorithm" title="Extended Euclidean algorithm">Extended Euclidean</a></li>
+<li><a href="/wiki/Lehmer%27s_GCD_algorithm" title="Lehmer's GCD algorithm">Lehmer's</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row"><a href="/wiki/Quadratic_residue" title="Quadratic residue">Modular square root</a></th>
+<td class="navbox-list navbox-odd hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Cipolla%27s_algorithm" title="Cipolla's algorithm">Cipolla</a></li>
+<li><a href="/wiki/Pocklington%27s_algorithm" title="Pocklington's algorithm">Pocklington's</a></li>
+<li><a href="/wiki/Tonelli%E2%80%93Shanks_algorithm" title="Tonelli–Shanks algorithm">Tonelli–Shanks</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th class="navbox-group" scope="row">Other algorithms</th>
+<td class="navbox-list navbox-even hlist" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Chakravala_method" title="Chakravala method">Chakravala</a></li>
+<li><a href="/wiki/Cornacchia%27s_algorithm" title="Cornacchia's algorithm">Cornacchia</a></li>
+<li><a href="/wiki/Lenstra%E2%80%93Lenstra%E2%80%93Lov%C3%A1sz_lattice_basis_reduction_algorithm" title="Lenstra–Lenstra–Lovász lattice basis reduction algorithm">LLL</a></li>
+<li><a href="/wiki/Integer_square_root" title="Integer square root">Integer square root</a></li>
+<li><a href="/wiki/Modular_exponentiation" title="Modular exponentiation">Modular exponentiation</a></li>
+<li><a href="/wiki/Schoof%27s_algorithm" title="Schoof's algorithm">Schoof's</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow hlist" colspan="2">
+<div>
+<ul>
+<li><i>Italics</i> indicate that algorithm is for numbers of special forms</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<!-- 
+NewPP limit report
+Parsed by mw1264
+Cached time: 20170110232143
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.192 seconds
+Real time usage: 0.355 seconds
+Preprocessor visited node count: 1529/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 63491/2097152 bytes
+Template argument size: 2165/2097152 bytes
+Highest expansion depth: 11/40
+Expensive parser function count: 0/500
+Lua time usage: 0.065/10.000 seconds
+Lua memory usage: 2.83 MB/50 MB
+-->
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  157.409      1 - -total
+ 70.87%  111.548      1 - Template:Reflist
+ 40.27%   63.394     10 - Template:Citation
+  9.98%   15.716      1 - Template:Number_theoretic_algorithms
+  8.58%   13.501      4 - Template:Cite_journal
+  8.27%   13.021      1 - Template:Navbox
+  6.11%    9.619      1 - Template:Wikibooks
+  5.18%    8.160      1 - Template:Sister_project
+  4.14%    6.516      1 - Template:Side_box
+  4.07%    6.399      2 - Template:Cite_web
+-->
+<!-- Saved in parser cache with key enwiki:pcache:idhash:188999-0!*!0!!en!4!*!math=5 and timestamp 20170110232142 and revision id 756360689
+ -->
+<noscript><img alt="" height="1" src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" style="border: none; position: absolute;" title="" width="1"/></noscript></div> <div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Miller–Rabin_primality_test&amp;oldid=756360689">https://en.wikipedia.org/w/index.php?title=Miller–Rabin_primality_test&amp;oldid=756360689</a>"					</div>
+<div class="catlinks" data-mw="interface" id="catlinks"><div class="mw-normal-catlinks" id="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Primality_tests" title="Category:Primality tests">Primality tests</a></li><li><a href="/wiki/Category:Finite_fields" title="Category:Finite fields">Finite fields</a></li></ul></div></div> <div class="visualClear"></div>
+</div>
+</div>
+<div id="mw-navigation">
+<h2>Navigation menu</h2>
+<div id="mw-head">
+<div aria-labelledby="p-personal-label" class="" id="p-personal" role="navigation">
+<h3 id="p-personal-label">Personal tools</h3>
+<ul>
+<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a accesskey="n" href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]">Talk</a></li><li id="pt-anoncontribs"><a accesskey="y" href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Miller%E2%80%93Rabin+primality+test" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a accesskey="o" href="/w/index.php?title=Special:UserLogin&amp;returnto=Miller%E2%80%93Rabin+primality+test" title="You're encouraged to log in; however, it's not mandatory. [o]">Log in</a></li> </ul>
+</div>
+<div id="left-navigation">
+<div aria-labelledby="p-namespaces-label" class="vectorTabs" id="p-namespaces" role="navigation">
+<h3 id="p-namespaces-label">Namespaces</h3>
+<ul>
+<li class="selected" id="ca-nstab-main"><span><a accesskey="c" href="/wiki/Miller%E2%80%93Rabin_primality_test" title="View the content page [c]">Article</a></span></li>
+<li id="ca-talk"><span><a accesskey="t" href="/wiki/Talk:Miller%E2%80%93Rabin_primality_test" rel="discussion" title="Discussion about the content page [t]">Talk</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-variants-label" class="vectorMenu emptyPortlet" id="p-variants" role="navigation">
+<h3 id="p-variants-label">
+<span>Variants</span><a href="#"></a>
+</h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+</div>
+<div id="right-navigation">
+<div aria-labelledby="p-views-label" class="vectorTabs" id="p-views" role="navigation">
+<h3 id="p-views-label">Views</h3>
+<ul>
+<li class="selected" id="ca-view"><span><a href="/wiki/Miller%E2%80%93Rabin_primality_test">Read</a></span></li>
+<li id="ca-edit"><span><a accesskey="e" href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=edit" title="Edit this page [e]">Edit</a></span></li>
+<li class="collapsible" id="ca-history"><span><a accesskey="h" href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=history" title="Past revisions of this page [h]">View history</a></span></li>
+</ul>
+</div>
+<div aria-labelledby="p-cactions-label" class="vectorMenu emptyPortlet" id="p-cactions" role="navigation">
+<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+<div class="menu">
+<ul>
+</ul>
+</div>
+</div>
+<div id="p-search" role="search">
+<h3>
+<label for="searchInput">Search</label>
+</h3>
+<form action="/w/index.php" id="searchform">
+<div id="simpleSearch">
+<input accesskey="f" id="searchInput" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" type="search"/><input name="title" type="hidden" value="Special:Search"/><input class="searchButton mw-fallbackSearchButton" id="mw-searchButton" name="fulltext" title="Search Wikipedia for this text" type="submit" value="Search"/><input class="searchButton" id="searchButton" name="go" title="Go to a page with this exact name if it exists" type="submit" value="Go"/> </div>
+</form>
+</div>
+</div>
+</div>
+<div id="mw-panel">
+<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page" title="Visit the main page"></a></div>
+<div aria-labelledby="p-navigation-label" class="portal" id="p-navigation" role="navigation">
+<h3 id="p-navigation-label">Navigation</h3>
+<div class="body">
+<ul>
+<li id="n-mainpage-description"><a accesskey="z" href="/wiki/Main_Page" title="Visit the main page [z]">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a accesskey="x" href="/wiki/Special:Random" title="Load a random article [x]">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-interaction-label" class="portal" id="p-interaction" role="navigation">
+<h3 id="p-interaction-label">Interaction</h3>
+<div class="body">
+<ul>
+<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a accesskey="r" href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-tb-label" class="portal" id="p-tb" role="navigation">
+<h3 id="p-tb-label">Tools</h3>
+<div class="body">
+<ul>
+<li id="t-whatlinkshere"><a accesskey="j" href="/wiki/Special:WhatLinksHere/Miller%E2%80%93Rabin_primality_test" title="List of all English Wikipedia pages containing links to this page [j]">What links here</a></li><li id="t-recentchangeslinked"><a accesskey="k" href="/wiki/Special:RecentChangesLinked/Miller%E2%80%93Rabin_primality_test" rel="nofollow" title="Recent changes in pages linked from this page [k]">Related changes</a></li><li id="t-upload"><a accesskey="u" href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]">Upload file</a></li><li id="t-specialpages"><a accesskey="q" href="/wiki/Special:SpecialPages" title="A list of all special pages [q]">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;oldid=756360689" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a accesskey="g" href="https://www.wikidata.org/wiki/Q980224" title="Link to connected data repository item [g]">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Miller%E2%80%93Rabin_primality_test&amp;id=756360689" title="Information on how to cite this page">Cite this page</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-coll-print_export-label" class="portal" id="p-coll-print_export" role="navigation">
+<h3 id="p-coll-print_export-label">Print/export</h3>
+<div class="body">
+<ul>
+<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Miller%E2%80%93Rabin+primality+test">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Miller%E2%80%93Rabin+primality+test&amp;returnto=Miller%E2%80%93Rabin+primality+test&amp;oldid=756360689&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a accesskey="p" href="/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;printable=yes" title="Printable version of this page [p]">Printable version</a></li> </ul>
+</div>
+</div>
+<div aria-labelledby="p-lang-label" class="portal" id="p-lang" role="navigation">
+<h3 id="p-lang-label">Languages</h3>
+<div class="body">
+<ul>
+<li class="interlanguage-link interwiki-ar"><a class="interlanguage-link-target" href="https://ar.wikipedia.org/wiki/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D9%85%D9%8A%D9%84%D8%B1-%D8%B1%D8%A7%D8%A8%D9%86_%D9%84%D8%A3%D9%88%D9%84%D9%8A%D8%A9_%D8%B9%D8%AF%D8%AF_%D9%85%D8%A7" hreflang="ar" lang="ar" title="اختبار ميلر-رابن لأولية عدد ما – Arabic">العربية</a></li><li class="interlanguage-link interwiki-ca"><a class="interlanguage-link-target" href="https://ca.wikipedia.org/wiki/Test_de_primalitat_de_Miller-Rabin" hreflang="ca" lang="ca" title="Test de primalitat de Miller-Rabin – Catalan">Català</a></li><li class="interlanguage-link interwiki-cs"><a class="interlanguage-link-target" href="https://cs.wikipedia.org/wiki/Miller%C5%AFv-Rabin%C5%AFv_test_prvo%C4%8D%C3%ADselnosti" hreflang="cs" lang="cs" title="Millerův-Rabinův test prvočíselnosti – Czech">Čeština</a></li><li class="interlanguage-link interwiki-de"><a class="interlanguage-link-target" href="https://de.wikipedia.org/wiki/Miller-Rabin-Test" hreflang="de" lang="de" title="Miller-Rabin-Test – German">Deutsch</a></li><li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/wiki/Test_de_primalidad_de_Miller-Rabin" hreflang="es" lang="es" title="Test de primalidad de Miller-Rabin – Spanish">Español</a></li><li class="interlanguage-link interwiki-fr"><a class="interlanguage-link-target" href="https://fr.wikipedia.org/wiki/Test_de_primalit%C3%A9_de_Miller-Rabin" hreflang="fr" lang="fr" title="Test de primalité de Miller-Rabin – French">Français</a></li><li class="interlanguage-link interwiki-ko"><a class="interlanguage-link-target" href="https://ko.wikipedia.org/wiki/%EB%B0%80%EB%9F%AC-%EB%9D%BC%EB%B9%88_%EC%86%8C%EC%88%98%ED%8C%90%EB%B3%84%EB%B2%95" hreflang="ko" lang="ko" title="밀러-라빈 소수판별법 – Korean">한국어</a></li><li class="interlanguage-link interwiki-hi"><a class="interlanguage-link-target" href="https://hi.wikipedia.org/wiki/%E0%A4%AE%E0%A4%BF%E0%A4%B2%E0%A5%8D%E0%A4%B2%E0%A4%B0_%E0%A4%B0%E0%A5%88%E0%A4%AC%E0%A4%BF%E0%A4%A8_%E0%A4%A8%E0%A4%82%E0%A4%AC%E0%A4%B0_%E0%A4%85%E0%A4%AD%E0%A4%BE%E0%A4%9C%E0%A5%8D%E0%A4%AF%E0%A4%A4%E0%A4%BE_%E0%A4%9F%E0%A5%87%E0%A4%B8%E0%A5%8D%E0%A4%9F" hreflang="hi" lang="hi" title="मिल्लर रैबिन नंबर अभाज्यता टेस्ट – Hindi">हिन्दी</a></li><li class="interlanguage-link interwiki-it"><a class="interlanguage-link-target" href="https://it.wikipedia.org/wiki/Test_di_Miller-Rabin" hreflang="it" lang="it" title="Test di Miller-Rabin – Italian">Italiano</a></li><li class="interlanguage-link interwiki-he"><a class="interlanguage-link-target" href="https://he.wikipedia.org/wiki/%D7%90%D7%9C%D7%92%D7%95%D7%A8%D7%99%D7%AA%D7%9D_%D7%9E%D7%99%D7%9C%D7%A8-%D7%A8%D7%91%D7%99%D7%9F" hreflang="he" lang="he" title="אלגוריתם מילר-רבין – Hebrew">עברית</a></li><li class="interlanguage-link interwiki-nl"><a class="interlanguage-link-target" href="https://nl.wikipedia.org/wiki/Miller-Rabin-priemgetaltest" hreflang="nl" lang="nl" title="Miller-Rabin-priemgetaltest – Dutch">Nederlands</a></li><li class="interlanguage-link interwiki-ja"><a class="interlanguage-link-target" href="https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95" hreflang="ja" lang="ja" title="ミラー–ラビン素数判定法 – Japanese">日本語</a></li><li class="interlanguage-link interwiki-pl"><a class="interlanguage-link-target" href="https://pl.wikipedia.org/wiki/Test_Millera-Rabina" hreflang="pl" lang="pl" title="Test Millera-Rabina – Polish">Polski</a></li><li class="interlanguage-link interwiki-pt"><a class="interlanguage-link-target" href="https://pt.wikipedia.org/wiki/Teste_de_primalidade_de_Miller-Rabin" hreflang="pt" lang="pt" title="Teste de primalidade de Miller-Rabin – Portuguese">Português</a></li><li class="interlanguage-link interwiki-ru badge-Q17559452 badge-recommendedarticle" title="recommended article"><a class="interlanguage-link-target" href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82_%D0%9C%D0%B8%D0%BB%D0%BB%D0%B5%D1%80%D0%B0_%E2%80%94_%D0%A0%D0%B0%D0%B1%D0%B8%D0%BD%D0%B0" hreflang="ru" lang="ru" title="Тест Миллера — Рабина – Russian">Русский</a></li><li class="interlanguage-link interwiki-sr"><a class="interlanguage-link-target" href="https://sr.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BB%D0%B5%D1%80%E2%80%94%D0%A0%D0%B0%D0%B1%D0%B8%D0%BD%D0%BE%D0%B2_%D1%82%D0%B5%D1%81%D1%82" hreflang="sr" lang="sr" title="Милер—Рабинов тест – Serbian">Српски / srpski</a></li><li class="interlanguage-link interwiki-uk"><a class="interlanguage-link-target" href="https://uk.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%82%D0%B8_%D0%9C%D1%96%D0%BB%D0%BB%D0%B5%D1%80%D0%B0%E2%80%93%D0%A0%D0%B0%D0%B1%D1%96%D0%BD%D0%B0" hreflang="uk" lang="uk" title="Тест простоти Міллера–Рабіна – Ukrainian">Українська</a></li><li class="interlanguage-link interwiki-vi"><a class="interlanguage-link-target" href="https://vi.wikipedia.org/wiki/Ki%E1%BB%83m_tra_Miller-Rabin" hreflang="vi" lang="vi" title="Kiểm tra Miller-Rabin – Vietnamese">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a class="interlanguage-link-target" href="https://zh.wikipedia.org/wiki/%E7%B1%B3%E5%8B%92-%E6%8B%89%E5%AE%BE%E6%A3%80%E9%AA%8C" hreflang="zh" lang="zh" title="米勒-拉宾检验 – Chinese">中文</a></li> </ul>
+<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a class="wbc-editpage" href="https://www.wikidata.org/wiki/Q980224#sitelinks-wikipedia" title="Edit interlanguage links">Edit links</a></span></div> </div>
+</div>
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<ul id="footer-info">
+<li id="footer-info-lastmod"> This page was last modified on 23 December 2016, at 18:22.</li>
+<li id="footer-info-copyright">Text is available under the <a href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" rel="license">Creative Commons Attribution-ShareAlike License</a><a href="//creativecommons.org/licenses/by-sa/3.0/" rel="license" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+</ul>
+<ul id="footer-places">
+<li id="footer-places-privacy"><a class="extiw" href="https://wikimediafoundation.org/wiki/Privacy_policy" title="wmf:Privacy policy">Privacy policy</a></li>
+<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+<li id="footer-places-mobileview"><a class="noprint stopMobileRedirectToggle" href="//en.m.wikipedia.org/w/index.php?title=Miller%E2%80%93Rabin_primality_test&amp;mobileaction=toggle_view_mobile">Mobile view</a></li>
+</ul>
+<ul class="noprint" id="footer-icons">
+<li id="footer-copyrightico">
+<a href="https://wikimediafoundation.org/"><img alt="Wikimedia Foundation" height="31" src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88"/></a> </li>
+<li id="footer-poweredbyico">
+<a href="//www.mediawiki.org/"><img alt="Powered by MediaWiki" height="31" src="/static/images/poweredby_mediawiki_88x31.png" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88"/></a> </li>
+</ul>
+<div style="clear:both"></div>
+</div>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":67,"wgHostname":"mw1245"});});</script>
+</body>
+</html>
